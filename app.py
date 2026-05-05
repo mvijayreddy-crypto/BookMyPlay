@@ -4,6 +4,9 @@ from flask_dance.contrib.google import make_google_blueprint, google
 from werkzeug.security import generate_password_hash, check_password_hash
 
 app = Flask(__name__)
+@app.route('/')
+def home():
+    return "BookMyPlay Home Working"
 app.secret_key = "bookmyplay_secret_key"
 
 # ================= DATABASE =================
