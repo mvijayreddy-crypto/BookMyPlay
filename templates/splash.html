@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+body{
+    margin:0;
+    height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    background:black;
+    color:white;
+    overflow:hidden;
+}
+
+/* Glow Text */
+.logo{
+    font-size:45px;
+    text-shadow:0 0 20px #00f2ff, 0 0 40px #ff00cc;
+    animation:pulse 2s infinite;
+}
+
+@keyframes pulse{
+    0%{transform:scale(1)}
+    50%{transform:scale(1.1)}
+    100%{transform:scale(1)}
+}
+</style>
+</head>
+
+<body>
+
+<div class="logo">BOOK MY PLAY</div>
+
+<script>
+setTimeout(()=>{
+    window.location.href="/index";
+},2500);
+</script>
+
+</body>
+</html>

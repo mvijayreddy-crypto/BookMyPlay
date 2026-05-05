@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Manager Panel</title>
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+
+body{
+    font-family:'Segoe UI';
+    background:#eef2f7;
+}
+
+/* HEADER */
+.header{
+    background:linear-gradient(135deg,#4CAF50,#2e7d32);
+    color:white;
+    padding:15px;
+    text-align:center;
+}
+
+/* CONTAINER */
+.container{
+    padding:20px;
+    padding-bottom:90px;
+}
+
+/* CARD */
+.card{
+    background:white;
+    padding:15px;
+    margin-bottom:15px;
+    border-radius:12px;
+    box-shadow:0 5px 15px rgba(0,0,0,0.1);
+}
+
+/* INPUT */
+input{
+    width:100%;
+    padding:10px;
+    margin:6px 0;
+    border-radius:8px;
+    border:1px solid #ccc;
+}
+
+/* BUTTON */
+button{
+    background:#4CAF50;
+    color:white;
+    border:none;
+    padding:10px;
+    width:100%;
+    border-radius:8px;
+    cursor:pointer;
+    margin-top:5px;
+}
+
+/* DELETE BTN */
+.delete{
+    background:red;
+    margin-top:5px;
+}
+
+/* NAV */
+.bottom-nav{
+    position:fixed;
+    bottom:0;
+    width:100%;
+    height:70px;
+    background:#4CAF50;
+    display:flex;
+    justify-content:space-around;
+    align-items:center;
+    color:white;
+}
+.bottom-nav div{cursor:pointer;}
+</style>
+</head>
+
+<body>
+
+<div class="header">
+    <h2>Manager Panel 🛠</h2>
+</div>
+
+<div class="container">
+
+<!-- ADD GROUND -->
+<div class="card">
+    <h3>Add Ground</h3>
+
+    <input id="name" placeholder="Ground Name">
+    <input id="game" placeholder="Game Type (cricket, football)">
+    <input id="price" placeholder="Price ₹">
+    <input id="slot" placeholder="Slots (6AM, 7AM...)">
+
+    <button onclick="addGround()">Add Ground</button>
+</div>
+
+<!-- LIST -->
+<div class="card">
+    <h3>Ground List</h3>
+    <div id="list"></div>
+</div>
+
+</div>
+
+<!-- NAV -->
+<div class="bottom-nav">
+    <div onclick="go('dashboard')">🏠 Home</div>
+    <div onclick="go('venues')">📍 Venue</div>
+    <div onclick="go('history')">📅 Bookings</div>
+    <div onclick="go('manage')">🛠 Manage</div>
+    <div onclick="go('profile')">👤 Profile</div>
+</div>
+
+<script>
+
+// LOAD DATA
+let grounds = JSON.parse(localStorage.getItem("grounds")) || [];
+
+// ADD GROUND
+function addGround(){
+
+    let name = document.getElementById("name").value;
+    let game = document.getElementById("game").value;
+    let price = document.getElementById("price").value;
+    let slot = document.getElementById("slot").value;
+
+    if(!name || !game || !price || !slot){
+        alert("Fill all fields");
+        return;
+    }
+
+    let newGround = {
+        id: Date.now(),
+        name,
+        game,
+        price,
+        slot
+    };
+
+    grounds.push(newGround);
+    localStorage.setItem("grounds", JSON.stringify(grounds));
+
+    display();
+
+    // clear inputs
+    document.getElementById("name").value="";
+    document.getElementById("game").value="";
+    document.getElementById("price").value="";
+    document.getElementById("slot").value="";
+}
+
+// DISPLAY
+function display(){
+
+    let box = document.getElementById("list");
+    box.innerHTML = "";
+
+    if(grounds.length === 0){
+        box.innerHTML = "<p>No grounds added</p>";
+        return;
+    }
+
+    grounds.forEach(g => {
+        box.innerHTML += `
+        <div class="card">
+            <b>${g.name}</b><br>
+            Game: ${g.game}<br>
+            Price: ₹${g.price}<br>
+            Slots: ${g.slot}
+
+            <button class="delete" onclick="remove(${g.id})">Delete</button>
+        </div>
+        `;
+    });
+}
+
+// DELETE
+function remove(id){
+    grounds = grounds.filter(g => g.id !== id);
+    localStorage.setItem("grounds", JSON.stringify(grounds));
+    display();
+}
+
+// NAV
+function go(p){
+    window.location.href = "/" + p;
+}
+
+// INIT
+display();
+
+</script>
+
+</body>
+</html>

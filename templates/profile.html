@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Profile</title>
+
+<style>
+:root{
+    --primary:#4CAF50;
+    --bg:#eef1f5;
+    --card:#ffffff;
+    --text:#333;
+}
+
+/* DARK MODE */
+.dark{
+    --bg:#121212;
+    --card:#1e1e1e;
+    --text:#f1f1f1;
+}
+
+body{
+    margin:0;
+    font-family:'Segoe UI';
+    background:var(--bg);
+    color:var(--text);
+}
+
+/* HEADER */
+.header{
+    background:linear-gradient(135deg,#4CAF50,#2e7d32);
+    color:white;
+    padding:30px;
+    text-align:center;
+    border-bottom-left-radius:25px;
+    border-bottom-right-radius:25px;
+}
+
+/* AVATAR */
+.avatar{
+    width:90px;
+    height:90px;
+    border-radius:50%;
+    background:#ddd;
+    margin:auto;
+    overflow:hidden;
+}
+
+.avatar img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+}
+
+/* CARD */
+.card{
+    background:var(--card);
+    margin:15px;
+    padding:20px;
+    border-radius:15px;
+    box-shadow:0 6px 20px rgba(0,0,0,0.1);
+}
+
+/* BUTTON */
+button{
+    padding:10px;
+    border:none;
+    border-radius:10px;
+    background:var(--primary);
+    color:white;
+    cursor:pointer;
+    margin-top:10px;
+    width:100%;
+}
+
+/* SMALL BUTTON */
+.small-btn{
+    width:auto;
+    padding:6px 10px;
+    margin-top:5px;
+}
+
+/* STATS */
+.stats{
+    display:flex;
+    justify-content:space-between;
+    text-align:center;
+}
+
+/* ACTIONS */
+.actions button{
+    margin-top:10px;
+}
+
+/* TOGGLE */
+.toggle{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+
+/* NAV */
+.bottom-nav{
+    position:fixed;
+    bottom:0;
+    left:0;
+    width:100%;
+    background:var(--card);
+    display:flex;
+    justify-content:space-around;
+    padding:10px 0;
+}
+
+.bottom-nav div{
+    text-align:center;
+    cursor:pointer;
+    color:#777;
+}
+
+.bottom-nav .active{
+    color:var(--primary);
+}
+
+body{
+    padding-bottom:80px;
+}
+</style>
+</head>
+
+<body>
+
+<!-- HEADER -->
+<div class="header">
+    <div class="avatar">
+        <img id="profileImg" src="https://via.placeholder.com/90">
+    </div>
+
+    <h3 id="username">User</h3>
+
+    <input type="file" id="upload" style="display:none" onchange="uploadImg()">
+    <button class="small-btn" onclick="document.getElementById('upload').click()">Upload Photo</button>
+</div>
+
+<!-- STATS -->
+<div class="card">
+    <div class="stats">
+        <div>
+            <h3 id="bookCount">0</h3>
+            Bookings
+        </div>
+        <div>
+            <h3>⭐ 4.8</h3>
+            Rating
+        </div>
+        <div>
+            <h3>🏆 Gold</h3>
+            Member
+        </div>
+    </div>
+</div>
+
+<!-- DARK MODE -->
+<div class="card toggle">
+    <span>🌙 Dark Mode</span>
+    <input type="checkbox" id="darkToggle" onchange="toggleDark()">
+</div>
+
+<!-- NOTIFICATIONS -->
+<div class="card">
+    <h3>🔔 Notifications</h3>
+    <div id="notifications"></div>
+</div>
+
+<!-- ACTIONS -->
+<div class="card actions">
+    <button onclick="goHistory()">📊 My Bookings</button>
+    <button onclick="goVenues()">📍 Explore Venues</button>
+    <button style="background:#f44336" onclick="logout()">🚪 Logout</button>
+</div>
+
+<!-- NAV -->
+<div class="bottom-nav">
+    <div onclick="goHome()">🏠<br>Home</div>
+    <div onclick="goVenues()">📍<br>Venues</div>
+    <div onclick="goHistory()">📊<br>History</div>
+    <div class="active">👤<br>Profile</div>
+</div>
+
+<script>
+
+// LOAD USER
+let user = localStorage.getItem("username") || "Guest";
+document.getElementById("username").innerText = user;
+
+// BOOKINGS COUNT
+let bookings = JSON.parse(localStorage.getItem("bookings")) || [];
+document.getElementById("bookCount").innerText = bookings.length;
+
+// DARK MODE LOAD
+if(localStorage.getItem("dark") === "true"){
+    document.body.classList.add("dark");
+    document.getElementById("darkToggle").checked = true;
+}
+
+// TOGGLE DARK
+function toggleDark(){
+    document.body.classList.toggle("dark");
+    localStorage.setItem("dark", document.body.classList.contains("dark"));
+}
+
+// UPLOAD IMAGE
+function uploadImg(){
+    let file = document.getElementById("upload").files[0];
+    let reader = new FileReader();
+
+    reader.onload = function(){
+        localStorage.setItem("profileImg", reader.result);
+        document.getElementById("profileImg").src = reader.result;
+    };
+
+    reader.readAsDataURL(file);
+}
+
+// LOAD IMAGE
+let savedImg = localStorage.getItem("profileImg");
+if(savedImg){
+    document.getElementById("profileImg").src = savedImg;
+}
+
+// NOTIFICATIONS
+let notifBox = document.getElementById("notifications");
+
+if(bookings.length > 0){
+    notifBox.innerHTML = `You have ${bookings.length} bookings`;
+}else{
+    notifBox.innerHTML = "No new notifications";
+}
+
+// NAV
+function goHome(){
+    window.location.href="/dashboard";
+}
+function goVenues(){
+    window.location.href="/venues";
+}
+function goHistory(){
+    window.location.href="/history";
+}
+
+// LOGOUT
+function logout(){
+    localStorage.clear();
+    alert("Logged out");
+    window.location.href="/login";
+}
+
+</script>
+
+</body>
+</html>

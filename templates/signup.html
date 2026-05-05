@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Sign Up - BookMyPlay</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Segoe UI';
+            height: 100vh;
+            background: linear-gradient(135deg, #0f2027, #2c5364);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .signup-box {
+            background: rgba(255,255,255,0.08);
+            backdrop-filter: blur(15px);
+            padding: 40px;
+            border-radius: 15px;
+            width: 320px;
+            text-align: center;
+            color: white;
+            box-shadow: 0 0 30px rgba(0,0,0,0.5);
+        }
+
+        h2 {
+            margin-bottom: 20px;
+        }
+
+        input {
+            width: 100%;
+            padding: 12px;
+            margin: 10px 0;
+            border-radius: 8px;
+            border: none;
+            outline: none;
+        }
+
+        button {
+            width: 100%;
+            padding: 12px;
+            background: linear-gradient(45deg, #00c6ff, #0072ff);
+            border: none;
+            border-radius: 8px;
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+
+        button:hover {
+            transform: scale(1.05);
+        }
+
+        a {
+            color: #00c6ff;
+            text-decoration: none;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="signup-box">
+    <h2>Create Account</h2>
+
+    <!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Login - Book My Play</title>
+
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
+<style>
+
+/* PAGE */
+body.login-page{
+    margin:0;
+    font-family:'Segoe UI', sans-serif;
+    background: linear-gradient(135deg,#0f2027,#2c5364);
+    height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+}
+
+/* MAIN CARD */
+.split-login-card{
+    width:800px;
+    height:450px;
+    display:flex;
+    border-radius:15px;
+    overflow:hidden;
+    background:rgba(255,255,255,0.08);
+    backdrop-filter:blur(15px);
+    box-shadow:0 0 30px rgba(0,0,0,0.5);
+}
+
+/* LEFT IMAGE */
+.login-left{
+    width:50%;
+}
+
+.login-left img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+}
+
+/* RIGHT FORM */
+.login-right{
+    width:50%;
+    padding:30px;
+    text-align:center;
+    color:white;
+}
+
+/* USER ICON */
+.user-icon img{
+    width:60px;
+    margin-bottom:10px;
+}
+
+/* INPUT */
+input{
+    width:100%;
+    padding:10px;
+    margin:8px 0;
+    border:none;
+    border-radius:8px;
+    outline:none;
+}
+
+/* LOGIN BUTTON */
+.login-btn{
+    width:100%;
+    padding:10px;
+    border:none;
+    border-radius:8px;
+    background:linear-gradient(45deg,#00c6ff,#0072ff);
+    color:white;
+    cursor:pointer;
+    margin-top:10px;
+}
+
+/* GOOGLE BUTTON */
+.google-btn{
+    width:100%;
+    padding:10px;
+    margin-top:10px;
+    border:none;
+    border-radius:8px;
+    background:white;
+    color:black;
+    cursor:pointer;
+}
+
+/* ERROR */
+.error{
+    color:red;
+    font-size:14px;
+}
+
+/* LINK */
+a{
+    color:#00c6ff;
+    text-decoration:none;
+}
+
+</style>
+
+</head>
+
+<body class="login-page">
+
+<div class="split-login-card">
+
+    <!-- LEFT -->
+    <div class="login-left">
+        <img src="{{ url_for('static', filename='sports-bg.jpg') }}">
+    </div>
+
+    <!-- RIGHT -->
+    <div class="login-right">
+
+        <div class="user-icon">
+            <img src="{{ url_for('static', filename='user.png') }}">
+        </div>
+
+        <h2>Welcome Back</h2>
+        <p>Login to continue booking your game</p>
+
+        <!-- LOGIN FORM -->
+        <form method="POST">
+            <input type="text" name="identifier" placeholder="Email or Phone" required>
+            <input type="password" name="password" placeholder="Password" required>
+
+            <button type="submit" class="login-btn">Login</button>
+        </form>
+
+        <!-- ERROR MESSAGE -->
+        {% if error %}
+        <p class="error">{{ error }}</p>
+        {% endif %}
+
+        <!-- GOOGLE LOGIN -->
+        <form action="/login/google">
+            <button class="google-btn">Continue with Google</button>
+        </form>
+
+        <p style="margin-top:15px;">
+            Don't have an account? 
+            <a href="/signup">Sign Up</a>
+        </p>
+
+    </div>
+
+</div>
+
+</body>
+</html>
+    <p style="margin-top:15px;">
+        Already have account? <a href="/login">Login</a>
+    </p>
+</div>
+
+</body>
+</html>

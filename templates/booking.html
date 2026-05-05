@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Booking</title>
+
+<style>
+body{
+    margin:0;
+    font-family:Arial;
+    background:#f5f7fa;
+    text-align:center;
+}
+
+/* Header */
+.header{
+    background:#4CAF50;
+    color:white;
+    padding:15px;
+    font-size:20px;
+}
+
+/* Slots */
+.slots{
+    margin-top:30px;
+}
+
+.slot{
+    display:inline-block;
+    padding:12px 20px;
+    margin:10px;
+    background:white;
+    border-radius:8px;
+    box-shadow:0 2px 8px rgba(0,0,0,0.1);
+    cursor:pointer;
+}
+
+/* Button */
+.book-btn{
+    margin-top:30px;
+    padding:15px 30px;
+    background:#4CAF50;
+    color:white;
+    border:none;
+    border-radius:10px;
+    font-size:16px;
+    cursor:pointer;
+}
+</style>
+</head>
+
+<body>
+
+<div class="header" id="gameTitle">Game</div>
+
+<div class="slots" id="slots"></div>
+
+<button class="book-btn" onclick="book()">Book Now</button>
+
+<script>
+let game = localStorage.getItem("selectedGame");
+document.getElementById("gameTitle").innerText = game;
+
+/* Sample slots */
+let times = ["6 AM", "8 AM", "10 AM", "4 PM", "6 PM"];
+
+let container = document.getElementById("slots");
+
+times.forEach(time => {
+    let div = document.createElement("div");
+    div.className = "slot";
+    div.innerText = time;
+
+    div.onclick = function(){
+        localStorage.setItem("time", time);
+        alert("Selected: " + time);
+    };
+
+    container.appendChild(div);
+});
+
+function book(){
+    let time = localStorage.getItem("time");
+    if(!time){
+        alert("Select time first!");
+    }else{
+        alert("Booking Confirmed for " + game + " at " + time);
+    }
+}
+
+fetch(`/check-slots?game=${game}&date=${date}`)
+.then(res => res.json())
+.then(data => {
+    console.log(data.booked);
+});
+</script>
+
+</body>
+</html>

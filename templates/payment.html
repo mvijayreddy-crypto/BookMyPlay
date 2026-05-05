@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Payment</title>
+<style>
+body{
+    font-family:Arial;
+    text-align:center;
+    background:#f5f7fa;
+}
+
+.box{
+    background:white;
+    margin:50px auto;
+    padding:30px;
+    width:300px;
+    border-radius:15px;
+    box-shadow:0 4px 10px rgba(0,0,0,0.1);
+}
+
+input{
+    width:100%;
+    padding:10px;
+    margin:10px 0;
+    border-radius:8px;
+    border:1px solid #ccc;
+}
+
+button{
+    padding:12px;
+    width:100%;
+    background:#4CAF50;
+    color:white;
+    border:none;
+    border-radius:10px;
+}
+</style>
+</head>
+
+<body>
+
+<h2>Payment</h2>
+
+<div class="box">
+    <p id="summary"></p>
+
+    <input placeholder="Card Number">
+    <input placeholder="Expiry Date">
+    <input placeholder="CVV">
+
+    <button onclick="payNow()">Pay Now</button>
+</div>
+
+<script>
+let game = localStorage.getItem("bookingGame");
+let time = localStorage.getItem("bookingTime");
+let venue = localStorage.getItem("bookingVenue");
+
+document.getElementById("summary").innerText =
+    game + " | " + time + " | " + venue;
+
+function payNow(){
+
+    let game = localStorage.getItem("bookingGame");
+    let time = localStorage.getItem("bookingTime");
+    let venue = localStorage.getItem("bookingVenue");
+
+    let booking = {
+        game: game,
+        time: time,
+        venue: venue,
+        date: new Date().toLocaleDateString()
+    };
+
+    // Get existing bookings
+    let bookings = JSON.parse(localStorage.getItem("allBookings")) || [];
+
+    bookings.push(booking);
+
+    // Save back
+    localStorage.setItem("allBookings", JSON.stringify(bookings));
+
+    window.location.href = "/success";
+}
+</script>
+
+</body>
+</html>

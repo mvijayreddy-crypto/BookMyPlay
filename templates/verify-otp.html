@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Verify OTP</title>
+</head>
+
+<body style="margin:0; display:flex; height:100vh; font-family:sans-serif;">
+
+<!-- LEFT IMAGE -->
+<div style="flex:1;">
+    <img src="/static/sports-bg.jpg" style="width:100%; height:100%; object-fit:cover;">
+</div>
+
+<!-- RIGHT -->
+<div style="flex:1; display:flex; justify-content:center; align-items:center; background:#f5f5f5;">
+
+<div style="
+    width:350px;
+    padding:30px;
+    background:white;
+    border-radius:12px;
+    box-shadow:0 0 20px rgba(0,0,0,0.1);
+    text-align:center;
+">
+
+    <h2>🔐 Enter OTP</h2>
+
+    {% if error %}
+    <p style="color:red;">{{ error }}</p>
+    {% endif %}
+
+    <form method="POST" onsubmit="combineOtp()">
+
+        <div style="display:flex; justify-content:space-between; margin:20px 0;">
+            <input maxlength="1" class="box" id="o1" oninput="move(this,'o2')">
+            <input maxlength="1" class="box" id="o2" oninput="move(this,'o3')">
+            <input maxlength="1" class="box" id="o3" oninput="move(this,'o4')">
+            <input maxlength="1" class="box" id="o4" oninput="autoSubmit()">
+        </div>
+
+        <input type="hidden" name="otp" id="otp">
+
+        <button style="width:100%; padding:10px; background:green; color:white; border:none; border-radius:5px;">
+            Verify
+        </button>
+
+    </form>
+
+    <br>
+
+    <!-- TIMER -->
+    <p id="timer">Resend in 30s</p>
+    <a href="/otp-login" id="resend" style="display:none;">Resend OTP</a>
+
+</div>
+</div>
+
+<style>
+.box{
+    width:60px;
+    height:60px;
+    text-align:center;
+    font-size:24px;
+    border:1px solid #ccc;
+    border-radius:8px;
+}
+</style>
+
+<script>
+function move(curr,next){
+    if(curr.value.length===1){
+        document.getElementById(next)?.focus();
+    }
+}
+
+function combineOtp(){
+    let otp =
+        o1.value + o2.value + o3.value + o4.value;
+    document.getElementById('otp').value = otp;
+}
+
+function autoSubmit(){
+    combineOtp();
+    document.forms[0].submit();
+}
+
+// TIMER
+let time = 30;
+let timer = setInterval(()=>{
+    time--;
+    document.getElementById("timer").innerText = "Resend in " + time + "s";
+    if(time<=0){
+        clearInterval(timer);
+        document.getElementById("timer").style.display="none";
+        document.getElementById("resend").style.display="block";
+    }
+},1000);
+</script>
+
+</body>
+</html>

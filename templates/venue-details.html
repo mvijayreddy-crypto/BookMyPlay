@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Venue Details</title>
+
+<style>
+
+/* (YOUR ORIGINAL CSS — NOT CHANGED) */
+
+#slots{
+    display:flex;
+    flex-wrap:wrap;
+    gap:10px;
+    justify-content:center;
+    margin-top:20px;
+}
+
+.slot{
+    padding:10px 15px;
+    border-radius:8px;
+    cursor:pointer;
+    font-weight:bold;
+    transition:0.3s;
+}
+
+.available{
+    background:#4CAF50;
+    color:white;
+}
+
+.booked{
+    background:#ccc;
+    color:#666;
+    cursor:not-allowed;
+}
+
+.slot:hover{
+    transform:scale(1.1);
+}
+
+.selected{
+    background:#2e7d32 !important;
+    color:white;
+}
+
+body {
+    margin: 0;
+    font-family: 'Segoe UI', sans-serif;
+    background: #eef1f5;
+}
+
+.hero {
+    height: 220px;
+    background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)),
+                url('/static/cricket.png');
+    background-size: cover;
+    display: flex;
+    align-items: flex-end;
+    padding: 20px;
+    color: white;
+}
+
+.container {
+    display: flex;
+    gap: 25px;
+    padding: 25px;
+}
+
+.left { flex: 2; }
+
+.card {
+    background: white;
+    border-radius: 15px;
+    padding: 15px;
+    width: 220px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+.games {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.card img {
+    width: 100%;
+    height: 120px;
+    border-radius: 10px;
+}
+
+.summary {
+    position: sticky;
+    top: 20px;
+    background: white;
+    padding: 20px;
+    border-radius: 15px;
+    width: 260px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+}
+
+.price {
+    color: green;
+    font-weight: bold;
+    font-size: 18px;
+}
+
+button {
+    width: 100%;
+    padding: 12px;
+    border: none;
+    border-radius: 10px;
+    background: linear-gradient(90deg,#4CAF50,#2e7d32);
+    color: white;
+    margin-top: 10px;
+    cursor: pointer;
+}
+
+.map {
+    margin-top: 30px;
+    border-radius: 15px;
+    overflow: hidden;
+}
+
+.nearby {
+    margin-top: 30px;
+}
+
+.near-card {
+    background: white;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 10px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.modal {
+    position: fixed;
+    top:0; left:0;
+    width:100%; height:100%;
+    background: rgba(0,0,0,0.6);
+    display:none;
+    align-items:center;
+    justify-content:center;
+}
+
+.modal-content {
+    background:white;
+    padding:25px;
+    border-radius:15px;
+    width:300px;
+}
+
+input {
+    width:100%;
+    padding:10px;
+    margin:8px 0;
+    border-radius:8px;
+    border:1px solid #ccc;
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="hero">
+    <h2 id="venueTitle">Venue</h2>
+</div>
+
+<div class="container">
+
+<div class="left">
+
+<div class="games" id="gamesContainer"></div>
+
+<!-- DATE -->
+<h3>Select Date 📅</h3>
+<input type="date" id="date" onchange="handleDate()">
+
+<!-- MAP -->
+<div class="map">
+<iframe width="100%" height="250"
+src="https://maps.google.com/maps?q=hyderabad&output=embed">
+</iframe>
+</div>
+
+<!-- SLOTS -->
+<h3>Select Slot ⏰</h3>
+<div id="slots"></div>
+
+<!-- NEARBY -->
+<div class="nearby">
+<h3>Nearby Venues</h3>
+
+<div class="near-card">
+<span>Gachibowli Turf</span>
+<span>⭐4.7 | ₹500</span>
+</div>
+
+<div class="near-card">
+<span>Indoor Arena</span>
+<span>⭐4.3 | ₹200</span>
+</div>
+
+</div>
+
+</div>
+
+<!-- RIGHT -->
+<div class="summary">
+<h3>Your Booking</h3>
+<p id="game">Game: -</p>
+<p id="time">Time: -</p>
+<p class="price" id="price">₹0</p>
+
+<button onclick="openPayment()">Proceed to pay</button>
+</div>
+
+</div>
+
+<!-- PAYMENT -->
+<div class="modal" id="paymentModal">
+<div class="modal-content">
+<h3>Payment</h3>
+
+<input placeholder="Card Number">
+<input placeholder="Expiry">
+<input placeholder="CVV">
+
+<button onclick="pay()">Pay Now</button>
+</div>
+</div>
+
+<script>
+
+/* DATA */
+let gamesData = {
+    "LB Stadium":["cricket","tennis"],
+    "Gachibowli Turf":["football","cricket"],
+    "Indoor Arena":["badminton"]
+};
+
+let prices = {
+    cricket:300,
+    football:500,
+    badminton:200,
+    tennis:400
+};
+
+let times = ["06:00","07:00","08:00","09:00","10:00"];
+
+let venue = localStorage.getItem("venueName");
+document.getElementById("venueTitle").innerText = venue;
+
+let container = document.getElementById("gamesContainer");
+
+let selectedGame="";
+let selectedTime="";
+
+/* LOAD GAMES */
+(gamesData[venue] || []).forEach(game=>{
+    let div = document.createElement("div");
+    div.className = "card";
+
+    div.innerHTML=`
+        <img src="/static/${game}.png">
+        <h4>${game}</h4>
+    `;
+
+    div.onclick = () => {
+        selectedGame = game;
+        alert("Selected: " + game);
+    };
+
+    container.appendChild(div);
+});
+
+/* DATE CHANGE */
+function handleDate(){
+    let date = document.getElementById("date").value;
+
+    if(!selectedGame){
+        alert("Select game first");
+        return;
+    }
+
+    loadSlots(selectedGame, date);
+}
+
+/* LOAD SLOTS */
+function loadSlots(game, date){
+
+    fetch(`/check-slots?game=${game}&date=${date}`)
+    .then(res => res.json())
+    .then(data => {
+
+        let container = document.getElementById("slots");
+        container.innerHTML = "";
+
+        times.forEach(time => {
+
+            let div = document.createElement("div");
+            div.innerText = time;
+            div.classList.add("slot");
+
+            if(data.booked.includes(time)){
+                div.classList.add("booked");
+            } else {
+                div.classList.add("available");
+
+                div.onclick = () => selectSlot(time);
+            }
+
+            container.appendChild(div);
+        });
+
+    });
+}
+
+/* SELECT SLOT */
+function selectSlot(time){
+    selectedTime = time;
+
+    document.querySelectorAll(".slot").forEach(s=>s.classList.remove("selected"));
+    event.target.classList.add("selected");
+
+    document.getElementById("game").innerText="Game: "+selectedGame;
+    document.getElementById("time").innerText="Time: "+time;
+    document.getElementById("price").innerText="₹"+prices[selectedGame];
+}
+
+/* BOOK SLOT */
+function bookSlot(){
+    let date = document.getElementById("date").value;
+
+    fetch("/book-slot", {
+        method: "POST",
+        headers: {"Content-Type": "application/json"},
+        body: JSON.stringify({
+            game: selectedGame,
+            date: date,
+            time: selectedTime
+        })
+    })
+    .then(res => res.text())
+    .then(msg => {
+        alert(msg);
+        handleDate();
+    });
+}
+
+/* PAYMENT */
+function openPayment(){
+    if(!selectedGame || !selectedTime){
+        alert("Select slot first");
+        return;
+    }
+
+    document.getElementById("paymentModal").style.display = "flex";
+}
+
+function pay(){
+    bookSlot();
+    alert("🎉 Payment Successful!");
+    document.getElementById("paymentModal").style.display = "none";
+    window.location.href="/success";
+}
+
+/* AUTO DATE */
+window.onload = function(){
+    let today = new Date().toISOString().split('T')[0];
+    document.getElementById("date").value = today;
+};
+
+</script>
+
+</body>
+</html>
