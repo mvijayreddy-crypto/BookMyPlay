@@ -31,6 +31,30 @@ class User(db.Model):
 with app.app_context():
     db.create_all()
 
+    # ================= LOGIN =================
+@app.route('/login', methods=['GET', 'POST'])
+def login():
+    if request.method == 'POST':
+
+        email = request.form.get('email')
+        password = request.form.get('password')
+
+        # manual login
+        if email == "admin@gmail.com" and password == "1234":
+
+            session['user'] = email
+            session['name'] = "Admin User"
+
+            return redirect('/dashboard')
+
+        else:
+            return render_template(
+                'login.html',
+                error="Invalid credentials"
+            )
+
+    return render_template('login.html')
+
 # ================= GOOGLE LOGIN =================
 google_bp = make_google_blueprint(
     client_id="YOUR_CLIENT_ID",
