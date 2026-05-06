@@ -185,18 +185,27 @@
         {% endif %}
 
         <!-- LOGIN -->
-        <form method="POST" action="/login" id="loginForm">
+      <form method="POST" action="/login">
 
-            <div class="input-group">
-                <input type="text" name="email" required>
-                <label>Email or Phone</label>
-            </div>
+    <input 
+        type="text"
+        name="email"
+        placeholder="Enter Email"
+        required
+    >
 
-            <div class="input-group">
-                <input type="password" name="password" required>
-                <label>Password</label>
-            </div>
+    <input 
+        type="password"
+        name="password"
+        placeholder="Enter Password"
+        required
+    >
 
+    <button type="submit">
+        Login
+    </button>
+
+</form>
             <div class="forgot">
                 <a href="/forgot-password">Forgot Password?</a>
             </div>
