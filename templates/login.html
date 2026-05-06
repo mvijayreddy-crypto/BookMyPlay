@@ -263,6 +263,7 @@
             <button 
                 type="submit"
                 class="btn login-btn"
+                id="loginSubmitBtn"
             >
                 Login
             </button>
@@ -328,6 +329,7 @@
             <button 
                 type="submit"
                 class="btn login-btn"
+                id="signupSubmitBtn"
             >
                 Sign Up
             </button>
@@ -463,6 +465,25 @@ function toggleSignupPassword(){
         password.type = "password";
     }
 }
+document.getElementById("loginForm")
+.addEventListener("submit", function(){
+
+    const btn =
+        document.getElementById("loginSubmitBtn");
+
+    btn.innerHTML = "⏳ Loading...";
+    btn.disabled = true;
+});
+
+document.getElementById("signupForm")
+.addEventListener("submit", function(){
+
+    const btn =
+        document.getElementById("signupSubmitBtn");
+
+    btn.innerHTML = "⏳ Creating Account...";
+    btn.disabled = true;
+});
 
 </script>
 

@@ -12,6 +12,7 @@ body{
     font-family:'Segoe UI';
     background: radial-gradient(circle at top, #1a1f3c, #020617 70%);
     color:white;
+    overflow-x:hidden;
 }
 
 /* LOADER */
@@ -36,7 +37,7 @@ body{
 @keyframes spin{to{transform:rotate(360deg);}}
 
 /* MAIN */
-.main{min-height:100vh;padding-bottom:90px;}
+.main{min-height:100vh;padding-bottom:100px;}
 
 /* HEADER */
 .header{
@@ -46,6 +47,9 @@ body{
     padding:15px 20px;
     background:rgba(255,255,255,0.05);
     backdrop-filter:blur(15px);
+    position:sticky;
+    top:0;
+    z-index:100;
 }
 
 /* POPUPS */
@@ -53,13 +57,14 @@ body{
     display:none;
     position:absolute;
     top:60px;
-    background:rgba(0,0,0,0.8);
+    background:rgba(0,0,0,0.9);
     padding:15px;
     border-radius:12px;
+    box-shadow:0 0 20px rgba(0,255,200,0.2);
 }
-#menu{left:20px;width:200px;}
-#notify{right:20px;width:220px;}
-#panel{left:50%;transform:translateX(-50%);width:250px;}
+#menu{left:20px;width:220px;}
+#notify{right:20px;width:240px;}
+#panel{left:50%;transform:translateX(-50%);width:260px;}
 
 /* WELCOME */
 .welcome{
@@ -69,6 +74,58 @@ body{
     border-radius:20px;
     text-align:center;
     box-shadow:0 0 25px rgba(0,255,128,0.5);
+    animation:fadeUp 1s ease;
+}
+
+.welcome h2{
+    margin-bottom:10px;
+}
+
+.live-time{
+    margin-top:10px;
+    font-size:14px;
+    opacity:0.9;
+}
+
+@keyframes fadeUp{
+    from{
+        transform:translateY(30px);
+        opacity:0;
+    }
+    to{
+        transform:translateY(0);
+        opacity:1;
+    }
+}
+
+/* STATS */
+.stats{
+    display:flex;
+    justify-content:center;
+    flex-wrap:wrap;
+    gap:15px;
+    margin:20px;
+}
+
+.stat-card{
+    width:150px;
+    padding:18px;
+    border-radius:18px;
+    background:rgba(255,255,255,0.08);
+    backdrop-filter:blur(10px);
+    text-align:center;
+    transition:0.3s;
+    box-shadow:0 0 20px rgba(0,255,200,0.1);
+}
+
+.stat-card:hover{
+    transform:translateY(-5px) scale(1.05);
+    box-shadow:0 0 30px rgba(0,255,200,0.4);
+}
+
+.stat-card h3{
+    font-size:26px;
+    color:#00ffc8;
 }
 
 /* SEARCH */
@@ -82,6 +139,7 @@ body{
     border:none;
     background:rgba(255,255,255,0.1);
     color:white;
+    outline:none;
 }
 
 /* SECTION */
@@ -105,7 +163,24 @@ body{
 }
 
 /* STATUS */
-.status{text-align:center;margin-top:10px;font-weight:bold;}
+.status{
+    text-align:center;
+    margin-top:10px;
+    font-weight:bold;
+    font-size:18px;
+}
+
+/* WEATHER */
+.weather{
+    width:90%;
+    max-width:600px;
+    margin:20px auto;
+    padding:18px;
+    border-radius:20px;
+    background:rgba(255,255,255,0.08);
+    text-align:center;
+    box-shadow:0 0 20px rgba(0,255,200,0.1);
+}
 
 /* GAMES */
 .games{
@@ -120,15 +195,49 @@ body{
     background:linear-gradient(145deg,#111827,#020617);
     padding:15px;
     border-radius:18px;
-    width:130px;
+    width:140px;
     text-align:center;
     cursor:pointer;
     transition:0.3s;
     box-shadow:0 0 20px rgba(0,255,200,0.2);
+    position:relative;
+    overflow:hidden;
 }
+
 .card:hover{
     transform:scale(1.07);
     box-shadow:0 0 35px rgba(0,255,200,0.6);
+}
+
+.card img{
+    transition:0.3s;
+}
+
+.card:hover img{
+    transform:scale(1.1);
+}
+
+/* ACTIVITY */
+.activity{
+    width:90%;
+    max-width:700px;
+    margin:25px auto;
+    background:rgba(255,255,255,0.08);
+    border-radius:20px;
+    padding:20px;
+}
+
+.activity h2{
+    margin-bottom:15px;
+    color:#00e676;
+    text-align:center;
+}
+
+.activity p{
+    margin:10px 0;
+    padding:12px;
+    background:rgba(255,255,255,0.05);
+    border-radius:10px;
 }
 
 /* NAV */
@@ -136,17 +245,25 @@ body{
     position:fixed;
     bottom:0;
     width:100%;
-    height:70px;
-    background:rgba(20,20,30,0.95);
+    height:75px;
+    background:rgba(20,20,30,0.98);
     display:flex;
     justify-content:space-around;
     align-items:center;
+    backdrop-filter:blur(12px);
+    z-index:999;
 }
+
 .bottom-nav div{
     cursor:pointer;
+    transition:0.3s;
+    text-align:center;
+    font-size:14px;
 }
+
 .bottom-nav div:hover{
     color:#00ffc8;
+    transform:translateY(-3px);
 }
 </style>
 </head>
@@ -162,8 +279,11 @@ body{
 
 <!-- HEADER -->
 <div class="header">
+
     <button onclick="toggleMenu()">☰ Menu</button>
+
     <h2>BOOK MY PLAY</h2>
+
     <span onclick="toggleNotify()">🔔</span>
 
     <div id="menu" class="popup">
@@ -171,20 +291,57 @@ body{
         <p onclick="openPanel('ratings')">⭐ Ratings</p>
         <p onclick="openPanel('reviews')">📝 Reviews</p>
         <p onclick="openMap()">📍 Nearby</p>
+        <p onclick="toggleDarkMode()">🌙 Dark Mode</p>
     </div>
 
     <div id="notify" class="popup">
         <p>📢 New offers available</p>
         <p>🏏 Cricket slots open</p>
+        <p>🔥 Football tournament live</p>
     </div>
 
     <div id="panel" class="popup"></div>
+
 </div>
 
 <!-- WELCOME -->
 <div class="welcome">
-    <h2>Welcome Back 👋</h2>
-    <p>Book your favorite venue in seconds</p>
+
+    <h2>
+        Welcome Back 👋
+    </h2>
+
+    <p>
+        Book your favorite venue in seconds
+    </p>
+
+    <div class="live-time" id="liveTime"></div>
+
+</div>
+
+<!-- STATS -->
+<div class="stats">
+
+    <div class="stat-card">
+        <h3>12</h3>
+        <p>Total Bookings</p>
+    </div>
+
+    <div class="stat-card">
+        <h3>4.9</h3>
+        <p>User Rating</p>
+    </div>
+
+    <div class="stat-card">
+        <h3>8</h3>
+        <p>Nearby Venues</p>
+    </div>
+
+    <div class="stat-card">
+        <h3>24</h3>
+        <p>Live Slots</p>
+    </div>
+
 </div>
 
 <!-- SEARCH -->
@@ -194,11 +351,18 @@ onfocus="openMap()"
 onkeyup="filterGames()"
 onkeypress="enterSearch(event)">
 
+<!-- WEATHER -->
+<div class="weather">
+    ☀️ Perfect weather for outdoor sports today!
+</div>
+
 <!-- DATE & TIME -->
 <div class="section">
+
     <h2>Select Date & Time 📅</h2>
 
     <div class="flex">
+
         <div class="box">
             <input type="date" onchange="checkAvailability()">
         </div>
@@ -206,126 +370,252 @@ onkeypress="enterSearch(event)">
         <div class="box">
             <input type="time" onchange="checkAvailability()">
         </div>
+
     </div>
 
-    <div class="status" id="status">Select date & time</div>
+    <div class="status" id="status">
+        Select date & time
+    </div>
+
 </div>
 
 <!-- GAMES -->
 <div class="section">
+
     <h2>Popular Games 🎮</h2>
 
     <div class="games">
+
         <div class="card" onclick="openVenue('cricket')">
-            <img src="/static/cricket.png" width="80"><p>Cricket</p>
+            <img src="/static/cricket.png" width="80">
+            <p>Cricket</p>
         </div>
 
         <div class="card" onclick="openVenue('badminton')">
-            <img src="/static/badminton.png" width="80"><p>Badminton</p>
+            <img src="/static/badminton.png" width="80">
+            <p>Badminton</p>
         </div>
 
         <div class="card" onclick="openVenue('volleyball')">
-            <img src="/static/volleyball.png" width="80"><p>Volleyball</p>
+            <img src="/static/volleyball.png" width="80">
+            <p>Volleyball</p>
         </div>
 
         <div class="card" onclick="openVenue('tennis')">
-            <img src="/static/tennis.png" width="80"><p>Tennis</p>
+            <img src="/static/tennis.png" width="80">
+            <p>Tennis</p>
         </div>
+
     </div>
+
+</div>
+
+<!-- RECENT ACTIVITY -->
+<div class="activity">
+
+    <h2>Recent Activity ⚡</h2>
+
+    <p>🏏 You booked Cricket Arena yesterday</p>
+
+    <p>🎾 Tennis slot available near your location</p>
+
+    <p>🔥 20% OFF available on weekend bookings</p>
+
 </div>
 
 </div>
 
 <!-- NAV -->
 <div class="bottom-nav">
-    <div onclick="go('dashboard')">🏠 Home</div>
-    <div onclick="go('venues')">📍 Venue</div>
-    <div onclick="go('history')">📅 Bookings</div>
-    <div onclick="go('manage')">🛠 Manage</div>
-    <div onclick="go('profile')">👤 Profile</div>
+
+    <div onclick="go('dashboard')">
+        🏠<br>Home
+    </div>
+
+    <div onclick="go('venues')">
+        📍<br>Venue
+    </div>
+
+    <div onclick="go('history')">
+        📅<br>Bookings
+    </div>
+
+    <div onclick="go('manage')">
+        🛠<br>Manage
+    </div>
+
+    <div onclick="go('profile')">
+        👤<br>Profile
+    </div>
+
 </div>
 
 <script>
 
 /* LOADER */
 window.addEventListener("load",()=>{
+
     setTimeout(()=>{
+
         document.getElementById("loader").style.display="none";
+
     },800);
+
 });
+
+/* LIVE TIME */
+setInterval(()=>{
+
+    let now = new Date();
+
+    document.getElementById("liveTime").innerHTML =
+        now.toLocaleString();
+
+},1000);
 
 /* MENU */
 function toggleMenu(){
+
     let m=document.getElementById("menu");
-    m.style.display=m.style.display==="block"?"none":"block";
+
+    m.style.display=
+        m.style.display==="block"
+        ?"none":"block";
 }
 
 /* NOTIFY */
 function toggleNotify(){
+
     let n=document.getElementById("notify");
-    n.style.display=n.style.display==="block"?"none":"block";
+
+    n.style.display=
+        n.style.display==="block"
+        ?"none":"block";
 }
 
 /* PANEL */
 function openPanel(type){
+
     let p=document.getElementById("panel");
 
-    if(type==="offers") p.innerHTML="🎁 20% OFF on first booking!";
-    if(type==="ratings") p.innerHTML="⭐ Rating: 4.5 / 5";
-    if(type==="reviews") p.innerHTML="📝 Users love this platform!";
+    if(type==="offers")
+        p.innerHTML="🎁 20% OFF on first booking!";
+
+    if(type==="ratings")
+        p.innerHTML="⭐ Rating: 4.5 / 5";
+
+    if(type==="reviews")
+        p.innerHTML="📝 Users love this platform!";
 
     p.style.display="block";
 }
 
 /* GOOGLE MAP */
 function openMap(){
-    window.open("https://www.google.com/maps","_blank");
+
+    window.open(
+        "https://www.google.com/maps",
+        "_blank"
+    );
 }
 
 /* SEARCH FILTER */
 function filterGames(){
-    let val=document.getElementById("search").value.toLowerCase();
-    document.querySelectorAll(".card").forEach(c=>{
-        c.style.display=c.innerText.toLowerCase().includes(val)?"block":"none";
+
+    let val=
+        document.getElementById("search")
+        .value.toLowerCase();
+
+    document.querySelectorAll(".card")
+    .forEach(c=>{
+
+        c.style.display=
+            c.innerText.toLowerCase()
+            .includes(val)
+            ?"block":"none";
     });
 }
 
 /* ENTER SEARCH */
 function enterSearch(e){
+
     if(e.key==="Enter"){
-        let val=document.getElementById("search").value;
-        window.open("https://www.google.com/maps/search/"+val,"_blank");
+
+        let val=
+            document.getElementById("search")
+            .value;
+
+        window.open(
+            "https://www.google.com/maps/search/"+val,
+            "_blank"
+        );
     }
 }
 
 /* OPEN VENUE */
 function openVenue(game){
-    localStorage.setItem("selectedGame",game);
+
+    localStorage.setItem(
+        "selectedGame",
+        game
+    );
+
     window.location.href="/venues";
 }
 
 /* NAVIGATION */
 function go(page){
+
     window.location.href="/"+page;
 }
 
 /* AVAILABILITY */
 function checkAvailability(){
-    let time=document.querySelector("input[type='time']").value;
+
+    let time=
+        document.querySelector("input[type='time']").value;
 
     if(!time){
-        document.getElementById("status").innerText="Select time";
+
+        document.getElementById("status")
+        .innerText="Select time";
+
         return;
     }
 
     let h=parseInt(time.split(":")[0]);
 
     if(h>=6 && h<=10)
-        document.getElementById("status").innerText="⚠ Few slots left";
+
+        document.getElementById("status")
+        .innerText="⚠ Few slots left";
+
     else if(h>=11 && h<=17)
-        document.getElementById("status").innerText="✅ Available";
+
+        document.getElementById("status")
+        .innerText="✅ Available";
+
     else
-        document.getElementById("status").innerText="❌ Fully booked";
+
+        document.getElementById("status")
+        .innerText="❌ Fully booked";
+}
+
+/* DARK MODE */
+function toggleDarkMode(){
+
+    if(document.body.style.background=="white"){
+
+        document.body.style.background=
+        "radial-gradient(circle at top, #1a1f3c, #020617 70%)";
+
+        document.body.style.color="white";
+
+    }else{
+
+        document.body.style.background="white";
+        document.body.style.color="black";
+    }
 }
 
 </script>
