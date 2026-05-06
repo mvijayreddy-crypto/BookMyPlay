@@ -90,6 +90,7 @@
             border: 1px solid #ccc;
             border-radius: 6px;
             outline: none;
+            box-sizing: border-box;
         }
 
         .input-group label {
@@ -98,6 +99,7 @@
             top: 12px;
             color: gray;
             transition: 0.3s;
+            pointer-events: none;
         }
 
         .input-group input:focus + label,
@@ -163,6 +165,22 @@
             text-decoration: none;
             color: #4CAF50;
         }
+
+        #strengthMessage {
+            font-size: 13px;
+            margin-top: -8px;
+            margin-bottom: 10px;
+            display: block;
+        }
+
+        .eye-icon {
+            position: absolute;
+            right: 15px;
+            top: 12px;
+            cursor: pointer;
+            font-size: 18px;
+            z-index: 100;
+        }
     </style>
 </head>
 
@@ -177,13 +195,22 @@
 
         <!-- TOGGLE -->
         <div class="toggle">
-            <button id="loginBtn" class="active" onclick="showLogin()">
+
+            <button 
+                id="loginBtn"
+                class="active"
+                onclick="showLogin()"
+            >
                 Login
             </button>
 
-            <button id="signupBtn" onclick="showSignup()">
+            <button 
+                id="signupBtn"
+                onclick="showSignup()"
+            >
                 Sign Up
             </button>
+
         </div>
 
         <!-- ERROR -->
@@ -195,45 +222,113 @@
         <form method="POST" action="/login" id="loginForm">
 
             <div class="input-group">
-                <input type="text" name="email" required>
+
+                <input 
+                    type="text"
+                    name="email"
+                    required
+                >
+
                 <label>Email or Phone</label>
+
             </div>
 
             <div class="input-group">
-                <input type="password" name="password" required>
+
+                <input 
+                    type="password"
+                    name="password"
+                    id="loginPassword"
+                    required
+                    style="padding-right:45px;"
+                >
+
                 <label>Password</label>
+
+                <span 
+                    class="eye-icon"
+                    onclick="toggleLoginPassword()"
+                >
+                    👁️
+                </span>
+
             </div>
 
             <div class="forgot">
-                <a href="/forgot-password">Forgot Password?</a>
+                <a href="/forgot-password">
+                    Forgot Password?
+                </a>
             </div>
 
-            <button type="submit" class="btn login-btn">
+            <button 
+                type="submit"
+                class="btn login-btn"
+            >
                 Login
             </button>
 
         </form>
 
         <!-- SIGNUP -->
-        <form method="POST" action="/signup" id="signupForm" class="hidden">
+        <form 
+            method="POST"
+            action="/signup"
+            id="signupForm"
+            class="hidden"
+        >
 
             <div class="input-group">
-                <input type="email" name="email" required>
+
+                <input 
+                    type="email"
+                    name="email"
+                    required
+                >
+
                 <label>Email</label>
+
             </div>
 
             <div class="input-group">
-                <input type="text" name="phone" required>
+
+                <input 
+                    type="text"
+                    name="phone"
+                    required
+                >
+
                 <label>Phone</label>
+
             </div>
+
+            <div class="input-group">
+
+                <input 
+                    type="password"
+                    name="password"
+                    id="signupPassword"
+                    onkeyup="checkPasswordStrength()"
+                    required
+                    style="padding-right:45px;"
+                >
+
+                <label>Password</label>
+
+                <span 
+                    class="eye-icon"
+                    onclick="toggleSignupPassword()"
+                >
+                    👁️
+                </span>
+
+            </div>
+
             <small id="strengthMessage"></small>
 
-            <div class="input-group">
-                <input type="password" name="password" required>
-                <label>Password</label>
-            </div>
-
-            <button type="submit" class="btn login-btn">
+            <button 
+                type="submit"
+                class="btn login-btn"
+            >
                 Sign Up
             </button>
 
@@ -245,20 +340,29 @@
 
         <!-- OTP -->
         <a href="/otp-login">
-            <button type="button"
+
+            <button 
+                type="button"
                 class="btn"
-                style="background:linear-gradient(135deg,#ff9800,#ff5722)">
+                style="background:linear-gradient(135deg,#ff9800,#ff5722)"
+            >
                 🔐 Login with OTP
             </button>
+
         </a>
 
         <br><br>
 
         <!-- GOOGLE -->
         <a href="/login/google">
-            <button type="button" class="btn google-btn">
+
+            <button 
+                type="button"
+                class="btn google-btn"
+            >
                 Continue with Google
             </button>
+
         </a>
 
         <br><br>
@@ -275,45 +379,90 @@
 
 function showSignup() {
 
-    document.getElementById("loginForm").classList.add("hidden");
-    document.getElementById("signupForm").classList.remove("hidden");
+    document.getElementById("loginForm")
+        .classList.add("hidden");
 
-    document.getElementById("signupBtn").classList.add("active");
-    document.getElementById("loginBtn").classList.remove("active");
+    document.getElementById("signupForm")
+        .classList.remove("hidden");
+
+    document.getElementById("signupBtn")
+        .classList.add("active");
+
+    document.getElementById("loginBtn")
+        .classList.remove("active");
 }
 
 function showLogin() {
 
-    document.getElementById("signupForm").classList.add("hidden");
-    document.getElementById("loginForm").classList.remove("hidden");
+    document.getElementById("signupForm")
+        .classList.add("hidden");
 
-    document.getElementById("loginBtn").classList.add("active");
-    document.getElementById("signupBtn").classList.remove("active");
+    document.getElementById("loginForm")
+        .classList.remove("hidden");
+
+    document.getElementById("loginBtn")
+        .classList.add("active");
+
+    document.getElementById("signupBtn")
+        .classList.remove("active");
 }
 
-const passwordInput = document.getElementById("signupPassword");
-const strengthMessage = document.getElementById("strengthMessage");
+function checkPasswordStrength(){
 
-passwordInput.addEventListener("input", () => {
+    let password =
+        document.getElementById("signupPassword").value;
 
-    const password = passwordInput.value;
+    let message =
+        document.getElementById("strengthMessage");
 
     if(password.length < 6){
 
-        strengthMessage.innerHTML = "🔴 Weak Password";
-        strengthMessage.style.color = "red";
+        message.innerHTML = "🔴 Weak Password";
+        message.style.color = "red";
 
-    } else if(password.length < 10){
+    }
+    else if(password.length < 10){
 
-        strengthMessage.innerHTML = "🟡 Medium Password";
-        strengthMessage.style.color = "orange";
+        message.innerHTML = "🟡 Medium Password";
+        message.style.color = "orange";
+
+    }
+    else{
+
+        message.innerHTML = "🟢 Strong Password";
+        message.style.color = "green";
+    }
+}
+
+function toggleLoginPassword(){
+
+    const password =
+        document.getElementById("loginPassword");
+
+    if(password.type === "password"){
+
+        password.type = "text";
 
     } else {
 
-        strengthMessage.innerHTML = "🟢 Strong Password";
-        strengthMessage.style.color = "green";
+        password.type = "password";
     }
-});
+}
+
+function toggleSignupPassword(){
+
+    const password =
+        document.getElementById("signupPassword");
+
+    if(password.type === "password"){
+
+        password.type = "text";
+
+    } else {
+
+        password.type = "password";
+    }
+}
 
 </script>
 
