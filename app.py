@@ -5,6 +5,7 @@ from werkzeug.security import generate_password_hash, check_password_hash
 
 app = Flask(__name__)
 app.secret_key = "bookmyplay_secret_key"
+app.config['SESSION_COOKIE_SECURE'] = False
 
 # ================= DATABASE =================
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///users.db'
@@ -18,6 +19,7 @@ class Booking(db.Model):
     game = db.Column(db.String(50))
     booking_date = db.Column(db.String(50))
     booking_time = db.Column(db.String(50))
+
 # ================= USER MODEL =================
 class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -101,7 +103,7 @@ def otp_login():
         session['otp'] = otp
         session['phone'] = phone
 
-        print("OTP:", otp)  # for testing in terminal
+        print("OTP:", otp)
 
         return redirect('/verify-otp')
 
@@ -128,21 +130,22 @@ def login():
         user_input = request.form.get('email')
         password = request.form.get('password')
 
-        print("INPUT:", user_input, password)
-
         if not user_input or not password:
             return render_template('login.html', error="Please fill all fields")
 
+        # ✅ FETCH USER FROM DATABASE
         user = User.query.filter(
             (User.email == user_input) | (User.phone == user_input)
         ).first()
-        
-        print("USER FOUNd:", user)
 
-        print("DEBUG USER:", user)  # 👈 debugging
+        print("USER INPUT:", user_input)
+        print("USER FOUND:", user)
 
         if user and check_password_hash(user.password, password):
-            session['user'] = user.email or user.phone
+            print("LOGIN SUCCESS")
+
+            session['user'] = user.email if user.email else user.phone
+
             return redirect('/dashboard')
         else:
             return render_template('login.html', error="Invalid credentials")
@@ -179,6 +182,8 @@ def signup():
         db.session.add(new_user)
         db.session.commit()
 
+        print("USER CREATED SUCCESSFULLY")
+
         return redirect('/login')
 
     return render_template('signup.html')
@@ -208,6 +213,9 @@ def forgot_password():
 # ================= DASHBOARD =================
 @app.route('/dashboard')
 def dashboard():
+
+    print("SESSION:", session)
+
     if 'user' not in session:
         return redirect('/login')
 
