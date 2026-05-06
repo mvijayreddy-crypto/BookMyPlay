@@ -232,11 +232,12 @@ textarea{
             display: flex;
             height: 100vh;
             animation: fadeIn 0.8s ease-in-out;
+            flex-direction: column;
         }
 
         /* LEFT SIDE */
         .left {
-            width: 50%;
+            width: 52%;
             background: url("/static/sports-bg.jpg") no-repeat center;
             background-size: cover;
             animation: zoom 10s infinite alternate;
@@ -249,7 +250,7 @@ textarea{
 
         /* RIGHT SIDE */
         .right {
-            width: 50%;
+            width: 48%;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -402,6 +403,71 @@ textarea{
             font-size: 18px;
             z-index: 100;
         }
+        /* ================= PHONE LANDSCAPE STYLE ================= */
+
+@media screen and (max-width:768px){
+
+    body{
+        display:flex;
+        overflow:hidden;
+    }
+
+    .left{
+        width:52%;
+        min-height:100vh;
+    }
+
+    .right{
+        width:48%;
+        padding:10px;
+    }
+
+    .card{
+        width:100%;
+        max-width:350px;
+        padding:20px;
+    }
+
+    h2{
+        font-size:22px;
+    }
+
+    .btn{
+        font-size:14px;
+    }
+
+    .input-group input{
+        font-size:14px;
+        padding:10px;
+    }
+}
+
+@media screen and (max-width:480px){
+
+    .left{
+        width:50%;
+    }
+
+    .right{
+        width:50%;
+    }
+
+    .card{
+        padding:16px;
+    }
+
+    h2{
+        font-size:18px;
+    }
+
+    .toggle button{
+        font-size:12px;
+    }
+
+    .btn{
+        font-size:13px;
+    }
+}
     </style>
 </head>
 
