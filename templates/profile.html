@@ -4,6 +4,150 @@
 <title>Profile</title>
 
 <style>
+    /* ================= GLOBAL RESPONSIVE ================= */
+
+img{
+    max-width:100%;
+    height:auto;
+}
+
+iframe{
+    max-width:100%;
+}
+
+input,
+button,
+select,
+textarea{
+    max-width:100%;
+}
+
+/* TABLET */
+
+@media(max-width:900px){
+
+    body{
+        overflow-x:hidden;
+    }
+
+    .flex,
+    .games,
+    .stats{
+        flex-wrap:wrap;
+    }
+
+    .card,
+    .stat-card{
+        width:45%;
+    }
+
+    .search,
+    .weather,
+    .activity,
+    .slot-section,
+    .map,
+    .trending{
+        width:94%;
+    }
+}
+
+/* MOBILE */
+
+@media(max-width:600px){
+
+    body{
+        overflow-x:hidden;
+    }
+
+    .header{
+        padding:12px;
+    }
+
+    .header h2{
+        font-size:20px;
+    }
+
+    .welcome{
+        margin:15px;
+        padding:18px;
+    }
+
+    .stats{
+        flex-direction:column;
+        align-items:center;
+    }
+
+    .stat-card{
+        width:92%;
+    }
+
+    .games{
+        justify-content:center;
+        gap:15px;
+    }
+
+    .card{
+        width:90%;
+        max-width:250px;
+    }
+
+    .slot{
+        width:90%;
+        text-align:center;
+    }
+
+    .search{
+        width:94%;
+    }
+
+    .flex{
+        flex-direction:column;
+        align-items:center;
+    }
+
+    .box{
+        width:92%;
+    }
+
+    .bottom-nav{
+        width:96%;
+        height:70px;
+    }
+
+    .bottom-nav div{
+        font-size:11px;
+    }
+
+    .quick-book{
+        width:58px;
+        height:58px;
+    }
+
+    .plus-icon{
+        font-size:26px;
+    }
+}
+
+/* SMALL MOBILE */
+
+@media(max-width:420px){
+
+    .header h2{
+        font-size:18px;
+    }
+
+    .welcome h2{
+        font-size:22px;
+    }
+
+    .card{
+        width:95%;
+    }
+
+    .bottom-nav div{
+        font-size:10px;
+    }
+}
 :root{
     --primary:#4CAF50;
     --bg:#eef1f5;
