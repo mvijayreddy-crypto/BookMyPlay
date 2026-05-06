@@ -1,474 +1,305 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
     <title>Login - BookMyPlay</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+    content="width=device-width, initial-scale=1.0">
 
     <style>
-        /* ================= GLOBAL RESPONSIVE ================= */
-/* ================= MOBILE RESPONSIVE ================= */
 
-@media(max-width:768px){
+        *{
+            margin:0;
+            padding:0;
+            box-sizing:border-box;
+        }
 
-    body{
-        flex-direction:column;
-    }
+        body{
+            font-family:'Segoe UI',sans-serif;
+            display:flex;
+            min-height:100vh;
+            overflow:hidden;
+            animation:fadeIn 0.8s ease-in-out;
+        }
 
-    .left{
-        width:100%;
-        height:250px;
-    }
-
-    .right{
-        width:100%;
-        padding:20px;
-        display:flex;
-        justify-content:center;
-        align-items:center;
-    }
-
-    .card{
-        width:100%;
-        max-width:400px;
-        margin-top:-40px;
-    }
-}
-
-@media(max-width:600px){
-
-    .left{
-        height:220px;
-    }
-
-    .card{
-        width:95%;
-        padding:20px;
-        border-radius:18px;
-    }
-
-    h2{
-        font-size:26px;
-    }
-
-    .toggle button{
-        font-size:14px;
-    }
-
-    .input-group input{
-        font-size:15px;
-    }
-
-    .btn{
-        font-size:15px;
-    }
-}
-
-@media(max-width:420px){
-
-    .left{
-        height:180px;
-    }
-
-    .right{
-        padding:10px;
-    }
-
-    .card{
-        width:100%;
-        padding:18px;
-        margin-top:-30px;
-    }
-
-    h2{
-        font-size:22px;
-    }
-}
-
-img{
-    max-width:100%;
-    height:auto;
-}
-
-iframe{
-    max-width:100%;
-}
-
-input,
-button,
-select,
-textarea{
-    max-width:100%;
-}
-
-/* TABLET */
-
-@media(max-width:900px){
-
-    body{
-        overflow-x:hidden;
-    }
-
-    .flex,
-    .games,
-    .stats{
-        flex-wrap:wrap;
-    }
-
-    .card,
-    .stat-card{
-        width:45%;
-    }
-
-    .search,
-    .weather,
-    .activity,
-    .slot-section,
-    .map,
-    .trending{
-        width:94%;
-    }
-}
-
-/* MOBILE */
-
-@media(max-width:600px){
-
-    body{
-        overflow-x:hidden;
-    }
-
-    .header{
-        padding:12px;
-    }
-
-    .header h2{
-        font-size:20px;
-    }
-
-    .welcome{
-        margin:15px;
-        padding:18px;
-    }
-
-    .stats{
-        flex-direction:column;
-        align-items:center;
-    }
-
-    .stat-card{
-        width:92%;
-    }
-
-    .games{
-        justify-content:center;
-        gap:15px;
-    }
-
-    .card{
-        width:90%;
-        max-width:250px;
-    }
-
-    .slot{
-        width:90%;
-        text-align:center;
-    }
-
-    .search{
-        width:94%;
-    }
-
-    .flex{
-        flex-direction:column;
-        align-items:center;
-    }
-
-    .box{
-        width:92%;
-    }
-
-    .bottom-nav{
-        width:96%;
-        height:70px;
-    }
-
-    .bottom-nav div{
-        font-size:11px;
-    }
-
-    .quick-book{
-        width:58px;
-        height:58px;
-    }
-
-    .plus-icon{
-        font-size:26px;
-    }
-}
-
-/* SMALL MOBILE */
-
-@media(max-width:420px){
-
-    .header h2{
-        font-size:18px;
-    }
-
-    .welcome h2{
-        font-size:22px;
-    }
-
-    .card{
-        width:95%;
-    }
-
-    .bottom-nav div{
-        font-size:10px;
-    }
-}
-        body {
-            margin: 0;
-            font-family: 'Segoe UI', sans-serif;
-            display: flex;
-            height: 100vh;
-            animation: fadeIn 0.8s ease-in-out;
-            flex-direction: column;
+        @keyframes fadeIn{
+            from{
+                opacity:0;
+            }
+            to{
+                opacity:1;
+            }
         }
 
         /* LEFT SIDE */
-        .left {
-            width: 52%;
-            background: url("/static/sports-bg.jpg") no-repeat center;
-            background-size: cover;
-            animation: zoom 10s infinite alternate;
+
+        .left{
+            flex:1;
+            background:url("/static/sports-bg.jpg")
+            no-repeat center;
+            background-size:cover;
+            animation:zoom 10s infinite alternate;
         }
 
-        @keyframes zoom {
-            from { transform: scale(1); }
-            to { transform: scale(1.1); }
+        @keyframes zoom{
+
+            from{
+                transform:scale(1);
+            }
+
+            to{
+                transform:scale(1.08);
+            }
         }
 
         /* RIGHT SIDE */
-        .right {
-            width: 48%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            background: #f5f5f5;
+
+        .right{
+            flex:1;
+            display:flex;
+            justify-content:center;
+            align-items:center;
+            background:#f5f5f5;
+            padding:20px;
         }
 
         /* CARD */
-        .card {
-            width: 350px;
-            background: white;
-            padding: 30px;
-            border-radius: 15px;
-            box-shadow: 0 0 20px rgba(0,0,0,0.1);
-            animation: slideUp 0.7s ease;
+
+        .card{
+            width:100%;
+            max-width:380px;
+            background:white;
+            padding:30px;
+            border-radius:18px;
+            box-shadow:0 0 20px rgba(0,0,0,0.08);
+            animation:slideUp 0.7s ease;
         }
 
-        @keyframes slideUp {
-            from {
-                transform: translateY(40px);
-                opacity: 0;
+        @keyframes slideUp{
+
+            from{
+                transform:translateY(40px);
+                opacity:0;
             }
-            to {
-                transform: translateY(0);
-                opacity: 1;
+
+            to{
+                transform:translateY(0);
+                opacity:1;
             }
         }
 
-        h2 {
-            text-align: center;
+        h2{
+            text-align:center;
+            margin-bottom:20px;
+            font-size:42px;
+            font-weight:700;
         }
 
-        .toggle {
-            display: flex;
-            margin-bottom: 20px;
+        /* TOGGLE */
+
+        .toggle{
+            display:flex;
+            margin-bottom:20px;
+            border-radius:8px;
+            overflow:hidden;
         }
 
-        .toggle button {
-            flex: 1;
-            padding: 10px;
-            border: none;
-            cursor: pointer;
-            background: #eee;
+        .toggle button{
+            flex:1;
+            padding:10px;
+            border:none;
+            cursor:pointer;
+            background:#eeeeee;
+            font-size:15px;
         }
 
-        .active {
-            background: #4CAF50;
-            color: white;
+        .active{
+            background:#4CAF50;
+            color:white;
         }
 
-        /* FLOAT INPUT */
-        .input-group {
-            position: relative;
-            margin: 15px 0;
+        /* INPUT */
+
+        .input-group{
+            position:relative;
+            margin:15px 0;
         }
 
-        .input-group input {
-            width: 100%;
-            padding: 12px;
-            border: 1px solid #ccc;
-            border-radius: 6px;
-            outline: none;
-            box-sizing: border-box;
+        .input-group input{
+            width:100%;
+            padding:12px;
+            padding-right:45px;
+            border:1px solid #ccc;
+            border-radius:8px;
+            outline:none;
+            font-size:15px;
+            background:white;
         }
 
-        .input-group label {
-            position: absolute;
-            left: 12px;
-            top: 12px;
-            color: gray;
-            transition: 0.3s;
-            pointer-events: none;
+        .input-group label{
+            position:absolute;
+            left:12px;
+            top:12px;
+            color:gray;
+            transition:0.3s;
+            pointer-events:none;
+            background:white;
         }
 
         .input-group input:focus + label,
-        .input-group input:valid + label {
-            top: -8px;
-            left: 8px;
-            font-size: 12px;
-            color: green;
-            background: white;
-            padding: 0 5px;
+        .input-group input:valid + label{
+
+            top:-8px;
+            left:8px;
+            font-size:12px;
+            color:green;
+            padding:0 5px;
+        }
+
+        /* EYE ICON */
+
+        .eye-icon{
+            position:absolute;
+            right:14px;
+            top:12px;
+            cursor:pointer;
+            font-size:18px;
         }
 
         /* BUTTON */
-        .btn {
-            width: 100%;
-            padding: 10px;
-            border: none;
-            color: white;
-            border-radius: 6px;
-            cursor: pointer;
-            transition: 0.3s;
+
+        .btn{
+            width:100%;
+            padding:12px;
+            border:none;
+            color:white;
+            border-radius:8px;
+            cursor:pointer;
+            transition:0.3s;
+            font-size:15px;
         }
 
-        .btn:hover {
-            transform: scale(1.05);
-            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+        .btn:hover{
+            transform:scale(1.03);
+            box-shadow:0 4px 12px rgba(0,0,0,0.15);
         }
 
-        .login-btn {
-            background: #4CAF50;
+        .login-btn{
+            background:#4CAF50;
         }
 
-        .google-btn {
-            background: #4285F4;
+        .google-btn{
+            background:#4285F4;
         }
 
-        .google-btn:hover {
-            background: #357ae8;
+        .google-btn:hover{
+            background:#357ae8;
         }
 
-        .apple-btn {
-            background: black;
+        .apple-btn{
+            background:black;
         }
 
-        .hidden {
-            display: none;
+        .hidden{
+            display:none;
         }
 
-        .error {
-            color: red;
-            text-align: center;
-            font-size: 14px;
-            margin-bottom: 10px;
+        .error{
+            color:red;
+            text-align:center;
+            font-size:14px;
+            margin-bottom:10px;
         }
 
-        .forgot {
-            text-align: right;
-            font-size: 13px;
-            margin-top: 5px;
+        .forgot{
+            text-align:right;
+            font-size:13px;
+            margin-top:5px;
+            margin-bottom:12px;
         }
 
-        .forgot a {
-            text-decoration: none;
-            color: #4CAF50;
+        .forgot a{
+            text-decoration:none;
+            color:#4CAF50;
         }
 
-        #strengthMessage {
-            font-size: 13px;
-            margin-top: -8px;
-            margin-bottom: 10px;
-            display: block;
+        #strengthMessage{
+            font-size:13px;
+            margin-top:-5px;
+            margin-bottom:10px;
+            display:block;
         }
 
-        .eye-icon {
-            position: absolute;
-            right: 15px;
-            top: 12px;
-            cursor: pointer;
-            font-size: 18px;
-            z-index: 100;
+        /* RESPONSIVE */
+
+        @media screen and (max-width:768px){
+
+            .left{
+                flex:1;
+            }
+
+            .right{
+                flex:1;
+                padding:15px;
+            }
+
+            .card{
+                max-width:320px;
+                padding:22px;
+            }
+
+            h2{
+                font-size:32px;
+            }
         }
-        /* ================= PHONE LANDSCAPE STYLE ================= */
 
-@media screen and (max-width:768px){
+        @media screen and (max-width:480px){
 
-    body{
-        display:flex;
-        overflow:hidden;
-    }
+            .left{
+                width:50%;
+            }
 
-    .left{
-        width:52%;
-        min-height:100vh;
-    }
+            .right{
+                width:50%;
+                padding:10px;
+            }
 
-    .right{
-        width:48%;
-        padding:10px;
-    }
+            .card{
+                max-width:280px;
+                padding:18px;
+                border-radius:16px;
+            }
 
-    .card{
-        width:100%;
-        max-width:350px;
-        padding:20px;
-    }
+            h2{
+                font-size:24px;
+            }
 
-    h2{
-        font-size:22px;
-    }
+            .toggle button{
+                font-size:12px;
+                padding:8px;
+            }
 
-    .btn{
-        font-size:14px;
-    }
+            .btn{
+                font-size:13px;
+                padding:10px;
+            }
 
-    .input-group input{
-        font-size:14px;
-        padding:10px;
-    }
-}
+            .input-group input{
+                font-size:13px;
+                padding:10px;
+                padding-right:40px;
+            }
 
-@media screen and (max-width:480px){
+            .eye-icon{
+                font-size:16px;
+            }
+        }
 
-    .left{
-        width:50%;
-    }
-
-    .right{
-        width:50%;
-    }
-
-    .card{
-        padding:16px;
-    }
-
-    h2{
-        font-size:18px;
-    }
-
-    .toggle button{
-        font-size:12px;
-    }
-
-    .btn{
-        font-size:13px;
-    }
-}
     </style>
+
 </head>
 
 <body>
@@ -476,14 +307,16 @@ textarea{
 <div class="left"></div>
 
 <div class="right">
+
     <div class="card">
 
         <h2>Welcome Back</h2>
 
         <!-- TOGGLE -->
+
         <div class="toggle">
 
-            <button 
+            <button
                 id="loginBtn"
                 class="active"
                 onclick="showLogin()"
@@ -491,7 +324,7 @@ textarea{
                 Login
             </button>
 
-            <button 
+            <button
                 id="signupBtn"
                 onclick="showSignup()"
             >
@@ -501,16 +334,24 @@ textarea{
         </div>
 
         <!-- ERROR -->
+
         {% if error %}
-        <div class="error">{{ error }}</div>
+        <div class="error">
+            {{ error }}
+        </div>
         {% endif %}
 
-        <!-- LOGIN -->
-        <form method="POST" action="/login" id="loginForm">
+        <!-- LOGIN FORM -->
+
+        <form
+            method="POST"
+            action="/login"
+            id="loginForm"
+        >
 
             <div class="input-group">
 
-                <input 
+                <input
                     type="text"
                     name="email"
                     required
@@ -522,17 +363,16 @@ textarea{
 
             <div class="input-group">
 
-                <input 
+                <input
                     type="password"
                     name="password"
                     id="loginPassword"
                     required
-                    style="padding-right:45px;"
                 >
 
                 <label>Password</label>
 
-                <span 
+                <span
                     class="eye-icon"
                     onclick="toggleLoginPassword()"
                 >
@@ -542,12 +382,14 @@ textarea{
             </div>
 
             <div class="forgot">
+
                 <a href="/forgot-password">
                     Forgot Password?
                 </a>
+
             </div>
 
-            <button 
+            <button
                 type="submit"
                 class="btn login-btn"
                 id="loginSubmitBtn"
@@ -557,8 +399,9 @@ textarea{
 
         </form>
 
-        <!-- SIGNUP -->
-        <form 
+        <!-- SIGNUP FORM -->
+
+        <form
             method="POST"
             action="/signup"
             id="signupForm"
@@ -567,7 +410,7 @@ textarea{
 
             <div class="input-group">
 
-                <input 
+                <input
                     type="email"
                     name="email"
                     required
@@ -579,7 +422,7 @@ textarea{
 
             <div class="input-group">
 
-                <input 
+                <input
                     type="text"
                     name="phone"
                     required
@@ -591,18 +434,17 @@ textarea{
 
             <div class="input-group">
 
-                <input 
+                <input
                     type="password"
                     name="password"
                     id="signupPassword"
                     onkeyup="checkPasswordStrength()"
                     required
-                    style="padding-right:45px;"
                 >
 
                 <label>Password</label>
 
-                <span 
+                <span
                     class="eye-icon"
                     onclick="toggleSignupPassword()"
                 >
@@ -613,7 +455,7 @@ textarea{
 
             <small id="strengthMessage"></small>
 
-            <button 
+            <button
                 type="submit"
                 class="btn login-btn"
                 id="signupSubmitBtn"
@@ -624,13 +466,16 @@ textarea{
         </form>
 
         <br>
+
         <center>OR</center>
+
         <br>
 
         <!-- OTP -->
+
         <a href="/otp-login">
 
-            <button 
+            <button
                 type="button"
                 class="btn"
                 style="background:linear-gradient(135deg,#ff9800,#ff5722)"
@@ -643,9 +488,10 @@ textarea{
         <br><br>
 
         <!-- GOOGLE -->
+
         <a href="/login/google">
 
-            <button 
+            <button
                 type="button"
                 class="btn google-btn"
             >
@@ -657,68 +503,76 @@ textarea{
         <br><br>
 
         <!-- APPLE -->
+
         <button class="btn apple-btn">
              Continue with Apple
         </button>
 
     </div>
+
 </div>
 
 <script>
 
-function showSignup() {
+function showSignup(){
 
     document.getElementById("loginForm")
-        .classList.add("hidden");
+    .classList.add("hidden");
 
     document.getElementById("signupForm")
-        .classList.remove("hidden");
+    .classList.remove("hidden");
 
     document.getElementById("signupBtn")
-        .classList.add("active");
+    .classList.add("active");
 
     document.getElementById("loginBtn")
-        .classList.remove("active");
+    .classList.remove("active");
 }
 
-function showLogin() {
+function showLogin(){
 
     document.getElementById("signupForm")
-        .classList.add("hidden");
+    .classList.add("hidden");
 
     document.getElementById("loginForm")
-        .classList.remove("hidden");
+    .classList.remove("hidden");
 
     document.getElementById("loginBtn")
-        .classList.add("active");
+    .classList.add("active");
 
     document.getElementById("signupBtn")
-        .classList.remove("active");
+    .classList.remove("active");
 }
 
 function checkPasswordStrength(){
 
     let password =
-        document.getElementById("signupPassword").value;
+    document.getElementById("signupPassword").value;
 
     let message =
-        document.getElementById("strengthMessage");
+    document.getElementById("strengthMessage");
 
     if(password.length < 6){
 
-        message.innerHTML = "🔴 Weak Password";
-        message.style.color = "red";
+        message.innerHTML =
+        "🔴 Weak Password";
 
+        message.style.color = "red";
     }
+
     else if(password.length < 10){
 
-        message.innerHTML = "🟡 Medium Password";
-        message.style.color = "orange";
+        message.innerHTML =
+        "🟡 Medium Password";
 
+        message.style.color = "orange";
     }
+
     else{
 
-        message.innerHTML = "🟢 Strong Password";
+        message.innerHTML =
+        "🟢 Strong Password";
+
         message.style.color = "green";
     }
 }
@@ -726,13 +580,14 @@ function checkPasswordStrength(){
 function toggleLoginPassword(){
 
     const password =
-        document.getElementById("loginPassword");
+    document.getElementById("loginPassword");
 
     if(password.type === "password"){
 
         password.type = "text";
+    }
 
-    } else {
+    else{
 
         password.type = "password";
     }
@@ -741,22 +596,24 @@ function toggleLoginPassword(){
 function toggleSignupPassword(){
 
     const password =
-        document.getElementById("signupPassword");
+    document.getElementById("signupPassword");
 
     if(password.type === "password"){
 
         password.type = "text";
+    }
 
-    } else {
+    else{
 
         password.type = "password";
     }
 }
+
 document.getElementById("loginForm")
 .addEventListener("submit", function(){
 
     const btn =
-        document.getElementById("loginSubmitBtn");
+    document.getElementById("loginSubmitBtn");
 
     btn.innerHTML = "⏳ Loading...";
     btn.disabled = true;
@@ -766,9 +623,11 @@ document.getElementById("signupForm")
 .addEventListener("submit", function(){
 
     const btn =
-        document.getElementById("signupSubmitBtn");
+    document.getElementById("signupSubmitBtn");
 
-    btn.innerHTML = "⏳ Creating Account...";
+    btn.innerHTML =
+    "⏳ Creating Account...";
+
     btn.disabled = true;
 });
 
