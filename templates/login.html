@@ -226,6 +226,7 @@
                 <input type="text" name="phone" required>
                 <label>Phone</label>
             </div>
+            <small id="strengthMessage"></small>
 
             <div class="input-group">
                 <input type="password" name="password" required>
@@ -289,6 +290,30 @@ function showLogin() {
     document.getElementById("loginBtn").classList.add("active");
     document.getElementById("signupBtn").classList.remove("active");
 }
+
+const passwordInput = document.getElementById("signupPassword");
+const strengthMessage = document.getElementById("strengthMessage");
+
+passwordInput.addEventListener("input", () => {
+
+    const password = passwordInput.value;
+
+    if(password.length < 6){
+
+        strengthMessage.innerHTML = "🔴 Weak Password";
+        strengthMessage.style.color = "red";
+
+    } else if(password.length < 10){
+
+        strengthMessage.innerHTML = "🟡 Medium Password";
+        strengthMessage.style.color = "orange";
+
+    } else {
+
+        strengthMessage.innerHTML = "🟢 Strong Password";
+        strengthMessage.style.color = "green";
+    }
+});
 
 </script>
 
