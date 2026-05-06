@@ -72,15 +72,23 @@ def book_slot():
 
 @app.route('/check-slots')
 def check_slots():
+
     game = request.args.get('game')
     date = request.args.get('date')
 
-    bookings = Booking.query.filter_by(game=game, booking_date=date).all()
+    bookings = Booking.query.filter_by(
+        game=game,
+        booking_date=date
+    ).all()
 
-    booked_times = [b.booking_time for b in bookings]
+    booked_times = []
 
-    return {"booked": booked_times}
+    for booking in bookings:
+        booked_times.append(booking.booking_time)
 
+    return {
+        "booked": booked_times
+    }
 # ================= HOME =================
 @app.route('/')
 def home():
