@@ -150,11 +150,13 @@
             color: red;
             text-align: center;
             font-size: 14px;
+            margin-bottom: 10px;
         }
 
         .forgot {
             text-align: right;
             font-size: 13px;
+            margin-top: 5px;
         }
 
         .forgot a {
@@ -175,8 +177,13 @@
 
         <!-- TOGGLE -->
         <div class="toggle">
-            <button id="loginBtn" class="active" onclick="showLogin()">Login</button>
-            <button id="signupBtn" onclick="showSignup()">Sign Up</button>
+            <button id="loginBtn" class="active" onclick="showLogin()">
+                Login
+            </button>
+
+            <button id="signupBtn" onclick="showSignup()">
+                Sign Up
+            </button>
         </div>
 
         <!-- ERROR -->
@@ -185,32 +192,26 @@
         {% endif %}
 
         <!-- LOGIN -->
-      <form method="POST" action="/login">
+        <form method="POST" action="/login" id="loginForm">
 
-    <input 
-        type="text"
-        name="email"
-        placeholder="Enter Email"
-        required
-    >
+            <div class="input-group">
+                <input type="text" name="email" required>
+                <label>Email or Phone</label>
+            </div>
 
-    <input 
-        type="password"
-        name="password"
-        placeholder="Enter Password"
-        required
-    >
+            <div class="input-group">
+                <input type="password" name="password" required>
+                <label>Password</label>
+            </div>
 
-    <button type="submit">
-        Login
-    </button>
-
-</form>
             <div class="forgot">
                 <a href="/forgot-password">Forgot Password?</a>
             </div>
 
-            <button class="btn login-btn">Login</button>
+            <button type="submit" class="btn login-btn">
+                Login
+            </button>
+
         </form>
 
         <!-- SIGNUP -->
@@ -231,7 +232,10 @@
                 <label>Password</label>
             </div>
 
-            <button class="btn login-btn">Sign Up</button>
+            <button type="submit" class="btn login-btn">
+                Sign Up
+            </button>
+
         </form>
 
         <br>
@@ -240,7 +244,9 @@
 
         <!-- OTP -->
         <a href="/otp-login">
-            <button type="button" class="btn" style="background:linear-gradient(135deg,#ff9800,#ff5722)">
+            <button type="button"
+                class="btn"
+                style="background:linear-gradient(135deg,#ff9800,#ff5722)">
                 🔐 Login with OTP
             </button>
         </a>
@@ -249,19 +255,25 @@
 
         <!-- GOOGLE -->
         <a href="/login/google">
-            <button type="button" class="btn google-btn">Continue with Google</button>
+            <button type="button" class="btn google-btn">
+                Continue with Google
+            </button>
         </a>
 
         <br><br>
 
         <!-- APPLE -->
-        <button class="btn apple-btn"> Continue with Apple</button>
+        <button class="btn apple-btn">
+             Continue with Apple
+        </button>
 
     </div>
 </div>
 
 <script>
+
 function showSignup() {
+
     document.getElementById("loginForm").classList.add("hidden");
     document.getElementById("signupForm").classList.remove("hidden");
 
@@ -270,12 +282,14 @@ function showSignup() {
 }
 
 function showLogin() {
+
     document.getElementById("signupForm").classList.add("hidden");
     document.getElementById("loginForm").classList.remove("hidden");
 
     document.getElementById("loginBtn").classList.add("active");
     document.getElementById("signupBtn").classList.remove("active");
 }
+
 </script>
 
 </body>

@@ -31,30 +31,6 @@ class User(db.Model):
 with app.app_context():
     db.create_all()
 
-    # ================= LOGIN =================
-@app.route('/login', methods=['GET', 'POST'])
-def login():
-    if request.method == 'POST':
-
-        email = request.form.get('email')
-        password = request.form.get('password')
-
-        # manual login
-        if email == "admin@gmail.com" and password == "1234":
-
-            session['user'] = email
-            session['name'] = "Admin User"
-
-            return redirect('/dashboard')
-
-        else:
-            return render_template(
-                'login.html',
-                error="Invalid credentials"
-            )
-
-    return render_template('login.html')
-
 # ================= GOOGLE LOGIN =================
 google_bp = make_google_blueprint(
     client_id="YOUR_CLIENT_ID",
@@ -122,7 +98,6 @@ def otp_login():
     if request.method == 'POST':
         phone = request.form.get('phone')
 
-        # generate OTP
         otp = str(random.randint(1000, 9999))
         session['otp'] = otp
         session['phone'] = phone
@@ -151,28 +126,35 @@ def verify_otp():
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     if request.method == 'POST':
+
         user_input = request.form.get('email')
         password = request.form.get('password')
 
         if not user_input or not password:
-            return render_template('login.html', error="Please fill all fields")
+            return render_template(
+                'login.html',
+                error="Please fill all fields"
+            )
 
-        # ✅ FETCH USER FROM DATABASE
+        # CHECK USER
         user = User.query.filter(
-            (User.email == user_input) | (User.phone == user_input)
+            (User.email == user_input) |
+            (User.phone == user_input)
         ).first()
 
-        print("USER INPUT:", user_input)
         print("USER FOUND:", user)
 
         if user and check_password_hash(user.password, password):
-            print("LOGIN SUCCESS")
 
             session['user'] = user.email if user.email else user.phone
 
             return redirect('/dashboard')
+
         else:
-            return render_template('login.html', error="Invalid credentials")
+            return render_template(
+                'login.html',
+                error="Wrong email or password"
+            )
 
     return render_template('login.html')
 
@@ -180,20 +162,27 @@ def login():
 @app.route('/signup', methods=['GET', 'POST'])
 def signup():
     if request.method == 'POST':
+
         email = request.form.get('email')
         phone = request.form.get('phone')
         password = request.form.get('password')
 
         if not email or not phone or not password:
-            return render_template('signup.html', error="All fields required")
+            return render_template(
+                'signup.html',
+                error="All fields required"
+            )
 
-        # 🔴 CHECK USER EXISTS
         existing_user = User.query.filter(
-            (User.email == email) | (User.phone == phone)
+            (User.email == email) |
+            (User.phone == phone)
         ).first()
 
         if existing_user:
-            return render_template('signup.html', error="User already exists")
+            return render_template(
+                'signup.html',
+                error="User already exists"
+            )
 
         hashed_password = generate_password_hash(password)
 
@@ -237,8 +226,6 @@ def forgot_password():
 # ================= DASHBOARD =================
 @app.route('/dashboard')
 def dashboard():
-
-    print("SESSION:", session)
 
     if 'user' not in session:
         return redirect('/login')
