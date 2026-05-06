@@ -215,10 +215,6 @@ body{
     background:#00c853;
 }
 
-.few{
-    background:#ff9800;
-}
-
 .full{
     background:#ff1744;
 }
@@ -366,21 +362,37 @@ body{
 /* QUICK BOOK */
 .quick-book{
     position:fixed;
-    bottom:105px;
-    right:20px;
-    width:65px;
-    height:65px;
+    bottom:110px;
+    right:22px;
+    width:72px;
+    height:72px;
     border-radius:50%;
-    background:#00e676;
-    color:black;
-    font-size:28px;
+    background:linear-gradient(135deg,#00ffc8,#00e676);
+    color:#02131f;
     display:flex;
     justify-content:center;
     align-items:center;
     cursor:pointer;
-    box-shadow:0 0 25px rgba(0,255,128,0.6);
+    box-shadow:
+    0 0 25px rgba(0,255,180,0.5),
+    0 0 50px rgba(0,255,180,0.2);
     animation:float 2s infinite;
     z-index:999;
+    border:3px solid rgba(255,255,255,0.2);
+    transition:0.3s;
+}
+
+.quick-book:hover{
+    transform:scale(1.08);
+    box-shadow:
+    0 0 35px rgba(0,255,180,0.7),
+    0 0 60px rgba(0,255,180,0.3);
+}
+
+.plus-icon{
+    font-size:38px;
+    font-weight:bold;
+    line-height:1;
 }
 
 @keyframes float{
@@ -421,6 +433,68 @@ body{
     transform:translateY(-4px);
 }
 
+/* RESPONSIVE */
+
+@media(max-width:768px){
+
+    .stat-card{
+        width:45%;
+    }
+
+    .card{
+        width:140px;
+    }
+}
+
+@media(max-width:600px){
+
+    .stats{
+        flex-direction:column;
+        align-items:center;
+    }
+
+    .stat-card{
+        width:90%;
+    }
+
+    .card{
+        width:42%;
+    }
+
+    .slot{
+        width:45%;
+        text-align:center;
+    }
+
+    .bottom-nav div{
+        font-size:12px;
+    }
+
+    .quick-book{
+        width:64px;
+        height:64px;
+    }
+
+    .plus-icon{
+        font-size:30px;
+    }
+}
+
+@media(max-width:420px){
+
+    .card{
+        width:85%;
+    }
+
+    .slot{
+        width:90%;
+    }
+
+    .bottom-nav div{
+        font-size:11px;
+    }
+}
+
 </style>
 </head>
 
@@ -447,7 +521,6 @@ body{
         <p onclick="openPanel('ratings')">⭐ Ratings</p>
         <p onclick="openPanel('reviews')">📝 Reviews</p>
         <p onclick="openMap()">📍 Nearby</p>
-        <p onclick="toggleDarkMode()">🌙 Dark Mode</p>
     </div>
 
     <div id="notify" class="popup">
@@ -536,7 +609,7 @@ onkeypress="enterSearch(event)"
     <div class="flex">
 
         <div class="box">
-            <input type="date" onchange="checkAvailability()">
+            <input type="date" onchange="checkAvailability(); loadSlots();">
         </div>
 
         <div class="box">
@@ -668,9 +741,11 @@ loading="lazy">
 
 </div>
 
-<!-- QUICK BOOK -->
-<div class="quick-book" onclick="go('booking')">
-⚡
+<!-- QUICK BUTTON -->
+<div class="quick-book" onclick="go('profile')">
+
+    <span class="plus-icon">＋</span>
+
 </div>
 
 <!-- NAV -->
@@ -862,23 +937,6 @@ function checkAvailability(){
     }
 }
 
-/* DARK MODE */
-function toggleDarkMode(){
-
-    if(document.body.style.background=="white"){
-
-        document.body.style.background=
-        "radial-gradient(circle at top left,#16213e,#0f172a 45%,#020617 90%)";
-
-        document.body.style.color="white";
-
-    }else{
-
-        document.body.style.background="white";
-        document.body.style.color="black";
-    }
-}
-
 /* LIVE SLOT BACKEND */
 const allSlots = [
     "6 AM",
@@ -936,9 +994,6 @@ async function loadSlots(){
         container.appendChild(div);
     });
 }
-
-document.querySelector("input[type='date']")
-.addEventListener("change", loadSlots);
 
 /* BOOKINGS */
 function renderBookings(){
