@@ -2,12 +2,12 @@
 <html lang="en">
 <head>
 
-    <title>Login - BookMyPlay</title>
-
     <meta charset="UTF-8">
 
     <meta name="viewport"
     content="width=device-width, initial-scale=1.0">
+
+    <title>Login - BookMyPlay</title>
 
     <style>
 
@@ -19,49 +19,28 @@
 
         body{
             font-family:'Segoe UI',sans-serif;
-            display:flex;
-            min-height:100vh;
             width:100%;
-            overflow-x:hidden;
-            animation:fadeIn 0.8s ease-in-out;
+            min-height:100vh;
+            display:flex;
+            overflow:hidden;
+            background:#f5f5f5;
         }
 
-        @keyframes fadeIn{
-
-            from{
-                opacity:0;
-            }
-
-            to{
-                opacity:1;
-            }
-        }
-
-        /* LEFT SIDE */
+        /* ================= LEFT IMAGE ================= */
 
         .left{
             width:50%;
+            height:100vh;
             background:url("/static/sports-bg.jpg")
-            no-repeat center;
+            no-repeat center center;
             background-size:cover;
-            animation:zoom 10s infinite alternate;
         }
 
-        @keyframes zoom{
-
-            from{
-                transform:scale(1);
-            }
-
-            to{
-                transform:scale(1.05);
-            }
-        }
-
-        /* RIGHT SIDE */
+        /* ================= RIGHT LOGIN ================= */
 
         .right{
             width:50%;
+            height:100vh;
             display:flex;
             justify-content:center;
             align-items:center;
@@ -69,55 +48,40 @@
             padding:20px;
         }
 
-        /* CARD */
+        /* ================= CARD ================= */
 
         .card{
             width:100%;
-            max-width:380px;
+            max-width:420px;
             background:white;
             padding:30px;
-            border-radius:20px;
-            box-shadow:0 0 20px rgba(0,0,0,0.08);
-            animation:slideUp 0.7s ease;
-        }
-
-        @keyframes slideUp{
-
-            from{
-                transform:translateY(40px);
-                opacity:0;
-            }
-
-            to{
-                transform:translateY(0);
-                opacity:1;
-            }
+            border-radius:24px;
+            box-shadow:0 0 25px rgba(0,0,0,0.08);
         }
 
         h2{
             text-align:center;
-            margin-bottom:20px;
-            font-size:42px;
+            font-size:48px;
+            margin-bottom:25px;
             font-weight:700;
         }
 
-        /* TOGGLE */
+        /* ================= TOGGLE ================= */
 
         .toggle{
             display:flex;
-            margin-bottom:20px;
-            border-radius:10px;
+            margin-bottom:22px;
             overflow:hidden;
+            border-radius:10px;
         }
 
         .toggle button{
             flex:1;
-            padding:10px;
+            padding:12px;
             border:none;
-            cursor:pointer;
             background:#eeeeee;
+            cursor:pointer;
             font-size:15px;
-            transition:0.3s;
         }
 
         .active{
@@ -125,28 +89,28 @@
             color:white;
         }
 
-        /* INPUT */
+        /* ================= INPUT ================= */
 
         .input-group{
             position:relative;
-            margin:15px 0;
+            margin-bottom:18px;
         }
 
         .input-group input{
             width:100%;
-            padding:12px;
-            padding-right:45px;
-            border:1px solid #ccc;
-            border-radius:8px;
+            padding:14px;
+            padding-right:48px;
+            border:1px solid #cccccc;
+            border-radius:10px;
             outline:none;
-            font-size:15px;
+            font-size:16px;
             background:white;
         }
 
         .input-group label{
             position:absolute;
-            left:12px;
-            top:12px;
+            left:14px;
+            top:14px;
             color:gray;
             transition:0.3s;
             pointer-events:none;
@@ -157,38 +121,37 @@
         .input-group input:valid + label{
 
             top:-8px;
-            left:8px;
+            left:10px;
             font-size:12px;
-            color:green;
+            color:#4CAF50;
             padding:0 5px;
         }
 
-        /* EYE ICON */
+        /* ================= EYE ICON ================= */
 
         .eye-icon{
             position:absolute;
             right:14px;
-            top:12px;
+            top:14px;
             cursor:pointer;
             font-size:18px;
         }
 
-        /* BUTTON */
+        /* ================= BUTTON ================= */
 
         .btn{
             width:100%;
-            padding:12px;
+            padding:14px;
             border:none;
-            color:white;
-            border-radius:8px;
+            border-radius:10px;
             cursor:pointer;
+            color:white;
+            font-size:16px;
             transition:0.3s;
-            font-size:15px;
         }
 
         .btn:hover{
-            transform:scale(1.03);
-            box-shadow:0 4px 12px rgba(0,0,0,0.15);
+            transform:scale(1.02);
         }
 
         .login-btn{
@@ -199,10 +162,6 @@
             background:#4285F4;
         }
 
-        .google-btn:hover{
-            background:#357ae8;
-        }
-
         .apple-btn{
             background:black;
         }
@@ -211,29 +170,27 @@
             display:none;
         }
 
-        .error{
-            color:red;
-            text-align:center;
-            font-size:14px;
-            margin-bottom:10px;
-        }
-
         .forgot{
             text-align:right;
-            font-size:13px;
-            margin-top:5px;
-            margin-bottom:12px;
+            margin-bottom:15px;
         }
 
         .forgot a{
-            text-decoration:none;
             color:#4CAF50;
+            text-decoration:none;
+            font-size:14px;
+        }
+
+        .error{
+            color:red;
+            text-align:center;
+            margin-bottom:12px;
         }
 
         #strengthMessage{
             font-size:13px;
-            margin-top:-5px;
-            margin-bottom:10px;
+            margin-top:-10px;
+            margin-bottom:12px;
             display:block;
         }
 
@@ -242,21 +199,21 @@
         @media screen and (max-width:900px){
 
             .left{
-                width:45%;
+                width:48%;
             }
 
             .right{
-                width:55%;
+                width:52%;
                 padding:15px;
             }
 
             .card{
-                max-width:340px;
+                max-width:360px;
                 padding:24px;
             }
 
             h2{
-                font-size:34px;
+                font-size:36px;
             }
         }
 
@@ -266,6 +223,7 @@
 
             body{
                 flex-direction:row;
+                width:100%;
                 height:100vh;
                 overflow:hidden;
             }
@@ -273,6 +231,8 @@
             .left{
                 width:45%;
                 height:100vh;
+                background-position:center;
+                background-size:cover;
             }
 
             .right{
@@ -284,38 +244,39 @@
 
             .card{
                 width:100%;
-                max-width:320px;
+                max-width:100%;
                 padding:18px;
-                border-radius:20px;
+                border-radius:18px;
             }
 
             h2{
-                font-size:26px;
+                font-size:28px;
+                margin-bottom:18px;
             }
 
             .toggle button{
                 font-size:12px;
-                padding:8px;
+                padding:9px;
             }
 
             .input-group input{
-                padding:10px;
-                padding-right:40px;
                 font-size:13px;
+                padding:11px;
+                padding-right:40px;
             }
 
             .btn{
-                padding:10px;
+                padding:11px;
                 font-size:13px;
             }
 
-            .forgot{
+            .forgot a{
                 font-size:12px;
             }
 
             .eye-icon{
                 font-size:16px;
-                top:10px;
+                top:11px;
             }
         }
 
@@ -325,213 +286,217 @@
 
 <body>
 
-<div class="left"></div>
+    <!-- LEFT IMAGE -->
 
-<div class="right">
+    <div class="left"></div>
 
-    <div class="card">
+    <!-- RIGHT LOGIN -->
 
-        <h2>Welcome Back</h2>
+    <div class="right">
 
-        <!-- TOGGLE -->
+        <div class="card">
 
-        <div class="toggle">
+            <h2>Welcome Back</h2>
 
-            <button
-                id="loginBtn"
-                class="active"
-                onclick="showLogin()"
+            <!-- TOGGLE -->
+
+            <div class="toggle">
+
+                <button
+                    id="loginBtn"
+                    class="active"
+                    onclick="showLogin()"
+                >
+                    Login
+                </button>
+
+                <button
+                    id="signupBtn"
+                    onclick="showSignup()"
+                >
+                    Sign Up
+                </button>
+
+            </div>
+
+            <!-- ERROR -->
+
+            {% if error %}
+            <div class="error">
+                {{ error }}
+            </div>
+            {% endif %}
+
+            <!-- LOGIN FORM -->
+
+            <form
+                method="POST"
+                action="/login"
+                id="loginForm"
             >
-                Login
-            </button>
 
-            <button
-                id="signupBtn"
-                onclick="showSignup()"
+                <div class="input-group">
+
+                    <input
+                        type="text"
+                        name="email"
+                        required
+                    >
+
+                    <label>Email or Phone</label>
+
+                </div>
+
+                <div class="input-group">
+
+                    <input
+                        type="password"
+                        name="password"
+                        id="loginPassword"
+                        required
+                    >
+
+                    <label>Password</label>
+
+                    <span
+                        class="eye-icon"
+                        onclick="toggleLoginPassword()"
+                    >
+                        👁️
+                    </span>
+
+                </div>
+
+                <div class="forgot">
+
+                    <a href="/forgot-password">
+                        Forgot Password?
+                    </a>
+
+                </div>
+
+                <button
+                    type="submit"
+                    class="btn login-btn"
+                    id="loginSubmitBtn"
+                >
+                    Login
+                </button>
+
+            </form>
+
+            <!-- SIGNUP FORM -->
+
+            <form
+                method="POST"
+                action="/signup"
+                id="signupForm"
+                class="hidden"
             >
-                Sign Up
+
+                <div class="input-group">
+
+                    <input
+                        type="email"
+                        name="email"
+                        required
+                    >
+
+                    <label>Email</label>
+
+                </div>
+
+                <div class="input-group">
+
+                    <input
+                        type="text"
+                        name="phone"
+                        required
+                    >
+
+                    <label>Phone</label>
+
+                </div>
+
+                <div class="input-group">
+
+                    <input
+                        type="password"
+                        name="password"
+                        id="signupPassword"
+                        onkeyup="checkPasswordStrength()"
+                        required
+                    >
+
+                    <label>Password</label>
+
+                    <span
+                        class="eye-icon"
+                        onclick="toggleSignupPassword()"
+                    >
+                        👁️
+                    </span>
+
+                </div>
+
+                <small id="strengthMessage"></small>
+
+                <button
+                    type="submit"
+                    class="btn login-btn"
+                    id="signupSubmitBtn"
+                >
+                    Sign Up
+                </button>
+
+            </form>
+
+            <br>
+
+            <center>OR</center>
+
+            <br>
+
+            <!-- OTP -->
+
+            <a href="/otp-login">
+
+                <button
+                    type="button"
+                    class="btn"
+                    style="background:linear-gradient(135deg,#ff9800,#ff5722)"
+                >
+                    🔐 Login with OTP
+                </button>
+
+            </a>
+
+            <br><br>
+
+            <!-- GOOGLE -->
+
+            <a href="/login/google">
+
+                <button
+                    type="button"
+                    class="btn google-btn"
+                >
+                    Continue with Google
+                </button>
+
+            </a>
+
+            <br><br>
+
+            <!-- APPLE -->
+
+            <button class="btn apple-btn">
+                 Continue with Apple
             </button>
 
         </div>
-
-        <!-- ERROR -->
-
-        {% if error %}
-        <div class="error">
-            {{ error }}
-        </div>
-        {% endif %}
-
-        <!-- LOGIN FORM -->
-
-        <form
-            method="POST"
-            action="/login"
-            id="loginForm"
-        >
-
-            <div class="input-group">
-
-                <input
-                    type="text"
-                    name="email"
-                    required
-                >
-
-                <label>Email or Phone</label>
-
-            </div>
-
-            <div class="input-group">
-
-                <input
-                    type="password"
-                    name="password"
-                    id="loginPassword"
-                    required
-                >
-
-                <label>Password</label>
-
-                <span
-                    class="eye-icon"
-                    onclick="toggleLoginPassword()"
-                >
-                    👁️
-                </span>
-
-            </div>
-
-            <div class="forgot">
-
-                <a href="/forgot-password">
-                    Forgot Password?
-                </a>
-
-            </div>
-
-            <button
-                type="submit"
-                class="btn login-btn"
-                id="loginSubmitBtn"
-            >
-                Login
-            </button>
-
-        </form>
-
-        <!-- SIGNUP FORM -->
-
-        <form
-            method="POST"
-            action="/signup"
-            id="signupForm"
-            class="hidden"
-        >
-
-            <div class="input-group">
-
-                <input
-                    type="email"
-                    name="email"
-                    required
-                >
-
-                <label>Email</label>
-
-            </div>
-
-            <div class="input-group">
-
-                <input
-                    type="text"
-                    name="phone"
-                    required
-                >
-
-                <label>Phone</label>
-
-            </div>
-
-            <div class="input-group">
-
-                <input
-                    type="password"
-                    name="password"
-                    id="signupPassword"
-                    onkeyup="checkPasswordStrength()"
-                    required
-                >
-
-                <label>Password</label>
-
-                <span
-                    class="eye-icon"
-                    onclick="toggleSignupPassword()"
-                >
-                    👁️
-                </span>
-
-            </div>
-
-            <small id="strengthMessage"></small>
-
-            <button
-                type="submit"
-                class="btn login-btn"
-                id="signupSubmitBtn"
-            >
-                Sign Up
-            </button>
-
-        </form>
-
-        <br>
-
-        <center>OR</center>
-
-        <br>
-
-        <!-- OTP -->
-
-        <a href="/otp-login">
-
-            <button
-                type="button"
-                class="btn"
-                style="background:linear-gradient(135deg,#ff9800,#ff5722)"
-            >
-                🔐 Login with OTP
-            </button>
-
-        </a>
-
-        <br><br>
-
-        <!-- GOOGLE -->
-
-        <a href="/login/google">
-
-            <button
-                type="button"
-                class="btn google-btn"
-            >
-                Continue with Google
-            </button>
-
-        </a>
-
-        <br><br>
-
-        <!-- APPLE -->
-
-        <button class="btn apple-btn">
-             Continue with Apple
-        </button>
 
     </div>
-
-</div>
 
 <script>
 
@@ -603,15 +568,10 @@ function toggleLoginPassword(){
     const password =
     document.getElementById("loginPassword");
 
-    if(password.type === "password"){
-
-        password.type = "text";
-    }
-
-    else{
-
-        password.type = "password";
-    }
+    password.type =
+    password.type === "password"
+    ? "text"
+    : "password";
 }
 
 function toggleSignupPassword(){
@@ -619,15 +579,10 @@ function toggleSignupPassword(){
     const password =
     document.getElementById("signupPassword");
 
-    if(password.type === "password"){
-
-        password.type = "text";
-    }
-
-    else{
-
-        password.type = "password";
-    }
+    password.type =
+    password.type === "password"
+    ? "text"
+    : "password";
 }
 
 document.getElementById("loginForm")
