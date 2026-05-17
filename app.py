@@ -296,6 +296,9 @@ def notifications():
 def support():
     return render_template("support.html")
 
+@app.route("/tournaments")
+def tournaments():
+    return render_template("tournaments.html")
 
 # ================= RUN =================
 import os
