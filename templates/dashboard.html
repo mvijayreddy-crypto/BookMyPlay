@@ -8,6 +8,286 @@
 <style>
     /* ================= GLOBAL RESPONSIVE ================= */
 
+    <!-- ADD THIS COMPLETE BLOCK AT THE VERY END OF YOUR CURRENT 
+
+/* ================= FINAL RESPONSIVE DASHBOARD ================= */
+
+/* TABLETS */
+
+    .main{
+        padding-bottom:120px;
+    }
+
+    .header{
+        padding:14px 16px;
+    }
+
+    .header h2{
+        font-size:22px;
+    }
+
+    .welcome{
+        margin:16px;
+        padding:22px;
+    }
+
+    .stats{
+        gap:14px;
+    }
+
+    .stat-card{
+        width:46%;
+    }
+
+    .search,
+    .slot-section,
+    .weather,
+    .trending,
+    .map,
+    .activity{
+        width:94%;
+    }
+
+    .games{
+        gap:16px;
+    }
+
+    .card{
+        width:160px;
+    }
+
+    .bottom-nav{
+        width:96%;
+    }
+
+
+/* MOBILE */
+
+@media screen and (max-width:768px){
+
+    body{
+        overflow-x:hidden;
+    }
+
+    .main{
+        padding-bottom:120px;
+    }
+
+    .header{
+        padding:14px;
+        border-bottom-left-radius:18px;
+        border-bottom-right-radius:18px;
+    }
+
+    .header h2{
+        font-size:18px;
+    }
+
+    .welcome{
+        margin:14px;
+        padding:20px 16px;
+        border-radius:24px;
+    }
+
+    .welcome h2{
+        font-size:24px;
+    }
+
+    .live-time,
+    .quote{
+        font-size:13px;
+    }
+
+    /* STATS */
+
+    .stats{
+        flex-direction:column;
+        align-items:center;
+        margin:14px;
+    }
+
+    .stat-card{
+        width:100%;
+        max-width:100%;
+        padding:18px;
+        border-radius:20px;
+    }
+
+    .stat-card h3{
+        font-size:24px;
+    }
+
+    /* SEARCH */
+
+    .search{
+        width:92%;
+        padding:14px;
+        font-size:14px;
+        border-radius:18px;
+    }
+
+    /* SLOT SECTION */
+
+    .slot-section{
+        width:92%;
+        padding:18px 14px;
+        border-radius:22px;
+    }
+
+    .slot{
+        width:100%;
+        text-align:center;
+        padding:12px;
+        border-radius:14px;
+    }
+
+    /* DATE TIME */
+
+    .flex{
+        flex-direction:column;
+        align-items:center;
+        gap:14px;
+    }
+
+    .box{
+        width:100%;
+    }
+
+    .box input{
+        width:100%;
+    }
+
+    /* WEATHER */
+
+    .weather{
+        width:92%;
+        padding:16px;
+        border-radius:20px;
+        font-size:14px;
+    }
+
+    /* GAMES */
+
+    .games{
+        gap:14px;
+        padding:0 10px;
+    }
+
+    .card{
+        width:46%;
+        padding:14px;
+        border-radius:18px;
+    }
+
+    .card img{
+        width:70px;
+    }
+
+    /* TRENDING */
+
+    .trending{
+        width:92%;
+    }
+
+    .trending-card{
+        border-radius:18px;
+        padding:16px;
+        font-size:14px;
+    }
+
+    /* MAP */
+
+    .map{
+        width:92%;
+        border-radius:20px;
+    }
+
+    iframe{
+        height:240px;
+    }
+
+    /* ACTIVITY */
+
+    .activity{
+        width:92%;
+        padding:18px 14px;
+        border-radius:22px;
+    }
+
+    .activity p{
+        font-size:14px;
+    }
+
+    /* FLOAT BUTTON */
+
+    .quick-book{
+        width:62px;
+        height:62px;
+        bottom:100px;
+        right:18px;
+    }
+
+    .plus-icon{
+        font-size:28px;
+    }
+
+    /* NAVIGATION */
+
+    .bottom-nav{
+        width:94%;
+        height:72px;
+        border-radius:22px;
+        bottom:10px;
+    }
+
+    .bottom-nav div{
+        font-size:11px;
+    }
+}
+
+/* SMALL MOBILE */
+
+@media screen and (max-width:480px){
+
+    .header h2{
+        font-size:16px;
+    }
+
+    .welcome h2{
+        font-size:22px;
+    }
+
+    .card{
+        width:100%;
+    }
+
+    .games{
+        flex-direction:column;
+        align-items:center;
+    }
+
+    .slot{
+        width:100%;
+    }
+
+    .bottom-nav{
+        height:68px;
+    }
+
+    .bottom-nav div{
+        font-size:10px;
+    }
+
+    .quick-book{
+        width:58px;
+        height:58px;
+    }
+
+    .plus-icon{
+        font-size:26px;
+    }
+}
+
 img{
     max-width:100%;
     height:auto;
