@@ -304,6 +304,10 @@ def tournaments():
 def leaderboard():
     return render_template("leaderboard.html")
 
+@app.route("/live-match")
+def live_match():
+    return render_template("live-match.html")
+
 # ================= RUN =================
 import os
 
