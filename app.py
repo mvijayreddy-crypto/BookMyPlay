@@ -278,6 +278,10 @@ def profile():
 def manage():
     return render_template('manage.html')
 
+@app.route("/admin")
+def admin():
+    return render_template("admin.html")
+
 # ================= LOGOUT =================
 @app.route('/logout')
 def logout():
