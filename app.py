@@ -288,6 +288,10 @@ def logout():
     session.clear()
     return redirect('/login')
 
+@app.route("/notifications")
+def notifications():
+    return render_template("notifications.html")
+
 # ================= RUN =================
 import os
 

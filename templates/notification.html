@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
+
+<title>
+Notifications - BookMyPlay
+</title>
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+:root{
+
+    --primary:#00ffc8;
+    --secondary:#00e676;
+
+    --bg:
+    radial-gradient(circle at top left,
+    #16213e,
+    #0f172a 45%,
+    #020617 90%);
+
+    --glass:
+    rgba(255,255,255,0.08);
+
+    --text:white;
+}
+
+body{
+
+    font-family:'Segoe UI',sans-serif;
+
+    background:var(--bg);
+
+    color:var(--text);
+
+    overflow-x:hidden;
+}
+
+/* HEADER */
+
+.header{
+
+    padding:28px 20px;
+
+    background:
+    linear-gradient(135deg,
+    #00c853,
+    #00e676);
+
+    text-align:center;
+
+    border-bottom-left-radius:30px;
+    border-bottom-right-radius:30px;
+
+    box-shadow:
+    0 0 30px rgba(0,255,180,0.3);
+}
+
+.header h2{
+    font-size:34px;
+}
+
+.header p{
+    margin-top:8px;
+    opacity:0.9;
+}
+
+/* CONTAINER */
+
+.container{
+
+    width:92%;
+    max-width:900px;
+
+    margin:auto;
+
+    padding:25px 0 120px;
+}
+
+/* FILTERS */
+
+.filters{
+
+    display:flex;
+
+    justify-content:center;
+
+    gap:12px;
+
+    flex-wrap:wrap;
+
+    margin-bottom:25px;
+}
+
+.filter-btn{
+
+    padding:10px 18px;
+
+    border:none;
+
+    border-radius:20px;
+
+    background:
+    rgba(255,255,255,0.08);
+
+    color:white;
+
+    cursor:pointer;
+
+    transition:0.3s;
+}
+
+.filter-btn:hover,
+.active{
+
+    background:
+    linear-gradient(135deg,
+    var(--primary),
+    var(--secondary));
+
+    color:black;
+
+    font-weight:bold;
+}
+
+/* NOTIFICATION CARD */
+
+.notify-card{
+
+    background:var(--glass);
+
+    backdrop-filter:blur(15px);
+
+    border-radius:24px;
+
+    padding:20px;
+
+    margin-bottom:18px;
+
+    display:flex;
+
+    gap:18px;
+
+    align-items:flex-start;
+
+    box-shadow:
+    0 0 25px rgba(0,0,0,0.2);
+
+    border:
+    1px solid rgba(255,255,255,0.08);
+
+    transition:0.3s;
+}
+
+.notify-card:hover{
+    transform:translateY(-4px);
+}
+
+.icon{
+
+    width:58px;
+    height:58px;
+
+    border-radius:18px;
+
+    background:
+    linear-gradient(135deg,
+    var(--primary),
+    var(--secondary));
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    font-size:28px;
+
+    color:black;
+
+    flex-shrink:0;
+}
+
+.notify-content{
+    flex:1;
+}
+
+.notify-content h3{
+    margin-bottom:8px;
+}
+
+.notify-content p{
+
+    color:#dddddd;
+
+    line-height:1.5;
+}
+
+.time{
+
+    margin-top:12px;
+
+    font-size:13px;
+
+    color:#aaaaaa;
+}
+
+/* UNREAD BADGE */
+
+.badge{
+
+    width:12px;
+    height:12px;
+
+    border-radius:50%;
+
+    background:#ff1744;
+
+    margin-top:5px;
+}
+
+/* NAV */
+
+.bottom-nav{
+
+    position:fixed;
+
+    bottom:15px;
+
+    left:50%;
+
+    transform:translateX(-50%);
+
+    width:95%;
+    max-width:700px;
+
+    height:75px;
+
+    border-radius:25px;
+
+    background:
+    rgba(15,20,35,0.92);
+
+    backdrop-filter:blur(18px);
+
+    display:flex;
+
+    justify-content:space-around;
+    align-items:center;
+
+    box-shadow:
+    0 0 30px rgba(0,255,200,0.15);
+
+    z-index:999;
+}
+
+.bottom-nav div{
+
+    text-align:center;
+
+    cursor:pointer;
+
+    transition:0.3s;
+
+    font-size:14px;
+}
+
+.bottom-nav div:hover{
+    color:var(--primary);
+}
+
+.active-nav{
+    color:var(--primary);
+}
+
+/* MOBILE */
+
+@media screen and (max-width:768px){
+
+    .header h2{
+        font-size:28px;
+    }
+
+    .notify-card{
+        padding:18px;
+    }
+}
+
+@media screen and (max-width:480px){
+
+    .header{
+        padding:24px 15px;
+    }
+
+    .header h2{
+        font-size:24px;
+    }
+
+    .notify-card{
+        gap:14px;
+        border-radius:20px;
+    }
+
+    .icon{
+        width:50px;
+        height:50px;
+        font-size:24px;
+    }
+
+    .bottom-nav div{
+        font-size:11px;
+    }
+}
+
+</style>
+
+</head>
+
+<body>
+
+<!-- HEADER -->
+
+<div class="header">
+
+<h2>
+🔔 Notifications
+</h2>
+
+<p>
+Stay updated with your latest activities
+</p>
+
+</div>
+
+<!-- CONTAINER -->
+
+<div class="container">
+
+<!-- FILTERS -->
+
+<div class="filters">
+
+<button class="filter-btn active">
+All
+</button>
+
+<button class="filter-btn">
+Bookings
+</button>
+
+<button class="filter-btn">
+Offers
+</button>
+
+<button class="filter-btn">
+Tournaments
+</button>
+
+</div>
+
+<!-- NOTIFICATION -->
+
+<div class="notify-card">
+
+<div class="icon">
+🏏
+</div>
+
+<div class="notify-content">
+
+<h3>
+Booking Confirmed
+</h3>
+
+<p>
+Your cricket ground booking has been confirmed successfully.
+</p>
+
+<div class="time">
+2 minutes ago
+</div>
+
+</div>
+
+<div class="badge"></div>
+
+</div>
+
+<!-- NOTIFICATION -->
+
+<div class="notify-card">
+
+<div class="icon">
+🎁
+</div>
+
+<div class="notify-content">
+
+<h3>
+Special Offer
+</h3>
+
+<p>
+Get 20% OFF on your next weekend booking.
+</p>
+
+<div class="time">
+1 hour ago
+</div>
+
+</div>
+
+</div>
+
+<!-- NOTIFICATION -->
+
+<div class="notify-card">
+
+<div class="icon">
+🏆
+</div>
+
+<div class="notify-content">
+
+<h3>
+Tournament Open
+</h3>
+
+<p>
+New football tournament registrations are now live.
+</p>
+
+<div class="time">
+Today
+</div>
+
+</div>
+
+</div>
+
+<!-- NOTIFICATION -->
+
+<div class="notify-card">
+
+<div class="icon">
+📍
+</div>
+
+<div class="notify-content">
+
+<h3>
+Nearby Venue Added
+</h3>
+
+<p>
+A new badminton arena is now available near your location.
+</p>
+
+<div class="time">
+Yesterday
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<!-- NAV -->
+
+<div class="bottom-nav">
+
+<div onclick="go('dashboard')">
+🏠<br>Home
+</div>
+
+<div onclick="go('venues')">
+📍<br>Venues
+</div>
+
+<div class="active-nav">
+🔔<br>Alerts
+</div>
+
+<div onclick="go('profile')">
+👤<br>Profile
+</div>
+
+</div>
+
+<script>
+
+function go(page){
+
+    window.location.href =
+    "/" + page;
+}
+
+</script>
+
+</body>
+</html>
