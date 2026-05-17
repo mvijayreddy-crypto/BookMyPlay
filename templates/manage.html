@@ -1,141 +1,679 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Manager Panel</title>
+
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
+
+<title>
+Manage Grounds - BookMyPlay
+</title>
 
 <style>
-*{margin:0;padding:0;box-sizing:border-box;}
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+:root{
+
+    --primary:#00ffc8;
+    --secondary:#00e676;
+
+    --bg:
+    radial-gradient(circle at top left,
+    #16213e,
+    #0f172a 45%,
+    #020617 90%);
+
+    --glass:
+    rgba(255,255,255,0.08);
+
+    --text:white;
+}
 
 body{
-    font-family:'Segoe UI';
-    background:#eef2f7;
+
+    font-family:'Segoe UI',sans-serif;
+
+    background:var(--bg);
+
+    color:var(--text);
+
+    overflow-x:hidden;
 }
 
 /* HEADER */
+
 .header{
-    background:linear-gradient(135deg,#4CAF50,#2e7d32);
-    color:white;
-    padding:15px;
+
+    background:
+    linear-gradient(135deg,
+    #00c853,
+    #00e676);
+
+    padding:30px 20px;
+
     text-align:center;
+
+    border-bottom-left-radius:30px;
+    border-bottom-right-radius:30px;
+
+    box-shadow:
+    0 0 25px rgba(0,255,180,0.35);
+}
+
+.header h2{
+    font-size:34px;
+    margin-top:10px;
+}
+
+.header p{
+    opacity:0.9;
+    margin-top:8px;
+}
+
+/* AVATAR */
+
+.avatar{
+
+    width:95px;
+    height:95px;
+
+    border-radius:50%;
+
+    margin:auto;
+
+    background:white;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    color:#00c853;
+
+    font-size:42px;
+
+    font-weight:bold;
+
+    box-shadow:
+    0 0 25px rgba(255,255,255,0.5);
 }
 
 /* CONTAINER */
+
 .container{
-    padding:20px;
-    padding-bottom:90px;
+
+    width:92%;
+    max-width:1100px;
+
+    margin:auto;
+
+    padding:25px 0 120px;
 }
 
-/* CARD */
+/* GLASS CARD */
+
 .card{
-    background:white;
-    padding:15px;
-    margin-bottom:15px;
-    border-radius:12px;
-    box-shadow:0 5px 15px rgba(0,0,0,0.1);
+
+    background:var(--glass);
+
+    backdrop-filter:blur(15px);
+
+    border-radius:25px;
+
+    padding:22px;
+
+    margin-bottom:22px;
+
+    box-shadow:
+    0 0 30px rgba(0,0,0,0.2);
+
+    border:
+    1px solid rgba(255,255,255,0.08);
 }
 
-/* INPUT */
-input{
+/* STATS */
+
+.stats{
+
+    display:grid;
+
+    grid-template-columns:
+    repeat(auto-fit,minmax(180px,1fr));
+
+    gap:18px;
+
+    margin-bottom:25px;
+}
+
+.stat-card{
+
+    background:rgba(255,255,255,0.08);
+
+    border-radius:22px;
+
+    padding:20px;
+
+    text-align:center;
+
+    transition:0.3s;
+}
+
+.stat-card:hover{
+    transform:translateY(-5px);
+}
+
+.stat-card h3{
+
+    color:var(--primary);
+
+    font-size:30px;
+
+    margin-bottom:10px;
+}
+
+/* FORM */
+
+.form-grid{
+
+    display:grid;
+
+    grid-template-columns:
+    repeat(auto-fit,minmax(250px,1fr));
+
+    gap:18px;
+}
+
+.input-box{
+    margin-top:10px;
+}
+
+.input-box label{
+
+    display:block;
+
+    margin-bottom:8px;
+
+    font-size:14px;
+
+    color:#cccccc;
+}
+
+.input-box input{
+
     width:100%;
-    padding:10px;
-    margin:6px 0;
-    border-radius:8px;
-    border:1px solid #ccc;
+
+    padding:14px;
+
+    border:none;
+
+    border-radius:14px;
+
+    outline:none;
+
+    background:
+    rgba(255,255,255,0.08);
+
+    color:white;
+
+    font-size:15px;
 }
 
 /* BUTTON */
-button{
-    background:#4CAF50;
-    color:white;
+
+.btn{
+
+    width:100%;
+
+    padding:15px;
+
     border:none;
-    padding:10px;
-    width:100%;
-    border-radius:8px;
+
+    border-radius:18px;
+
+    background:
+    linear-gradient(135deg,
+    var(--primary),
+    var(--secondary));
+
+    color:black;
+
+    font-weight:bold;
+
     cursor:pointer;
-    margin-top:5px;
+
+    transition:0.3s;
+
+    margin-top:20px;
 }
 
-/* DELETE BTN */
-.delete{
-    background:red;
-    margin-top:5px;
+.btn:hover{
+
+    transform:translateY(-3px);
+
+    box-shadow:
+    0 0 25px rgba(0,255,200,0.35);
 }
 
-/* NAV */
-.bottom-nav{
-    position:fixed;
-    bottom:0;
-    width:100%;
-    height:70px;
-    background:#4CAF50;
+/* GROUND LIST */
+
+.grounds{
+
+    display:grid;
+
+    grid-template-columns:
+    repeat(auto-fit,minmax(260px,1fr));
+
+    gap:20px;
+}
+
+.ground-card{
+
+    background:
+    rgba(255,255,255,0.06);
+
+    border-radius:22px;
+
+    overflow:hidden;
+
+    transition:0.3s;
+
+    box-shadow:
+    0 0 20px rgba(0,0,0,0.2);
+}
+
+.ground-card:hover{
+    transform:translateY(-5px);
+}
+
+.ground-img{
+
+    height:170px;
+
+    background:
+    linear-gradient(135deg,
+    #00c853,
+    #00e676);
+
     display:flex;
+    justify-content:center;
+    align-items:center;
+
+    font-size:60px;
+}
+
+.ground-body{
+    padding:18px;
+}
+
+.ground-body h3{
+    margin-bottom:10px;
+}
+
+.info{
+    margin-top:8px;
+    color:#dddddd;
+}
+
+/* ACTIONS */
+
+.actions{
+
+    display:flex;
+
+    gap:10px;
+
+    margin-top:15px;
+}
+
+.small-btn{
+
+    flex:1;
+
+    padding:10px;
+
+    border:none;
+
+    border-radius:12px;
+
+    cursor:pointer;
+
+    font-weight:bold;
+}
+
+.edit{
+    background:#ff9800;
+    color:white;
+}
+
+.delete{
+    background:#ff1744;
+    color:white;
+}
+
+/* BOTTOM NAV */
+
+.bottom-nav{
+
+    position:fixed;
+
+    bottom:15px;
+
+    left:50%;
+
+    transform:translateX(-50%);
+
+    width:95%;
+    max-width:700px;
+
+    height:75px;
+
+    border-radius:25px;
+
+    background:
+    rgba(15,20,35,0.92);
+
+    backdrop-filter:blur(18px);
+
+    display:flex;
+
     justify-content:space-around;
     align-items:center;
-    color:white;
+
+    box-shadow:
+    0 0 30px rgba(0,255,200,0.15);
+
+    z-index:999;
 }
-.bottom-nav div{cursor:pointer;}
+
+.bottom-nav div{
+
+    text-align:center;
+
+    cursor:pointer;
+
+    transition:0.3s;
+
+    font-size:14px;
+}
+
+.bottom-nav div:hover{
+    color:var(--primary);
+}
+
+.active{
+    color:var(--primary);
+}
+
+/* RESPONSIVE */
+
+@media screen and (max-width:768px){
+
+    .header h2{
+        font-size:28px;
+    }
+
+    .container{
+        width:94%;
+    }
+}
+
+@media screen and (max-width:480px){
+
+    .header{
+        padding:25px 15px;
+    }
+
+    .header h2{
+        font-size:24px;
+    }
+
+    .card{
+        padding:18px;
+        border-radius:20px;
+    }
+
+    .bottom-nav div{
+        font-size:11px;
+    }
+}
+
 </style>
+
 </head>
 
 <body>
 
+<!-- HEADER -->
+
 <div class="header">
-    <h2>Manager Panel 🛠</h2>
+
+<div class="avatar">
+🏟
 </div>
+
+<h2>
+Manage Grounds
+</h2>
+
+<p>
+Add and manage your sports venues professionally
+</p>
+
+</div>
+
+<!-- CONTAINER -->
 
 <div class="container">
 
-<!-- ADD GROUND -->
+<!-- STATS -->
+
+<div class="stats">
+
+<div class="stat-card">
+
+<h3 id="groundCount">
+0
+</h3>
+
+<p>
+Total Grounds
+</p>
+
+</div>
+
+<div class="stat-card">
+
+<h3>
+12
+</h3>
+
+<p>
+Active Slots
+</p>
+
+</div>
+
+<div class="stat-card">
+
+<h3>
+₹24K
+</h3>
+
+<p>
+Revenue
+</p>
+
+</div>
+
+</div>
+
+<!-- ADD FORM -->
+
 <div class="card">
-    <h3>Add Ground</h3>
 
-    <input id="name" placeholder="Ground Name">
-    <input id="game" placeholder="Game Type (cricket, football)">
-    <input id="price" placeholder="Price ₹">
-    <input id="slot" placeholder="Slots (6AM, 7AM...)">
+<h2>
+➕ Add New Ground
+</h2>
 
-    <button onclick="addGround()">Add Ground</button>
+<div class="form-grid">
+
+<div class="input-box">
+
+<label>
+Ground Name
+</label>
+
+<input
+type="text"
+id="name"
+placeholder="Elite Cricket Arena"
+>
+
+</div>
+
+<div class="input-box">
+
+<label>
+Game Type
+</label>
+
+<input
+type="text"
+id="game"
+placeholder="Cricket, Football"
+>
+
+</div>
+
+<div class="input-box">
+
+<label>
+Price Per Hour
+</label>
+
+<input
+type="number"
+id="price"
+placeholder="500"
+>
+
+</div>
+
+<div class="input-box">
+
+<label>
+Available Slots
+</label>
+
+<input
+type="text"
+id="slot"
+placeholder="6AM, 7AM, 8AM"
+>
+
+</div>
+
+</div>
+
+<button class="btn"
+onclick="addGround()">
+
+Add Ground
+
+</button>
+
 </div>
 
 <!-- LIST -->
+
 <div class="card">
-    <h3>Ground List</h3>
-    <div id="list"></div>
+
+<h2>
+🏟 Your Grounds
+</h2>
+
+<div class="grounds"
+id="list">
+
+</div>
+
 </div>
 
 </div>
 
 <!-- NAV -->
+
 <div class="bottom-nav">
-    <div onclick="go('dashboard')">🏠 Home</div>
-    <div onclick="go('venues')">📍 Venue</div>
-    <div onclick="go('history')">📅 Bookings</div>
-    <div onclick="go('manage')">🛠 Manage</div>
-    <div onclick="go('profile')">👤 Profile</div>
+
+<div onclick="go('dashboard')">
+🏠<br>Home
+</div>
+
+<div onclick="go('venues')">
+📍<br>Venues
+</div>
+
+<div onclick="go('history')">
+📅<br>Bookings
+</div>
+
+<div class="active">
+🛠<br>Manage
+</div>
+
+<div onclick="go('profile')">
+👤<br>Profile
+</div>
+
 </div>
 
 <script>
 
-// LOAD DATA
-let grounds = JSON.parse(localStorage.getItem("grounds")) || [];
+/* LOAD */
 
-// ADD GROUND
+let grounds =
+JSON.parse(
+localStorage.getItem("grounds")
+) || [];
+
+/* COUNT */
+
+document.getElementById("groundCount")
+.innerText = grounds.length;
+
+/* ADD */
+
 function addGround(){
 
-    let name = document.getElementById("name").value;
-    let game = document.getElementById("game").value;
-    let price = document.getElementById("price").value;
-    let slot = document.getElementById("slot").value;
+    let name =
+    document.getElementById("name").value;
+
+    let game =
+    document.getElementById("game").value;
+
+    let price =
+    document.getElementById("price").value;
+
+    let slot =
+    document.getElementById("slot").value;
 
     if(!name || !game || !price || !slot){
+
         alert("Fill all fields");
+
         return;
     }
 
     let newGround = {
-        id: Date.now(),
+
+        id:Date.now(),
+
         name,
         game,
         price,
@@ -143,55 +681,132 @@ function addGround(){
     };
 
     grounds.push(newGround);
-    localStorage.setItem("grounds", JSON.stringify(grounds));
+
+    localStorage.setItem(
+        "grounds",
+        JSON.stringify(grounds)
+    );
 
     display();
 
-    // clear inputs
+    clearInputs();
+}
+
+/* CLEAR */
+
+function clearInputs(){
+
     document.getElementById("name").value="";
+
     document.getElementById("game").value="";
+
     document.getElementById("price").value="";
+
     document.getElementById("slot").value="";
 }
 
-// DISPLAY
+/* DISPLAY */
+
 function display(){
 
-    let box = document.getElementById("list");
+    let box =
+    document.getElementById("list");
+
     box.innerHTML = "";
 
+    document.getElementById("groundCount")
+    .innerText = grounds.length;
+
     if(grounds.length === 0){
-        box.innerHTML = "<p>No grounds added</p>";
+
+        box.innerHTML = `
+        <p>
+        No grounds added yet
+        </p>
+        `;
+
         return;
     }
 
     grounds.forEach(g => {
-        box.innerHTML += `
-        <div class="card">
-            <b>${g.name}</b><br>
-            Game: ${g.game}<br>
-            Price: ₹${g.price}<br>
-            Slots: ${g.slot}
 
-            <button class="delete" onclick="remove(${g.id})">Delete</button>
+        box.innerHTML += `
+
+        <div class="ground-card">
+
+            <div class="ground-img">
+                🏟
+            </div>
+
+            <div class="ground-body">
+
+                <h3>
+                    ${g.name}
+                </h3>
+
+                <div class="info">
+                    🎮 ${g.game}
+                </div>
+
+                <div class="info">
+                    💰 ₹${g.price}/hr
+                </div>
+
+                <div class="info">
+                    ⏰ ${g.slot}
+                </div>
+
+                <div class="actions">
+
+                    <button
+                    class="small-btn edit">
+
+                    Edit
+
+                    </button>
+
+                    <button
+                    class="small-btn delete"
+                    onclick="removeGround(${g.id})">
+
+                    Delete
+
+                    </button>
+
+                </div>
+
+            </div>
+
         </div>
         `;
     });
 }
 
-// DELETE
-function remove(id){
-    grounds = grounds.filter(g => g.id !== id);
-    localStorage.setItem("grounds", JSON.stringify(grounds));
+/* DELETE */
+
+function removeGround(id){
+
+    grounds =
+    grounds.filter(g => g.id !== id);
+
+    localStorage.setItem(
+        "grounds",
+        JSON.stringify(grounds)
+    );
+
     display();
 }
 
-// NAV
-function go(p){
-    window.location.href = "/" + p;
+/* NAV */
+
+function go(page){
+
+    window.location.href =
+    "/" + page;
 }
 
-// INIT
+/* INIT */
+
 display();
 
 </script>
