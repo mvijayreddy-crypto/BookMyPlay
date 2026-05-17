@@ -1,194 +1,119 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-      <meta charset="UTF-8>"
-      <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Profile</title>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
+
+<title>
+Profile - BookMyPlay
+</title>
 
 <style>
-    /* ================= GLOBAL RESPONSIVE ================= */
 
-img{
-    max-width:100%;
-    height:auto;
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
 }
 
-iframe{
-    max-width:100%;
+html,
+body{
+    width:100%;
+    overflow-x:hidden;
 }
 
-input,
-button,
-select,
-textarea{
-    max-width:100%;
-}
-
-/* TABLET */
-
-@media(max-width:900px){
-
-    body{
-        overflow-x:hidden;
-    }
-
-    .flex,
-    .games,
-    .stats{
-        flex-wrap:wrap;
-    }
-
-    .card,
-    .stat-card{
-        width:45%;
-    }
-
-    .search,
-    .weather,
-    .activity,
-    .slot-section,
-    .map,
-    .trending{
-        width:94%;
-    }
-}
-
-/* MOBILE */
-
-@media(max-width:600px){
-
-    body{
-        overflow-x:hidden;
-    }
-
-    .header{
-        padding:12px;
-    }
-
-    .header h2{
-        font-size:20px;
-    }
-
-    .welcome{
-        margin:15px;
-        padding:18px;
-    }
-
-    .stats{
-        flex-direction:column;
-        align-items:center;
-    }
-
-    .stat-card{
-        width:92%;
-    }
-
-    .games{
-        justify-content:center;
-        gap:15px;
-    }
-
-    .card{
-        width:90%;
-        max-width:250px;
-    }
-
-    .slot{
-        width:90%;
-        text-align:center;
-    }
-
-    .search{
-        width:94%;
-    }
-
-    .flex{
-        flex-direction:column;
-        align-items:center;
-    }
-
-    .box{
-        width:92%;
-    }
-
-    .bottom-nav{
-        width:96%;
-        height:70px;
-    }
-
-    .bottom-nav div{
-        font-size:11px;
-    }
-
-    .quick-book{
-        width:58px;
-        height:58px;
-    }
-
-    .plus-icon{
-        font-size:26px;
-    }
-}
-
-/* SMALL MOBILE */
-
-@media(max-width:420px){
-
-    .header h2{
-        font-size:18px;
-    }
-
-    .welcome h2{
-        font-size:22px;
-    }
-
-    .card{
-        width:95%;
-    }
-
-    .bottom-nav div{
-        font-size:10px;
-    }
-}
 :root{
-    --primary:#4CAF50;
-    --bg:#eef1f5;
-    --card:#ffffff;
-    --text:#333;
+
+    --primary:#00ffc8;
+    --green:#00e676;
+    --bg1:#16213e;
+    --bg2:#0f172a;
+    --bg3:#020617;
+
+    --card:
+    rgba(255,255,255,0.08);
+
+    --text:#ffffff;
+    --sub:#cbd5e1;
 }
 
 /* DARK MODE */
+
 .dark{
-    --bg:#121212;
-    --card:#1e1e1e;
-    --text:#f1f1f1;
+
+    --bg1:#000000;
+    --bg2:#0a0a0a;
+    --bg3:#111111;
+
+    --card:
+    rgba(255,255,255,0.06);
+
+    --text:#ffffff;
+    --sub:#cccccc;
 }
 
 body{
-    margin:0;
-    font-family:'Segoe UI';
-    background:var(--bg);
+    font-family:'Segoe UI',sans-serif;
+
+    background:
+    radial-gradient(circle at top left,
+    var(--bg1),
+    var(--bg2) 45%,
+    var(--bg3) 90%);
+
     color:var(--text);
+
+    overflow-x:hidden;
+
+    padding-bottom:100px;
 }
 
-/* HEADER */
-.header{
-    background:linear-gradient(135deg,#4CAF50,#2e7d32);
-    color:white;
-    padding:30px;
-    text-align:center;
-    border-bottom-left-radius:25px;
-    border-bottom-right-radius:25px;
+/* HERO */
+
+.hero{
+    position:relative;
+    height:300px;
+
+    background:
+    linear-gradient(rgba(0,0,0,0.4),
+    rgba(0,0,0,0.5)),
+    url('/static/cricket.png');
+
+    background-size:cover;
+    background-position:center;
+
+    border-bottom-left-radius:30px;
+    border-bottom-right-radius:30px;
+
+    display:flex;
+    flex-direction:column;
+    justify-content:flex-end;
+    align-items:center;
+
+    padding-bottom:25px;
+
+    box-shadow:0 0 35px rgba(0,0,0,0.4);
 }
 
 /* AVATAR */
+
 .avatar{
-    width:90px;
-    height:90px;
+    width:120px;
+    height:120px;
     border-radius:50%;
-    background:#ddd;
-    margin:auto;
     overflow:hidden;
+
+    border:4px solid rgba(255,255,255,0.2);
+
+    box-shadow:
+    0 0 25px rgba(0,255,200,0.4);
+
+    margin-bottom:14px;
+
+    background:#ffffff;
 }
 
 .avatar img{
@@ -197,206 +122,892 @@ body{
     object-fit:cover;
 }
 
-/* CARD */
+/* USER */
+
+.hero h2{
+    font-size:32px;
+    margin-bottom:8px;
+}
+
+.hero p{
+    color:#eeeeee;
+    font-size:14px;
+}
+
+/* CONTAINER */
+
+.container{
+    width:92%;
+    max-width:1100px;
+    margin:auto;
+    margin-top:25px;
+}
+
+/* GLASS CARD */
+
 .card{
     background:var(--card);
-    margin:15px;
-    padding:20px;
-    border-radius:15px;
-    box-shadow:0 6px 20px rgba(0,0,0,0.1);
+
+    backdrop-filter:blur(16px);
+
+    border-radius:26px;
+
+    padding:24px;
+
+    margin-bottom:22px;
+
+    box-shadow:
+    0 0 25px rgba(0,0,0,0.2);
+
+    animation:fadeUp 0.7s ease;
 }
 
-/* BUTTON */
-button{
-    padding:10px;
-    border:none;
-    border-radius:10px;
-    background:var(--primary);
-    color:white;
-    cursor:pointer;
-    margin-top:10px;
-    width:100%;
-}
+@keyframes fadeUp{
 
-/* SMALL BUTTON */
-.small-btn{
-    width:auto;
-    padding:6px 10px;
-    margin-top:5px;
+    from{
+        transform:translateY(30px);
+        opacity:0;
+    }
+
+    to{
+        transform:translateY(0);
+        opacity:1;
+    }
 }
 
 /* STATS */
+
 .stats{
-    display:flex;
-    justify-content:space-between;
+    display:grid;
+
+    grid-template-columns:
+    repeat(auto-fit,minmax(180px,1fr));
+
+    gap:18px;
+}
+
+.stat-box{
+    background:
+    rgba(255,255,255,0.05);
+
+    border-radius:20px;
+
+    padding:22px;
+
     text-align:center;
 }
 
-/* ACTIONS */
-.actions button{
-    margin-top:10px;
+.stat-box h3{
+    color:var(--primary);
+    font-size:30px;
+    margin-bottom:8px;
 }
 
-/* TOGGLE */
-.toggle{
+/* PROFILE INFO */
+
+.profile-grid{
+    display:grid;
+
+    grid-template-columns:
+    repeat(auto-fit,minmax(280px,1fr));
+
+    gap:18px;
+}
+
+.info-box{
+    background:
+    rgba(255,255,255,0.05);
+
+    padding:18px;
+
+    border-radius:20px;
+}
+
+.label{
+    color:var(--sub);
+    font-size:13px;
+    margin-bottom:8px;
+}
+
+.value{
+    font-size:18px;
+    font-weight:bold;
+}
+
+/* BUTTONS */
+
+.btn{
+    width:100%;
+    padding:14px;
+    border:none;
+    border-radius:18px;
+
+    background:
+    linear-gradient(135deg,
+    var(--primary),
+    var(--green));
+
+    color:black;
+
+    font-weight:bold;
+
+    cursor:pointer;
+
+    transition:0.3s;
+
+    margin-top:12px;
+}
+
+.btn:hover{
+    transform:translateY(-3px);
+}
+
+.red-btn{
+    background:
+    linear-gradient(135deg,
+    #ff5252,
+    #ff1744);
+
+    color:white;
+}
+
+/* SETTINGS */
+
+.setting{
     display:flex;
     justify-content:space-between;
     align-items:center;
+
+    padding:16px 0;
+
+    border-bottom:
+    1px solid rgba(255,255,255,0.08);
 }
 
-/* NAV */
+.setting:last-child{
+    border-bottom:none;
+}
+
+/* TOGGLE */
+
+.switch{
+    position:relative;
+    width:52px;
+    height:28px;
+}
+
+.switch input{
+    opacity:0;
+    width:0;
+    height:0;
+}
+
+.slider{
+    position:absolute;
+    cursor:pointer;
+    inset:0;
+
+    background:#666;
+
+    border-radius:30px;
+
+    transition:0.3s;
+}
+
+.slider:before{
+    position:absolute;
+    content:"";
+
+    width:22px;
+    height:22px;
+
+    left:3px;
+    top:3px;
+
+    border-radius:50%;
+
+    background:white;
+
+    transition:0.3s;
+}
+
+input:checked + .slider{
+    background:#00e676;
+}
+
+input:checked + .slider:before{
+    transform:translateX(24px);
+}
+
+/* NOTIFICATION */
+
+.notification{
+    background:
+    rgba(255,255,255,0.05);
+
+    padding:16px;
+
+    border-radius:18px;
+
+    margin-top:12px;
+}
+
+/* BOTTOM NAV */
+
 .bottom-nav{
     position:fixed;
-    bottom:0;
-    left:0;
-    width:100%;
-    background:var(--card);
+
+    bottom:12px;
+    left:50%;
+
+    transform:translateX(-50%);
+
+    width:94%;
+    max-width:720px;
+
+    height:74px;
+
+    border-radius:25px;
+
+    background:
+    rgba(15,20,35,0.92);
+
+    backdrop-filter:blur(18px);
+
     display:flex;
+
     justify-content:space-around;
-    padding:10px 0;
+    align-items:center;
+
+    z-index:999;
+
+    box-shadow:
+    0 0 30px rgba(0,255,200,0.12);
 }
 
 .bottom-nav div{
     text-align:center;
+    font-size:13px;
     cursor:pointer;
-    color:#777;
+    color:#cccccc;
 }
 
 .bottom-nav .active{
     color:var(--primary);
+    font-weight:bold;
 }
 
-body{
-    padding-bottom:80px;
+/* RESPONSIVE */
+
+@media screen and (max-width:768px){
+
+    .hero{
+        height:260px;
+    }
+
+    .avatar{
+        width:100px;
+        height:100px;
+    }
+
+    .hero h2{
+        font-size:26px;
+    }
+
+    .container{
+        width:94%;
+    }
+
+    .card{
+        padding:20px;
+    }
+
+    .bottom-nav{
+        height:68px;
+    }
+
+    .bottom-nav div{
+        font-size:11px;
+    }
 }
+
+/* SMALL MOBILE */
+
+@media screen and (max-width:480px){
+
+    .hero{
+        height:230px;
+    }
+
+    .avatar{
+        width:90px;
+        height:90px;
+    }
+
+    .hero h2{
+        font-size:22px;
+    }
+
+    .hero p{
+        font-size:12px;
+    }
+
+    .card{
+        padding:18px;
+        border-radius:22px;
+    }
+
+    .stat-box h3{
+        font-size:26px;
+    }
+
+    .value{
+        font-size:16px;
+    }
+
+    .bottom-nav{
+        height:64px;
+    }
+
+    .bottom-nav div{
+        font-size:10px;
+    }
+}
+
 </style>
+
 </head>
 
 <body>
 
-<!-- HEADER -->
-<div class="header">
-    <div class="avatar">
-        <img id="profileImg" src="https://via.placeholder.com/90">
-    </div>
+<!-- HERO -->
 
-    <h3 id="username">User</h3>
+<div class="hero">
 
-    <input type="file" id="upload" style="display:none" onchange="uploadImg()">
-    <button class="small-btn" onclick="document.getElementById('upload').click()">Upload Photo</button>
+<div class="avatar">
+
+<img
+id="profileImg"
+src="https://via.placeholder.com/120">
+
 </div>
+
+<h2 id="username">
+User
+</h2>
+
+<p>
+Premium Sports Member ⚡
+</p>
+
+<input
+type="file"
+id="upload"
+style="display:none"
+onchange="uploadImg()">
+
+<button
+class="btn"
+style="
+max-width:220px;
+margin-top:18px;
+"
+onclick="
+document.getElementById('upload').click()
+">
+
+Upload Profile Photo
+
+</button>
+
+</div>
+
+<!-- CONTAINER -->
+
+<div class="container">
 
 <!-- STATS -->
+
 <div class="card">
-    <div class="stats">
-        <div>
-            <h3 id="bookCount">0</h3>
-            Bookings
-        </div>
-        <div>
-            <h3>⭐ 4.8</h3>
-            Rating
-        </div>
-        <div>
-            <h3>🏆 Gold</h3>
-            Member
-        </div>
-    </div>
+
+<div class="stats">
+
+<div class="stat-box">
+
+<h3 id="bookCount">
+0
+</h3>
+
+<p>
+Bookings
+</p>
+
 </div>
 
-<!-- DARK MODE -->
-<div class="card toggle">
-    <span>🌙 Dark Mode</span>
-    <input type="checkbox" id="darkToggle" onchange="toggleDark()">
+<div class="stat-box">
+
+<h3>
+⭐ 4.9
+</h3>
+
+<p>
+Rating
+</p>
+
+</div>
+
+<div class="stat-box">
+
+<h3>
+🏆 Gold
+</h3>
+
+<p>
+Membership
+</p>
+
+</div>
+
+<div class="stat-box">
+
+<h3>
+12
+</h3>
+
+<p>
+Venues Visited
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+<!-- PROFILE INFO -->
+
+<div class="card">
+
+<h2 style="margin-bottom:20px;">
+👤 Profile Information
+</h2>
+
+<div class="profile-grid">
+
+<div class="info-box">
+
+<div class="label">
+Username
+</div>
+
+<div class="value"
+id="nameBox">
+User
+</div>
+
+</div>
+
+<div class="info-box">
+
+<div class="label">
+Email
+</div>
+
+<div class="value">
+user@bookmyplay.com
+</div>
+
+</div>
+
+<div class="info-box">
+
+<div class="label">
+Phone
+</div>
+
+<div class="value">
++91 9876543210
+</div>
+
+</div>
+
+<div class="info-box">
+
+<div class="label">
+Location
+</div>
+
+<div class="value">
+Hyderabad
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<!-- GROUND MANAGEMENT -->
+
+<div class="card">
+
+<h2 style="margin-bottom:20px;">
+🏟 Ground Management
+</h2>
+
+<p style="color:var(--sub);">
+Add and manage your sports grounds professionally.
+</p>
+
+<button class="btn">
+Manage Grounds
+</button>
+
+</div>
+
+<!-- WALLET -->
+
+<div class="card">
+
+<h2 style="margin-bottom:20px;">
+💳 Wallet
+</h2>
+
+<div class="profile-grid">
+
+<div class="info-box">
+
+<div class="label">
+Available Balance
+</div>
+
+<div class="value">
+₹2,450
+</div>
+
+</div>
+
+<div class="info-box">
+
+<div class="label">
+Reward Points
+</div>
+
+<div class="value">
+850 Points
+</div>
+
+</div>
+
+</div>
+
+<button class="btn">
+View Transactions
+</button>
+
 </div>
 
 <!-- NOTIFICATIONS -->
+
 <div class="card">
-    <h3>🔔 Notifications</h3>
-    <div id="notifications"></div>
+
+<h2 style="margin-bottom:18px;">
+🔔 Notifications
+</h2>
+
+<div id="notifications">
+
+</div>
+
+</div>
+
+<!-- SETTINGS -->
+
+<div class="card">
+
+<h2 style="margin-bottom:20px;">
+⚙ Settings
+</h2>
+
+<div class="setting">
+
+<span>
+🌙 Dark Mode
+</span>
+
+<label class="switch">
+
+<input
+type="checkbox"
+id="darkToggle"
+onchange="toggleDark()">
+
+<span class="slider"></span>
+
+</label>
+
+</div>
+
+<div class="setting">
+
+<span>
+🔐 Privacy & Security
+</span>
+
+<span>
+›
+</span>
+
+</div>
+
+<div class="setting">
+
+<span>
+🌐 Language
+</span>
+
+<span>
+English
+</span>
+
+</div>
+
 </div>
 
 <!-- ACTIONS -->
-<div class="card actions">
-    <button onclick="goHistory()">📊 My Bookings</button>
-    <button onclick="goVenues()">📍 Explore Venues</button>
-    <button style="background:#f44336" onclick="logout()">🚪 Logout</button>
+
+<div class="card">
+
+<h2 style="margin-bottom:20px;">
+⚡ Quick Actions
+</h2>
+
+<button
+class="btn"
+onclick="goHistory()">
+
+📅 My Bookings
+
+</button>
+
+<button
+class="btn"
+onclick="goVenues()">
+
+📍 Explore Venues
+
+</button>
+
+<button
+class="btn red-btn"
+onclick="logout()">
+
+🚪 Logout
+
+</button>
+
+</div>
+
 </div>
 
 <!-- NAV -->
+
 <div class="bottom-nav">
-    <div onclick="goHome()">🏠<br>Home</div>
-    <div onclick="goVenues()">📍<br>Venues</div>
-    <div onclick="goHistory()">📊<br>History</div>
-    <div class="active">👤<br>Profile</div>
+
+<div onclick="goHome()">
+🏠<br>Home
+</div>
+
+<div onclick="goVenues()">
+📍<br>Venues
+</div>
+
+<div onclick="goHistory()">
+📅<br>Bookings
+</div>
+
+<div class="active">
+👤<br>Profile
+</div>
+
 </div>
 
 <script>
 
-// LOAD USER
-let user = localStorage.getItem("username") || "Guest";
-document.getElementById("username").innerText = user;
+/* USER */
 
-// BOOKINGS COUNT
-let bookings = JSON.parse(localStorage.getItem("bookings")) || [];
-document.getElementById("bookCount").innerText = bookings.length;
+let user =
+localStorage.getItem("username")
+|| "Player";
 
-// DARK MODE LOAD
-if(localStorage.getItem("dark") === "true"){
-    document.body.classList.add("dark");
-    document.getElementById("darkToggle").checked = true;
+document
+.getElementById("username")
+.innerText = user;
+
+document
+.getElementById("nameBox")
+.innerText = user;
+
+/* BOOKINGS */
+
+let bookings =
+JSON.parse(
+localStorage.getItem("bookings")
+) || [];
+
+document
+.getElementById("bookCount")
+.innerText = bookings.length;
+
+/* DARK MODE */
+
+if(localStorage.getItem("dark")
+=== "true"){
+
+document.body
+.classList.add("dark");
+
+document
+.getElementById("darkToggle")
+.checked = true;
+
 }
 
-// TOGGLE DARK
 function toggleDark(){
-    document.body.classList.toggle("dark");
-    localStorage.setItem("dark", document.body.classList.contains("dark"));
+
+document.body
+.classList.toggle("dark");
+
+localStorage.setItem(
+"dark",
+document.body.classList
+.contains("dark")
+);
+
 }
 
-// UPLOAD IMAGE
+/* IMAGE */
+
 function uploadImg(){
-    let file = document.getElementById("upload").files[0];
-    let reader = new FileReader();
 
-    reader.onload = function(){
-        localStorage.setItem("profileImg", reader.result);
-        document.getElementById("profileImg").src = reader.result;
-    };
+let file =
+document.getElementById("upload")
+.files[0];
 
-    reader.readAsDataURL(file);
+let reader =
+new FileReader();
+
+reader.onload = function(){
+
+localStorage.setItem(
+"profileImg",
+reader.result
+);
+
+document
+.getElementById("profileImg")
+.src = reader.result;
+
+};
+
+reader.readAsDataURL(file);
+
 }
 
-// LOAD IMAGE
-let savedImg = localStorage.getItem("profileImg");
+/* LOAD IMAGE */
+
+let savedImg =
+localStorage.getItem("profileImg");
+
 if(savedImg){
-    document.getElementById("profileImg").src = savedImg;
+
+document
+.getElementById("profileImg")
+.src = savedImg;
+
 }
 
-// NOTIFICATIONS
-let notifBox = document.getElementById("notifications");
+/* NOTIFICATIONS */
+
+let notif =
+document.getElementById("notifications");
 
 if(bookings.length > 0){
-    notifBox.innerHTML = `You have ${bookings.length} bookings`;
+
+notif.innerHTML = `
+
+<div class="notification">
+
+📅 You have
+${bookings.length}
+active bookings.
+
+</div>
+
+<div class="notification">
+
+🔥 Weekend tournament registrations are live.
+
+</div>
+
+<div class="notification">
+
+🎁 New sports offers available nearby.
+
+</div>
+
+`;
+
 }else{
-    notifBox.innerHTML = "No new notifications";
+
+notif.innerHTML = `
+
+<div class="notification">
+
+🚫 No notifications available.
+
+</div>
+
+`;
+
 }
 
-// NAV
+/* NAVIGATION */
+
 function goHome(){
-    window.location.href="/dashboard";
-}
-function goVenues(){
-    window.location.href="/venues";
-}
-function goHistory(){
-    window.location.href="/history";
+
+window.location.href =
+"/dashboard";
+
 }
 
-// LOGOUT
+function goVenues(){
+
+window.location.href =
+"/venues";
+
+}
+
+function goHistory(){
+
+window.location.href =
+"/history";
+
+}
+
+/* LOGOUT */
+
 function logout(){
-    localStorage.clear();
-    alert("Logged out");
-    window.location.href="/login";
+
+localStorage.clear();
+
+alert(
+"Logged out successfully"
+);
+
+window.location.href =
+"/login";
+
 }
 
 </script>
