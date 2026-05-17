@@ -292,6 +292,10 @@ def logout():
 def notifications():
     return render_template("notifications.html")
 
+@app.route("/support")
+def support():
+    return render_template("support.html")
+
 
 # ================= RUN =================
 import os
