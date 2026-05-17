@@ -22,7 +22,7 @@
             width:100%;
             min-height:100vh;
             display:flex;
-            overflow:hidden;
+            overflow-x:hidden;
             background:#f5f5f5;
         }
 
@@ -195,130 +195,120 @@
         }
 
         /* ================= TABLET ================= */
-/* ================= FINAL RESPONSIVE ================= */
 
-@media screen and (max-width:900px){
+        @media screen and (max-width:900px){
 
-    body{
-        width:100%;
-        height:100vh;
-        overflow:hidden;
-    }
+            .left{
+                width:48%;
+            }
 
-    .left{
-        width:45%;
-        height:100vh;
-    }
+            .right{
+                width:52%;
+                padding:15px;
+            }
 
-    .right{
-        width:55%;
-        height:100vh;
-        padding:12px;
-        overflow-y:auto;
-    }
+            .card{
+                max-width:360px;
+                padding:24px;
+            }
 
-    .card{
-        width:100%;
-        max-width:340px;
-        padding:22px;
-    }
+            h2{
+                font-size:36px;
+            }
+        }
 
-    h2{
-        font-size:34px;
-    }
-}
+        /* ================= FINAL PHONE RESPONSIVE ================= */
 
-@media screen and (max-width:768px){
+        @media screen and (max-width:768px){
 
-    body{
-        flex-direction:column;
-        overflow-y:auto;
-        height:auto;
-    }
+            body{
+                flex-direction:column;
+                overflow-y:auto;
+                background:#f5f5f5;
+            }
 
-    .left{
-        width:100%;
-        height:42vh;
-        min-height:320px;
-        background-position:center;
-        background-size:cover;
-    }
+            /* TOP IMAGE */
 
-    .right{
-        width:100%;
-        min-height:58vh;
-        padding:20px 14px;
-        display:flex;
-        justify-content:center;
-        align-items:flex-start;
-    }
+            .left{
+                width:100%;
+                height:32vh;
+                min-height:220px;
+                background-position:center top;
+                background-size:cover;
+            }
 
-    .card{
-        width:100%;
-        max-width:420px;
-        padding:24px 20px;
-        margin-top:-40px;
-        border-radius:24px;
-    }
+            /* LOGIN PANEL */
 
-    h2{
-        font-size:38px;
-        margin-bottom:18px;
-    }
+            .right{
+                width:100%;
+                min-height:auto;
+                padding:0;
+                background:#f5f5f5;
+                display:block;
+            }
 
-    .toggle button{
-        font-size:14px;
-        padding:10px;
-    }
+            .card{
+                width:100%;
+                max-width:100%;
+                border-radius:28px 28px 0 0;
+                margin-top:-30px;
+                padding:24px 18px 40px;
+                box-shadow:none;
+            }
 
-    .input-group input{
-        font-size:15px;
-        padding:13px;
-        padding-right:42px;
-    }
+            h2{
+                font-size:34px;
+                margin-bottom:18px;
+            }
 
-    .btn{
-        font-size:15px;
-        padding:13px;
-    }
+            .toggle button{
+                font-size:14px;
+                padding:11px;
+            }
 
-    .forgot a{
-        font-size:13px;
-    }
-}
+            .input-group input{
+                font-size:15px;
+                padding:13px;
+                padding-right:42px;
+            }
 
-@media screen and (max-width:480px){
+            .btn{
+                padding:13px;
+                font-size:15px;
+            }
 
-    .left{
-        height:40vh;
-        min-height:280px;
-    }
+            .forgot a{
+                font-size:13px;
+            }
 
-    .card{
-        margin-top:-35px;
-        padding:20px 16px;
-    }
+            .eye-icon{
+                top:13px;
+                font-size:18px;
+            }
+        }
 
-    h2{
-        font-size:30px;
-    }
+        /* SMALL PHONES */
 
-    .toggle button{
-        font-size:13px;
-    }
+        @media screen and (max-width:480px){
 
-    .btn{
-        font-size:14px;
-    }
+            .left{
+                height:28vh;
+                min-height:190px;
+            }
 
-    .input-group input{
-        font-size:14px;
-    }
-}
+            .card{
+                padding:22px 16px 40px;
+                margin-top:-24px;
+            }
 
-        /* ================= MOBILE ================= */
+            h2{
+                font-size:30px;
+            }
 
-  
+            .btn{
+                font-size:14px;
+            }
+        }
 
     </style>
 
