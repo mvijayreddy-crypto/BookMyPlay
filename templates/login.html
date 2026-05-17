@@ -2,625 +2,637 @@
 <html lang="en">
 <head>
 
-<meta charset="UTF-8">
+    <meta charset="UTF-8">
 
-<meta name="viewport"
-content="width=device-width, initial-scale=1.0">
+    <meta name="viewport"
+    content="width=device-width, initial-scale=1.0">
 
-<title>Login - BookMyPlay</title>
+    <title>Login - BookMyPlay</title>
 
-<style>
+    <style>
 
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-}
+        *{
+            margin:0;
+            padding:0;
+            box-sizing:border-box;
+        }
 
-body{
-    font-family:'Segoe UI',sans-serif;
-    width:100%;
-    height:100vh;
-    display:flex;
-    overflow:hidden;
-    background:#f5f5f5;
-}
+        body{
+            font-family:'Segoe UI',sans-serif;
+            width:100%;
+            min-height:100vh;
+            display:flex;
+            overflow-x:hidden;
+            background:#f5f5f5;
+        }
 
-/* ================= LEFT IMAGE ================= */
+        /* ================= LEFT IMAGE ================= */
 
-.left{
-    width:50%;
-    height:100vh;
-    background:url("/static/sports-bg.jpg")
-    no-repeat center center;
-    background-size:cover;
-    background-color:#0d1b2a;
-}
+        .left{
+            width:50%;
+            height:100vh;
+            background:url("/static/sports-bg.jpg")
+            no-repeat center center;
+            background-size:cover;
+            background-color:#0d1b2a;
+        }
 
-/* ================= RIGHT LOGIN ================= */
+        /* ================= RIGHT LOGIN ================= */
 
-.right{
-    width:50%;
-    height:100vh;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    background:#f5f5f5;
-    padding:20px;
-}
+        .right{
+            width:50%;
+            height:100vh;
+            display:flex;
+            justify-content:center;
+            align-items:center;
+            background:#f5f5f5;
+            padding:20px;
+        }
 
-/* ================= CARD ================= */
+        /* ================= CARD ================= */
 
-.card{
-    width:100%;
-    max-width:410px;
-    background:white;
-    padding:24px;
-    border-radius:24px;
-    box-shadow:0 0 20px rgba(0,0,0,0.08);
-}
+        .card{
+            width:100%;
+            max-width:420px;
+            background:white;
+            padding:30px;
+            border-radius:24px;
+            box-shadow:0 0 25px rgba(0,0,0,0.08);
+        }
 
-h2{
-    text-align:center;
-    font-size:38px;
-    margin-bottom:18px;
-    font-weight:700;
-}
+        h2{
+            text-align:center;
+            font-size:42px;
+            margin-bottom:25px;
+            font-weight:700;
+        }
 
-/* ================= TOGGLE ================= */
+        /* ================= TOGGLE ================= */
 
-.toggle{
-    display:flex;
-    margin-bottom:18px;
-    overflow:hidden;
-    border-radius:10px;
-}
+        .toggle{
+            display:flex;
+            margin-bottom:22px;
+            overflow:hidden;
+            border-radius:10px;
+        }
 
-.toggle button{
-    flex:1;
-    padding:11px;
-    border:none;
-    background:#eeeeee;
-    cursor:pointer;
-    font-size:14px;
-}
+        .toggle button{
+            flex:1;
+            padding:12px;
+            border:none;
+            background:#eeeeee;
+            cursor:pointer;
+            font-size:15px;
+        }
 
-.active{
-    background:#4CAF50;
-    color:white;
-}
+        .active{
+            background:#4CAF50;
+            color:white;
+        }
 
-/* ================= INPUT ================= */
+        /* ================= INPUT ================= */
 
-.input-group{
-    position:relative;
-    margin-bottom:14px;
-}
+        .input-group{
+            position:relative;
+            margin-bottom:18px;
+        }
 
-.input-group input{
-    width:100%;
-    padding:13px;
-    padding-right:45px;
-    border:1px solid #cccccc;
-    border-radius:10px;
-    outline:none;
-    font-size:15px;
-    background:white;
-}
+        .input-group input{
+            width:100%;
+            padding:14px;
+            padding-right:48px;
+            border:1px solid #cccccc;
+            border-radius:10px;
+            outline:none;
+            font-size:16px;
+            background:white;
+        }
 
-.input-group label{
-    position:absolute;
-    left:14px;
-    top:13px;
-    color:gray;
-    transition:0.3s;
-    pointer-events:none;
-    background:white;
-}
+        .input-group label{
+            position:absolute;
+            left:14px;
+            top:14px;
+            color:gray;
+            transition:0.3s;
+            pointer-events:none;
+            background:white;
+        }
 
-.input-group input:focus + label,
-.input-group input:valid + label{
+        .input-group input:focus + label,
+        .input-group input:valid + label{
 
-    top:-8px;
-    left:10px;
-    font-size:12px;
-    color:#4CAF50;
-    padding:0 5px;
-}
+            top:-8px;
+            left:10px;
+            font-size:12px;
+            color:#4CAF50;
+            padding:0 5px;
+        }
 
-/* ================= EYE ICON ================= */
+        /* ================= EYE ICON ================= */
 
-.eye-icon{
-    position:absolute;
-    right:14px;
-    top:13px;
-    cursor:pointer;
-    font-size:18px;
-}
+        .eye-icon{
+            position:absolute;
+            right:14px;
+            top:14px;
+            cursor:pointer;
+            font-size:18px;
+        }
 
-/* ================= BUTTON ================= */
+        /* ================= BUTTON ================= */
 
-.btn{
-    width:100%;
-    padding:13px;
-    border:none;
-    border-radius:10px;
-    cursor:pointer;
-    color:white;
-    font-size:15px;
-    transition:0.3s;
-}
+        .btn{
+            width:100%;
+            padding:14px;
+            border:none;
+            border-radius:10px;
+            cursor:pointer;
+            color:white;
+            font-size:16px;
+            transition:0.3s;
+        }
 
-.btn:hover{
-    transform:scale(1.02);
-}
+        .btn:hover{
+            transform:scale(1.02);
+        }
 
-.login-btn{
-    background:#4CAF50;
-}
+        .login-btn{
+            background:#4CAF50;
+        }
 
-.google-btn{
-    background:#4285F4;
-}
+        .google-btn{
+            background:#4285F4;
+        }
 
-.apple-btn{
-    background:black;
-}
+        .apple-btn{
+            background:black;
+        }
 
-.hidden{
-    display:none;
-}
+        .hidden{
+            display:none;
+        }
 
-.forgot{
-    text-align:right;
-    margin-bottom:12px;
-}
+        .forgot{
+            text-align:right;
+            margin-bottom:15px;
+        }
 
-.forgot a{
-    color:#4CAF50;
-    text-decoration:none;
-    font-size:13px;
-}
+        .forgot a{
+            color:#4CAF50;
+            text-decoration:none;
+            font-size:14px;
+        }
 
-.error{
-    color:red;
-    text-align:center;
-    margin-bottom:10px;
-}
+        .error{
+            color:red;
+            text-align:center;
+            margin-bottom:12px;
+        }
 
-#strengthMessage{
-    font-size:12px;
-    margin-top:-8px;
-    margin-bottom:10px;
-    display:block;
-}
+        #strengthMessage{
+            font-size:13px;
+            margin-top:-10px;
+            margin-bottom:12px;
+            display:block;
+        }
 
-/* ================= TABLET ================= */
+        /* ================= TABLET ================= */
 
-@media screen and (max-width:900px){
+        @media screen and (max-width:900px){
 
-    .left{
-        width:48%;
-    }
+            .left{
+                width:48%;
+            }
 
-    .right{
-        width:52%;
-        padding:15px;
-    }
+            .right{
+                width:52%;
+                padding:15px;
+            }
 
-    .card{
-        max-width:360px;
-        padding:22px;
-    }
+            .card{
+                max-width:360px;
+                padding:24px;
+            }
 
-    h2{
-        font-size:34px;
-    }
-}
+            h2{
+                font-size:36px;
+            }
+        }
 
-/* ================= MOBILE ================= */
+        /* ================= MOBILE ================= */
 
-@media screen and (max-width:768px){
+        @media screen and (max-width:768px){
 
-    body{
-        flex-direction:column;
-        overflow:hidden;
-        height:100vh;
-    }
+            body{
+                flex-direction:column;
+                overflow-y:auto;
+                background:#f5f5f5;
+            }
 
-    /* IMAGE */
+            /* IMAGE */
 
-    .left{
-        width:100%;
-        height:34vh;
-        min-height:250px;
-        background:url("/static/sports-bg.jpg")
-        no-repeat center top;
-        background-size:cover;
-        border-bottom-left-radius:26px;
-        border-bottom-right-radius:26px;
-    }
+            .left{
+                width:100%;
+                height:42vh;
+                min-height:320px;
+                background:url("/static/sports-bg.jpg")
+                no-repeat center top;
+                background-size:cover;
+                border-bottom-left-radius:28px;
+                border-bottom-right-radius:28px;
+            }
 
-    /* LOGIN */
+            /* LOGIN SECTION */
 
-    .right{
-        width:100%;
-        height:66vh;
-        display:flex;
-        justify-content:flex-start;
-        align-items:flex-start;
-        padding:0;
-    }
+            .right{
+                width:100%;
+                display:block;
+                padding:0;
+                background:#f5f5f5;
+            }
 
-    /* CARD */
+            /* CARD */
 
-    .card{
-        width:100%;
-        max-width:100%;
-        height:100%;
-        border-radius:28px 28px 0 0;
-        margin-top:-38px;
-        padding:18px 16px 16px;
-        box-shadow:none;
-    }
+            .card{
+                width:100%;
+                max-width:100%;
+                border-radius:30px 30px 0 0;
+                margin-top:-45px;
+                padding:20px 16px 30px;
+                box-shadow:none;
+            }
 
-    h2{
-        font-size:26px;
-        margin-bottom:14px;
-    }
+            h2{
+                font-size:28px;
+                margin-bottom:16px;
+            }
 
-    .toggle{
-        margin-bottom:14px;
-    }
+            .toggle{
+                margin-bottom:16px;
+            }
 
-    .toggle button{
-        padding:10px;
-        font-size:13px;
-    }
+            .toggle button{
+                padding:10px;
+                font-size:13px;
+            }
 
-    .input-group{
-        margin-bottom:12px;
-    }
+            .input-group{
+                margin-bottom:14px;
+            }
 
-    .input-group input{
-        font-size:14px;
-        padding:11px;
-        padding-right:40px;
-    }
+            .input-group input{
+                font-size:14px;
+                padding:12px;
+                padding-right:40px;
+            }
 
-    .btn{
-        padding:11px;
-        font-size:14px;
-    }
+            .btn{
+                padding:12px;
+                font-size:14px;
+            }
 
-    .forgot{
-        margin-bottom:10px;
-    }
+            .forgot{
+                margin-bottom:12px;
+            }
 
-    .forgot a{
-        font-size:12px;
-    }
+            .forgot a{
+                font-size:12px;
+            }
 
-    .eye-icon{
-        top:11px;
-        font-size:16px;
-    }
+            .eye-icon{
+                top:12px;
+                font-size:16px;
+            }
 
-    center{
-        font-size:14px;
-    }
-}
+            center{
+                font-size:15px;
+            }
+        }
 
-</style>
+    </style>
 
 </head>
 
 <body>
 
-<!-- LEFT IMAGE -->
+    <!-- LEFT IMAGE -->
 
-<div class="left"></div>
+    <div class="left"></div>
 
-<!-- RIGHT LOGIN -->
+    <!-- RIGHT LOGIN -->
 
-<div class="right">
+    <div class="right">
 
-<div class="card">
+        <div class="card">
 
-<h2>Welcome Back</h2>
+            <h2>Welcome Back</h2>
 
-<!-- TOGGLE -->
+            <!-- TOGGLE -->
 
-<div class="toggle">
+            <div class="toggle">
 
-<button
-id="loginBtn"
-class="active"
-onclick="showLogin()">
-Login
-</button>
+                <button
+                    id="loginBtn"
+                    class="active"
+                    onclick="showLogin()"
+                >
+                    Login
+                </button>
 
-<button
-id="signupBtn"
-onclick="showSignup()">
-Sign Up
-</button>
+                <button
+                    id="signupBtn"
+                    onclick="showSignup()"
+                >
+                    Sign Up
+                </button>
 
-</div>
+            </div>
 
-<!-- ERROR -->
+            <!-- ERROR -->
 
-{% if error %}
-<div class="error">
-{{ error }}
-</div>
-{% endif %}
+            {% if error %}
+            <div class="error">
+                {{ error }}
+            </div>
+            {% endif %}
 
-<!-- LOGIN FORM -->
+            <!-- LOGIN FORM -->
 
-<form
-method="POST"
-action="/login"
-id="loginForm">
+            <form
+                method="POST"
+                action="/login"
+                id="loginForm"
+            >
 
-<div class="input-group">
+                <div class="input-group">
 
-<input
-type="text"
-name="email"
-required>
+                    <input
+                        type="text"
+                        name="email"
+                        required
+                    >
 
-<label>Email or Phone</label>
+                    <label>Email or Phone</label>
 
-</div>
+                </div>
 
-<div class="input-group">
+                <div class="input-group">
 
-<input
-type="password"
-name="password"
-id="loginPassword"
-required>
+                    <input
+                        type="password"
+                        name="password"
+                        id="loginPassword"
+                        required
+                    >
 
-<label>Password</label>
+                    <label>Password</label>
 
-<span
-class="eye-icon"
-onclick="toggleLoginPassword()">
-👁️
-</span>
+                    <span
+                        class="eye-icon"
+                        onclick="toggleLoginPassword()"
+                    >
+                        👁️
+                    </span>
 
-</div>
+                </div>
 
-<div class="forgot">
+                <div class="forgot">
 
-<a href="/forgot-password">
-Forgot Password?
-</a>
+                    <a href="/forgot-password">
+                        Forgot Password?
+                    </a>
 
-</div>
+                </div>
 
-<button
-type="submit"
-class="btn login-btn"
-id="loginSubmitBtn">
-Login
-</button>
+                <button
+                    type="submit"
+                    class="btn login-btn"
+                    id="loginSubmitBtn"
+                >
+                    Login
+                </button>
 
-</form>
+            </form>
 
-<!-- SIGNUP FORM -->
+            <!-- SIGNUP FORM -->
 
-<form
-method="POST"
-action="/signup"
-id="signupForm"
-class="hidden">
+            <form
+                method="POST"
+                action="/signup"
+                id="signupForm"
+                class="hidden"
+            >
 
-<div class="input-group">
+                <div class="input-group">
 
-<input
-type="email"
-name="email"
-required>
+                    <input
+                        type="email"
+                        name="email"
+                        required
+                    >
 
-<label>Email</label>
+                    <label>Email</label>
 
-</div>
+                </div>
 
-<div class="input-group">
+                <div class="input-group">
 
-<input
-type="text"
-name="phone"
-required>
+                    <input
+                        type="text"
+                        name="phone"
+                        required
+                    >
 
-<label>Phone</label>
+                    <label>Phone</label>
 
-</div>
+                </div>
 
-<div class="input-group">
+                <div class="input-group">
 
-<input
-type="password"
-name="password"
-id="signupPassword"
-onkeyup="checkPasswordStrength()"
-required>
+                    <input
+                        type="password"
+                        name="password"
+                        id="signupPassword"
+                        onkeyup="checkPasswordStrength()"
+                        required
+                    >
 
-<label>Password</label>
+                    <label>Password</label>
 
-<span
-class="eye-icon"
-onclick="toggleSignupPassword()">
-👁️
-</span>
+                    <span
+                        class="eye-icon"
+                        onclick="toggleSignupPassword()"
+                    >
+                        👁️
+                    </span>
 
-</div>
+                </div>
 
-<small id="strengthMessage"></small>
+                <small id="strengthMessage"></small>
 
-<button
-type="submit"
-class="btn login-btn"
-id="signupSubmitBtn">
-Sign Up
-</button>
+                <button
+                    type="submit"
+                    class="btn login-btn"
+                    id="signupSubmitBtn"
+                >
+                    Sign Up
+                </button>
 
-</form>
+            </form>
 
-<br>
+            <br>
 
-<center>OR</center>
+            <center>OR</center>
 
-<br>
+            <br>
 
-<!-- OTP -->
+            <!-- OTP -->
 
-<a href="/otp-login">
+            <a href="/otp-login">
 
-<button
-type="button"
-class="btn"
-style="background:linear-gradient(135deg,#ff9800,#ff5722)">
-🔐 Login with OTP
-</button>
+                <button
+                    type="button"
+                    class="btn"
+                    style="background:linear-gradient(135deg,#ff9800,#ff5722)"
+                >
+                    🔐 Login with OTP
+                </button>
 
-</a>
+            </a>
 
-<br><br>
+            <br><br>
 
-<!-- GOOGLE -->
+            <!-- GOOGLE -->
 
-<a href="/login/google">
+            <a href="/login/google">
 
-<button
-type="button"
-class="btn google-btn">
-Continue with Google
-</button>
+                <button
+                    type="button"
+                    class="btn google-btn"
+                >
+                    Continue with Google
+                </button>
 
-</a>
+            </a>
 
-<br><br>
+            <br><br>
 
-<!-- APPLE -->
+            <!-- APPLE -->
 
-<button class="btn apple-btn">
- Continue with Apple
-</button>
+            <button class="btn apple-btn">
+                 Continue with Apple
+            </button>
 
-</div>
+        </div>
 
-</div>
+    </div>
 
 <script>
 
 function showSignup(){
 
-document.getElementById("loginForm")
-.classList.add("hidden");
+    document.getElementById("loginForm")
+    .classList.add("hidden");
 
-document.getElementById("signupForm")
-.classList.remove("hidden");
+    document.getElementById("signupForm")
+    .classList.remove("hidden");
 
-document.getElementById("signupBtn")
-.classList.add("active");
+    document.getElementById("signupBtn")
+    .classList.add("active");
 
-document.getElementById("loginBtn")
-.classList.remove("active");
+    document.getElementById("loginBtn")
+    .classList.remove("active");
 }
 
 function showLogin(){
 
-document.getElementById("signupForm")
-.classList.add("hidden");
+    document.getElementById("signupForm")
+    .classList.add("hidden");
 
-document.getElementById("loginForm")
-.classList.remove("hidden");
+    document.getElementById("loginForm")
+    .classList.remove("hidden");
 
-document.getElementById("loginBtn")
-.classList.add("active");
+    document.getElementById("loginBtn")
+    .classList.add("active");
 
-document.getElementById("signupBtn")
-.classList.remove("active");
+    document.getElementById("signupBtn")
+    .classList.remove("active");
 }
 
 function checkPasswordStrength(){
 
-let password =
-document.getElementById("signupPassword").value;
+    let password =
+    document.getElementById("signupPassword").value;
 
-let message =
-document.getElementById("strengthMessage");
+    let message =
+    document.getElementById("strengthMessage");
 
-if(password.length < 6){
+    if(password.length < 6){
 
-message.innerHTML =
-"🔴 Weak Password";
+        message.innerHTML =
+        "🔴 Weak Password";
 
-message.style.color = "red";
-}
+        message.style.color = "red";
+    }
 
-else if(password.length < 10){
+    else if(password.length < 10){
 
-message.innerHTML =
-"🟡 Medium Password";
+        message.innerHTML =
+        "🟡 Medium Password";
 
-message.style.color = "orange";
-}
+        message.style.color = "orange";
+    }
 
-else{
+    else{
 
-message.innerHTML =
-"🟢 Strong Password";
+        message.innerHTML =
+        "🟢 Strong Password";
 
-message.style.color = "green";
-}
+        message.style.color = "green";
+    }
 }
 
 function toggleLoginPassword(){
 
-const password =
-document.getElementById("loginPassword");
+    const password =
+    document.getElementById("loginPassword");
 
-password.type =
-password.type === "password"
-? "text"
-: "password";
+    password.type =
+    password.type === "password"
+    ? "text"
+    : "password";
 }
 
 function toggleSignupPassword(){
 
-const password =
-document.getElementById("signupPassword");
+    const password =
+    document.getElementById("signupPassword");
 
-password.type =
-password.type === "password"
-? "text"
-: "password";
+    password.type =
+    password.type === "password"
+    ? "text"
+    : "password";
 }
 
 document.getElementById("loginForm")
 .addEventListener("submit", function(){
 
-const btn =
-document.getElementById("loginSubmitBtn");
+    const btn =
+    document.getElementById("loginSubmitBtn");
 
-btn.innerHTML = "⏳ Loading...";
-btn.disabled = true;
+    btn.innerHTML = "⏳ Loading...";
+    btn.disabled = true;
 });
 
 document.getElementById("signupForm")
 .addEventListener("submit", function(){
 
-const btn =
-document.getElementById("signupSubmitBtn");
+    const btn =
+    document.getElementById("signupSubmitBtn");
 
-btn.innerHTML =
-"⏳ Creating Account...";
+    btn.innerHTML =
+    "⏳ Creating Account...";
 
-btn.disabled = true;
+    btn.disabled = true;
 });
 
 </script>
