@@ -1,351 +1,530 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Venue Details</title>
+
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
+
+<title>Venue Details - BookMyPlay</title>
 
 <style>
 
-/* ================= GLOBAL RESPONSIVE ================= */
-
-img{
-    max-width:100%;
-    height:auto;
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
 }
 
-iframe{
-    max-width:100%;
+html,
+body{
+    width:100%;
+    overflow-x:hidden;
 }
 
-input,
-button,
-select,
-textarea{
-    max-width:100%;
+body{
+    font-family:'Segoe UI',sans-serif;
+    background:
+    radial-gradient(circle at top left,#16213e,#0f172a 45%,#020617 90%);
+    color:white;
+    overflow-x:hidden;
+    padding-bottom:110px;
 }
 
-/* TABLET */
+/* HERO */
 
-@media(max-width:900px){
-
-    body{
-        overflow-x:hidden;
-    }
-
-    .flex,
-    .games,
-    .stats{
-        flex-wrap:wrap;
-    }
-
-    .card,
-    .stat-card{
-        width:45%;
-    }
-
-    .search,
-    .weather,
-    .activity,
-    .slot-section,
-    .map,
-    .trending{
-        width:94%;
-    }
+.hero{
+    height:280px;
+    background:
+    linear-gradient(rgba(0,0,0,0.45),
+    rgba(0,0,0,0.55)),
+    url('/static/cricket.png');
+    background-size:cover;
+    background-position:center;
+    display:flex;
+    align-items:flex-end;
+    padding:30px;
+    border-bottom-left-radius:28px;
+    border-bottom-right-radius:28px;
+    box-shadow:0 0 30px rgba(0,0,0,0.4);
 }
 
-/* MOBILE */
-
-@media(max-width:600px){
-
-    body{
-        overflow-x:hidden;
-    }
-
-    .header{
-        padding:12px;
-    }
-
-    .header h2{
-        font-size:20px;
-    }
-
-    .welcome{
-        margin:15px;
-        padding:18px;
-    }
-
-    .stats{
-        flex-direction:column;
-        align-items:center;
-    }
-
-    .stat-card{
-        width:92%;
-    }
-
-    .games{
-        justify-content:center;
-        gap:15px;
-    }
-
-    .card{
-        width:90%;
-        max-width:250px;
-    }
-
-    .slot{
-        width:90%;
-        text-align:center;
-    }
-
-    .search{
-        width:94%;
-    }
-
-    .flex{
-        flex-direction:column;
-        align-items:center;
-    }
-
-    .box{
-        width:92%;
-    }
-
-    .bottom-nav{
-        width:96%;
-        height:70px;
-    }
-
-    .bottom-nav div{
-        font-size:11px;
-    }
-
-    .quick-book{
-        width:58px;
-        height:58px;
-    }
-
-    .plus-icon{
-        font-size:26px;
-    }
+.hero h2{
+    font-size:38px;
 }
 
-/* SMALL MOBILE */
+/* CONTAINER */
 
-@media(max-width:420px){
-
-    .header h2{
-        font-size:18px;
-    }
-
-    .welcome h2{
-        font-size:22px;
-    }
-
-    .card{
-        width:95%;
-    }
-
-    .bottom-nav div{
-        font-size:10px;
-    }
+.container{
+    display:flex;
+    gap:24px;
+    padding:24px;
+    align-items:flex-start;
 }
+
+.left{
+    flex:2;
+}
+
+.right{
+    width:320px;
+}
+
+/* GLASS CARD */
+
+.glass{
+    background:rgba(255,255,255,0.08);
+    backdrop-filter:blur(14px);
+    border-radius:24px;
+    box-shadow:0 0 25px rgba(0,0,0,0.25);
+}
+
+/* GAMES */
+
+.games{
+    display:flex;
+    gap:18px;
+    flex-wrap:wrap;
+    margin-bottom:24px;
+}
+
+.card{
+    width:220px;
+    overflow:hidden;
+    cursor:pointer;
+    transition:0.3s;
+}
+
+.card:hover{
+    transform:translateY(-5px);
+}
+
+.card img{
+    width:100%;
+    height:150px;
+    object-fit:cover;
+}
+
+.card-body{
+    padding:16px;
+}
+
+.card h4{
+    margin-bottom:8px;
+    font-size:20px;
+}
+
+.card p{
+    color:#cccccc;
+    font-size:14px;
+}
+
+/* SECTION */
+
+.section{
+    margin-top:24px;
+}
+
+.section h3{
+    margin-bottom:16px;
+    color:#00ffc8;
+}
+
+/* DATE */
+
+.date-box{
+    padding:18px;
+}
+
+.date-box input{
+    width:100%;
+    padding:14px;
+    border:none;
+    border-radius:14px;
+    outline:none;
+    background:rgba(255,255,255,0.1);
+    color:white;
+    font-size:15px;
+}
+
+/* SLOTS */
 
 #slots{
     display:flex;
     flex-wrap:wrap;
-    gap:10px;
-    justify-content:center;
-    margin-top:20px;
+    gap:12px;
 }
 
 .slot{
-    padding:10px 15px;
-    border-radius:8px;
+    padding:12px 18px;
+    border-radius:14px;
     cursor:pointer;
     font-weight:bold;
     transition:0.3s;
 }
 
 .available{
-    background:#4CAF50;
+    background:#00c853;
     color:white;
 }
 
 .booked{
-    background:#ccc;
-    color:#666;
+    background:#555;
+    color:#ccc;
     cursor:not-allowed;
 }
 
-.slot:hover{
-    transform:scale(1.1);
-}
-
 .selected{
-    background:#2e7d32 !important;
-    color:white;
+    background:#00ffc8 !important;
+    color:black;
 }
 
-body {
-    margin: 0;
-    font-family: 'Segoe UI', sans-serif;
-    background: #eef1f5;
+.slot:hover{
+    transform:scale(1.05);
 }
 
-.hero {
-    height: 220px;
-    background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)),
-                url('/static/cricket.png');
-    background-size: cover;
-    display: flex;
-    align-items: flex-end;
-    padding: 20px;
-    color: white;
+/* MAP */
+
+.map{
+    overflow:hidden;
+    border-radius:22px;
 }
 
-.container {
-    display: flex;
-    gap: 25px;
-    padding: 25px;
-}
-
-.left { flex: 2; }
-
-.card {
-    background: white;
-    border-radius: 15px;
-    padding: 15px;
-    width: 220px;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-}
-
-.games {
-    display: flex;
-    gap: 20px;
-    flex-wrap: wrap;
-}
-
-.card img {
-    width: 100%;
-    height: 120px;
-    border-radius: 10px;
-}
-
-.summary {
-    position: sticky;
-    top: 20px;
-    background: white;
-    padding: 20px;
-    border-radius: 15px;
-    width: 260px;
-    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
-}
-
-.price {
-    color: green;
-    font-weight: bold;
-    font-size: 18px;
-}
-
-button {
-    width: 100%;
-    padding: 12px;
-    border: none;
-    border-radius: 10px;
-    background: linear-gradient(90deg,#4CAF50,#2e7d32);
-    color: white;
-    margin-top: 10px;
-    cursor: pointer;
-}
-
-.map {
-    margin-top: 30px;
-    border-radius: 15px;
-    overflow: hidden;
-}
-
-.nearby {
-    margin-top: 30px;
-}
-
-.near-card {
-    background: white;
-    padding: 10px;
-    margin-bottom: 10px;
-    border-radius: 10px;
-    display: flex;
-    justify-content: space-between;
-}
-
-.modal {
-    position: fixed;
-    top:0; left:0;
-    width:100%; height:100%;
-    background: rgba(0,0,0,0.6);
-    display:none;
-    align-items:center;
-    justify-content:center;
-}
-
-.modal-content {
-    background:white;
-    padding:25px;
-    border-radius:15px;
-    width:300px;
-}
-
-input {
+iframe{
     width:100%;
-    padding:10px;
-    margin:8px 0;
-    border-radius:8px;
-    border:1px solid #ccc;
+    border:none;
+}
+
+/* NEARBY */
+
+.nearby-card{
+    padding:16px;
+    margin-bottom:14px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+
+/* SUMMARY */
+
+.summary{
+    position:sticky;
+    top:20px;
+    padding:24px;
+}
+
+.summary h3{
+    margin-bottom:18px;
+}
+
+.summary p{
+    margin-bottom:14px;
+    color:#dddddd;
+}
+
+.price{
+    font-size:32px;
+    color:#00ffc8;
+    font-weight:bold;
+}
+
+.book-btn{
+    width:100%;
+    padding:14px;
+    border:none;
+    border-radius:18px;
+    background:
+    linear-gradient(135deg,#00ffc8,#00e676);
+    color:black;
+    font-weight:bold;
+    font-size:16px;
+    cursor:pointer;
+    transition:0.3s;
+}
+
+.book-btn:hover{
+    transform:scale(1.03);
+}
+
+/* REVIEWS */
+
+.review{
+    padding:18px;
+    margin-bottom:16px;
+}
+
+.review h4{
+    margin-bottom:8px;
+}
+
+/* MODAL */
+
+.modal{
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    background:rgba(0,0,0,0.7);
+    display:none;
+    justify-content:center;
+    align-items:center;
+    z-index:999;
+}
+
+.modal-content{
+    width:90%;
+    max-width:380px;
+    padding:24px;
+}
+
+.modal-content h3{
+    margin-bottom:18px;
+}
+
+.modal-content input{
+    width:100%;
+    padding:13px;
+    margin-bottom:12px;
+    border:none;
+    border-radius:12px;
+    background:rgba(255,255,255,0.1);
+    color:white;
+    outline:none;
+}
+
+.pay-btn{
+    width:100%;
+    padding:13px;
+    border:none;
+    border-radius:14px;
+    background:#00e676;
+    color:black;
+    font-weight:bold;
+    cursor:pointer;
+}
+
+/* RESPONSIVE */
+
+@media screen and (max-width:992px){
+
+    .container{
+        flex-direction:column;
+    }
+
+    .right{
+        width:100%;
+    }
+
+    .summary{
+        position:relative;
+        top:0;
+    }
+}
+
+/* MOBILE */
+
+@media screen and (max-width:768px){
+
+    .hero{
+        height:220px;
+        padding:20px;
+    }
+
+    .hero h2{
+        font-size:28px;
+    }
+
+    .container{
+        padding:16px;
+    }
+
+    .games{
+        justify-content:center;
+    }
+
+    .card{
+        width:100%;
+    }
+
+    .card img{
+        height:180px;
+    }
+
+    #slots{
+        justify-content:center;
+    }
+
+    .slot{
+        width:100%;
+        text-align:center;
+    }
+
+    .summary{
+        padding:20px;
+    }
+
+    .price{
+        font-size:28px;
+    }
+}
+
+/* SMALL MOBILE */
+
+@media screen and (max-width:480px){
+
+    .hero{
+        height:190px;
+    }
+
+    .hero h2{
+        font-size:22px;
+    }
+
+    .container{
+        padding:12px;
+    }
+
+    .card-body{
+        padding:14px;
+    }
+
+    .summary{
+        padding:18px;
+    }
 }
 
 </style>
+
 </head>
 
 <body>
 
+<!-- HERO -->
+
 <div class="hero">
-    <h2 id="venueTitle">Venue</h2>
+
+<h2 id="venueTitle">
+Venue
+</h2>
+
 </div>
+
+<!-- CONTAINER -->
 
 <div class="container">
 
+<!-- LEFT -->
+
 <div class="left">
 
-<div class="games" id="gamesContainer"></div>
+<!-- GAMES -->
+
+<div class="games"
+id="gamesContainer">
+</div>
 
 <!-- DATE -->
-<h3>Select Date 📅</h3>
-<input type="date" id="date" onchange="handleDate()">
 
-<!-- MAP -->
-<div class="map">
-<iframe width="100%" height="250"
-src="https://maps.google.com/maps?q=hyderabad&output=embed">
-</iframe>
+<div class="section">
+
+<h3>
+📅 Select Date
+</h3>
+
+<div class="glass date-box">
+
+<input
+type="date"
+id="date"
+onchange="handleDate()">
+
+</div>
+
 </div>
 
 <!-- SLOTS -->
-<h3>Select Slot ⏰</h3>
+
+<div class="section">
+
+<h3>
+⏰ Live Slots
+</h3>
+
 <div id="slots"></div>
 
-<!-- NEARBY -->
-<div class="nearby">
-<h3>Nearby Venues</h3>
-
-<div class="near-card">
-<span>Gachibowli Turf</span>
-<span>⭐4.7 | ₹500</span>
 </div>
 
-<div class="near-card">
+<!-- MAP -->
+
+<div class="section">
+
+<h3>
+📍 Location
+</h3>
+
+<div class="glass map">
+
+<iframe
+height="260"
+src="https://maps.google.com/maps?q=hyderabad&output=embed">
+</iframe>
+
+</div>
+
+</div>
+
+<!-- NEARBY -->
+
+<div class="section">
+
+<h3>
+🏟 Nearby Venues
+</h3>
+
+<div class="glass nearby-card">
+<span>Gachibowli Turf</span>
+<span>⭐4.7</span>
+</div>
+
+<div class="glass nearby-card">
 <span>Indoor Arena</span>
-<span>⭐4.3 | ₹200</span>
+<span>⭐4.3</span>
+</div>
+
+</div>
+
+<!-- REVIEWS -->
+
+<div class="section">
+
+<h3>
+⭐ Reviews
+</h3>
+
+<div class="glass review">
+
+<h4>
+Rahul
+</h4>
+
+<p>
+Amazing turf and great lighting for night matches.
+</p>
+
+</div>
+
+<div class="glass review">
+
+<h4>
+Kiran
+</h4>
+
+<p>
+Very smooth booking experience and affordable pricing.
+</p>
+
 </div>
 
 </div>
@@ -353,169 +532,347 @@ src="https://maps.google.com/maps?q=hyderabad&output=embed">
 </div>
 
 <!-- RIGHT -->
-<div class="summary">
-<h3>Your Booking</h3>
-<p id="game">Game: -</p>
-<p id="time">Time: -</p>
-<p class="price" id="price">₹0</p>
 
-<button onclick="openPayment()">Proceed to pay</button>
+<div class="right">
+
+<div class="glass summary">
+
+<h3>
+Your Booking
+</h3>
+
+<p id="game">
+Game: -
+</p>
+
+<p id="time">
+Time: -
+</p>
+
+<p class="price"
+id="price">
+₹0
+</p>
+
+<button
+class="book-btn"
+onclick="openPayment()">
+
+Proceed to Pay
+
+</button>
+
+</div>
+
 </div>
 
 </div>
 
 <!-- PAYMENT -->
-<div class="modal" id="paymentModal">
-<div class="modal-content">
-<h3>Payment</h3>
+
+<div class="modal"
+id="paymentModal">
+
+<div class="glass modal-content">
+
+<h3>
+Payment
+</h3>
 
 <input placeholder="Card Number">
+
 <input placeholder="Expiry">
+
 <input placeholder="CVV">
 
-<button onclick="pay()">Pay Now</button>
+<button
+class="pay-btn"
+onclick="pay()">
+
+Pay Now
+
+</button>
+
 </div>
+
 </div>
 
 <script>
 
 /* DATA */
+
 let gamesData = {
-    "LB Stadium":["cricket","tennis"],
-    "Gachibowli Turf":["football","cricket"],
-    "Indoor Arena":["badminton"]
+
+"LB Stadium":
+["cricket","tennis"],
+
+"Gachibowli Turf":
+["football","cricket"],
+
+"Indoor Arena":
+["badminton"]
+
 };
 
 let prices = {
-    cricket:300,
-    football:500,
-    badminton:200,
-    tennis:400
+
+cricket:300,
+football:500,
+badminton:200,
+tennis:400
+
 };
 
-let times = ["06:00","07:00","08:00","09:00","10:00"];
+let times = [
 
-let venue = localStorage.getItem("venueName");
-document.getElementById("venueTitle").innerText = venue;
+"06:00",
+"07:00",
+"08:00",
+"09:00",
+"10:00"
 
-let container = document.getElementById("gamesContainer");
+];
 
-let selectedGame="";
-let selectedTime="";
+let venue =
+localStorage.getItem("venueName");
+
+document
+.getElementById("venueTitle")
+.innerText = venue;
+
+let container =
+document.getElementById("gamesContainer");
+
+let selectedGame = "";
+let selectedTime = "";
 
 /* LOAD GAMES */
-(gamesData[venue] || []).forEach(game=>{
-    let div = document.createElement("div");
-    div.className = "card";
 
-    div.innerHTML=`
-        <img src="/static/${game}.png">
-        <h4>${game}</h4>
-    `;
+(gamesData[venue] || [])
+.forEach(game=>{
 
-    div.onclick = () => {
-        selectedGame = game;
-        alert("Selected: " + game);
-    };
+let div =
+document.createElement("div");
 
-    container.appendChild(div);
+div.className =
+"card glass";
+
+div.innerHTML = `
+
+<img src="/static/${game}.png">
+
+<div class="card-body">
+
+<h4>${game}</h4>
+
+<p>
+Professional sports arena
+</p>
+
+</div>
+
+`;
+
+div.onclick = ()=>{
+
+selectedGame = game;
+
+alert(
+"Selected: " + game
+);
+
+};
+
+container.appendChild(div);
+
 });
 
-/* DATE CHANGE */
+/* DATE */
+
 function handleDate(){
-    let date = document.getElementById("date").value;
 
-    if(!selectedGame){
-        alert("Select game first");
-        return;
-    }
+let date =
+document.getElementById("date").value;
 
-    loadSlots(selectedGame, date);
+if(!selectedGame){
+
+alert(
+"Select game first"
+);
+
+return;
+}
+
+loadSlots(
+selectedGame,
+date
+);
 }
 
 /* LOAD SLOTS */
-function loadSlots(game, date){
 
-    fetch(`/check-slots?game=${game}&date=${date}`)
-    .then(res => res.json())
-    .then(data => {
+function loadSlots(game,date){
 
-        let container = document.getElementById("slots");
-        container.innerHTML = "";
+fetch(
+`/check-slots?game=${game}&date=${date}`
+)
 
-        times.forEach(time => {
+.then(res=>res.json())
 
-            let div = document.createElement("div");
-            div.innerText = time;
-            div.classList.add("slot");
+.then(data=>{
 
-            if(data.booked.includes(time)){
-                div.classList.add("booked");
-            } else {
-                div.classList.add("available");
+let container =
+document.getElementById("slots");
 
-                div.onclick = () => selectSlot(time);
-            }
+container.innerHTML = "";
 
-            container.appendChild(div);
-        });
+times.forEach(time=>{
 
-    });
+let div =
+document.createElement("div");
+
+div.innerText = time;
+
+div.classList.add("slot");
+
+if(data.booked.includes(time)){
+
+div.classList.add("booked");
+
+}else{
+
+div.classList.add("available");
+
+div.onclick =
+()=> selectSlot(time,div);
+}
+
+container.appendChild(div);
+
+});
+
+});
+
 }
 
 /* SELECT SLOT */
-function selectSlot(time){
-    selectedTime = time;
 
-    document.querySelectorAll(".slot").forEach(s=>s.classList.remove("selected"));
-    event.target.classList.add("selected");
+function selectSlot(time,element){
 
-    document.getElementById("game").innerText="Game: "+selectedGame;
-    document.getElementById("time").innerText="Time: "+time;
-    document.getElementById("price").innerText="₹"+prices[selectedGame];
+selectedTime = time;
+
+document
+.querySelectorAll(".slot")
+.forEach(s=>
+s.classList.remove("selected")
+);
+
+element.classList.add("selected");
+
+document
+.getElementById("game")
+.innerText =
+"Game: " + selectedGame;
+
+document
+.getElementById("time")
+.innerText =
+"Time: " + time;
+
+document
+.getElementById("price")
+.innerText =
+"₹" + prices[selectedGame];
+
 }
 
 /* BOOK SLOT */
-function bookSlot(){
-    let date = document.getElementById("date").value;
 
-    fetch("/book-slot", {
-        method: "POST",
-        headers: {"Content-Type": "application/json"},
-        body: JSON.stringify({
-            game: selectedGame,
-            date: date,
-            time: selectedTime
-        })
-    })
-    .then(res => res.text())
-    .then(msg => {
-        alert(msg);
-        handleDate();
-    });
+function bookSlot(){
+
+let date =
+document.getElementById("date").value;
+
+fetch("/book-slot",{
+
+method:"POST",
+
+headers:{
+"Content-Type":
+"application/json"
+},
+
+body:JSON.stringify({
+
+game:selectedGame,
+date:date,
+time:selectedTime
+
+})
+
+})
+
+.then(res=>res.text())
+
+.then(msg=>{
+
+alert(msg);
+
+handleDate();
+
+});
+
 }
 
 /* PAYMENT */
-function openPayment(){
-    if(!selectedGame || !selectedTime){
-        alert("Select slot first");
-        return;
-    }
 
-    document.getElementById("paymentModal").style.display = "flex";
+function openPayment(){
+
+if(!selectedGame || !selectedTime){
+
+alert(
+"Select slot first"
+);
+
+return;
+}
+
+document
+.getElementById("paymentModal")
+.style.display = "flex";
+
 }
 
 function pay(){
-    bookSlot();
-    alert("🎉 Payment Successful!");
-    document.getElementById("paymentModal").style.display = "none";
-    window.location.href="/success";
+
+bookSlot();
+
+alert(
+"🎉 Payment Successful!"
+);
+
+document
+.getElementById("paymentModal")
+.style.display = "none";
+
+window.location.href =
+"/success";
+
 }
 
 /* AUTO DATE */
+
 window.onload = function(){
-    let today = new Date().toISOString().split('T')[0];
-    document.getElementById("date").value = today;
+
+let today =
+new Date()
+.toISOString()
+.split('T')[0];
+
+document
+.getElementById("date")
+.value = today;
+
 };
 
 </script>
