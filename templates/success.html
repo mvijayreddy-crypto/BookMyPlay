@@ -1,81 +1,500 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Booking Success</title>
-    <style>
-        body{
-            margin:0;
-            font-family:'Segoe UI';
-            background:#eef1f5;
-            display:flex;
-            justify-content:center;
-            align-items:center;
-            height:100vh;
-        }
 
-        .box{
-            background:white;
-            padding:40px;
-            border-radius:20px;
-            text-align:center;
-            box-shadow:0 10px 30px rgba(0,0,0,0.1);
-        }
+<meta charset="UTF-8">
 
-        h2{
-            color:#4CAF50;
-        }
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
 
-        button{
-            margin:10px;
-            padding:12px 20px;
-            border:none;
-            border-radius:10px;
-            background:#4CAF50;
-            color:white;
-            cursor:pointer;
-            transition:0.3s;
-        }
+<title>
+Booking Success - BookMyPlay
+</title>
 
-        button:hover{
-            background:#45a049;
-        }
-    </style>
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+html,
+body{
+    width:100%;
+    overflow-x:hidden;
+}
+
+body{
+    min-height:100vh;
+    font-family:'Segoe UI',sans-serif;
+    background:
+    radial-gradient(circle at top left,#16213e,#0f172a 45%,#020617 90%);
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    padding:20px;
+    color:white;
+    overflow:hidden;
+}
+
+/* BACKGROUND GLOW */
+
+.glow{
+    position:absolute;
+    width:350px;
+    height:350px;
+    border-radius:50%;
+    background:rgba(0,255,180,0.15);
+    filter:blur(90px);
+    z-index:0;
+}
+
+.glow1{
+    top:-100px;
+    left:-100px;
+}
+
+.glow2{
+    bottom:-120px;
+    right:-120px;
+}
+
+/* SUCCESS CARD */
+
+.success-card{
+    position:relative;
+    z-index:2;
+    width:100%;
+    max-width:450px;
+    padding:35px 28px;
+    border-radius:30px;
+    background:rgba(255,255,255,0.08);
+    backdrop-filter:blur(18px);
+    box-shadow:
+    0 0 40px rgba(0,0,0,0.35),
+    0 0 20px rgba(0,255,180,0.1);
+    text-align:center;
+    animation:fadeUp 0.8s ease;
+}
+
+@keyframes fadeUp{
+
+    from{
+        transform:translateY(40px);
+        opacity:0;
+    }
+
+    to{
+        transform:translateY(0);
+        opacity:1;
+    }
+}
+
+/* CHECKMARK */
+
+.check-wrap{
+    width:100px;
+    height:100px;
+    margin:0 auto 20px;
+    border-radius:50%;
+    background:
+    linear-gradient(135deg,#00ffc8,#00e676);
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    animation:pulse 2s infinite;
+    box-shadow:0 0 30px rgba(0,255,180,0.5);
+}
+
+.check{
+    font-size:52px;
+    color:#02131f;
+    font-weight:bold;
+}
+
+@keyframes pulse{
+
+    0%{
+        transform:scale(1);
+    }
+
+    50%{
+        transform:scale(1.05);
+    }
+
+    100%{
+        transform:scale(1);
+    }
+}
+
+/* TITLE */
+
+h2{
+    font-size:34px;
+    margin-bottom:10px;
+    color:#00ffc8;
+}
+
+.sub{
+    color:#cccccc;
+    margin-bottom:25px;
+    font-size:15px;
+}
+
+/* BOOKING DETAILS */
+
+.details{
+    background:rgba(255,255,255,0.05);
+    border-radius:22px;
+    padding:22px;
+    text-align:left;
+    margin-bottom:24px;
+}
+
+.detail-row{
+    display:flex;
+    justify-content:space-between;
+    margin-bottom:14px;
+    border-bottom:
+    1px solid rgba(255,255,255,0.06);
+    padding-bottom:10px;
+}
+
+.label{
+    color:#bbbbbb;
+}
+
+.value{
+    font-weight:bold;
+    color:white;
+}
+
+/* PRICE */
+
+.price{
+    text-align:center;
+    font-size:34px;
+    color:#00ffc8;
+    margin-top:15px;
+    font-weight:bold;
+}
+
+/* BUTTONS */
+
+.buttons{
+    display:flex;
+    gap:14px;
+    flex-wrap:wrap;
+    justify-content:center;
+}
+
+.btn{
+    flex:1;
+    min-width:140px;
+    padding:14px;
+    border:none;
+    border-radius:18px;
+    cursor:pointer;
+    font-size:15px;
+    font-weight:bold;
+    transition:0.3s;
+}
+
+.home-btn{
+    background:
+    linear-gradient(135deg,#00ffc8,#00e676);
+    color:black;
+}
+
+.history-btn{
+    background:
+    rgba(255,255,255,0.1);
+    color:white;
+    border:1px solid rgba(255,255,255,0.1);
+}
+
+.btn:hover{
+    transform:translateY(-3px);
+}
+
+/* SUCCESS TEXT */
+
+.success-msg{
+    margin-top:20px;
+    color:#cccccc;
+    font-size:13px;
+}
+
+/* RESPONSIVE */
+
+@media screen and (max-width:768px){
+
+    .success-card{
+        padding:28px 20px;
+    }
+
+    h2{
+        font-size:28px;
+    }
+
+    .details{
+        padding:18px;
+    }
+
+    .price{
+        font-size:30px;
+    }
+
+    .buttons{
+        flex-direction:column;
+    }
+
+    .btn{
+        width:100%;
+    }
+}
+
+/* SMALL MOBILE */
+
+@media screen and (max-width:480px){
+
+    body{
+        padding:14px;
+    }
+
+    .success-card{
+        padding:24px 16px;
+        border-radius:24px;
+    }
+
+    .check-wrap{
+        width:85px;
+        height:85px;
+    }
+
+    .check{
+        font-size:44px;
+    }
+
+    h2{
+        font-size:24px;
+    }
+
+    .sub{
+        font-size:13px;
+    }
+
+    .detail-row{
+        font-size:14px;
+    }
+
+    .price{
+        font-size:28px;
+    }
+}
+
+</style>
+
 </head>
 
 <body>
 
-<div class="box">
-    <h2>🎉 Booking Successful!</h2>
+<!-- GLOW EFFECTS -->
 
-    <div id="details" style="margin-top:15px;"></div>
+<div class="glow glow1"></div>
 
-    <button onclick="goHome()">🏠 Go Home</button>
-    <button onclick="viewHistory()">📊 View Bookings</button>
+<div class="glow glow2"></div>
+
+<!-- SUCCESS CARD -->
+
+<div class="success-card">
+
+<!-- CHECK -->
+
+<div class="check-wrap">
+
+<div class="check">
+✓
+</div>
+
+</div>
+
+<!-- TITLE -->
+
+<h2>
+Booking Successful!
+</h2>
+
+<p class="sub">
+Your sports venue has been reserved successfully.
+</p>
+
+<!-- DETAILS -->
+
+<div class="details"
+id="details">
+
+</div>
+
+<!-- BUTTONS -->
+
+<div class="buttons">
+
+<button
+class="btn home-btn"
+onclick="goHome()">
+
+🏠 Go Home
+
+</button>
+
+<button
+class="btn history-btn"
+onclick="viewHistory()">
+
+📅 View Bookings
+
+</button>
+
+</div>
+
+<!-- MESSAGE -->
+
+<p class="success-msg">
+Thank you for choosing BookMyPlay ⚡
+</p>
+
 </div>
 
 <script>
+
+/* NAVIGATION */
+
 function goHome(){
-    window.location.href = "/dashboard";
+
+window.location.href =
+"/dashboard";
+
 }
 
 function viewHistory(){
-    window.location.href = "/history";
+
+window.location.href =
+"/history";
+
 }
 
-// 🔥 SHOW LAST BOOKING
-let bookings = JSON.parse(localStorage.getItem("bookings")) || [];
+/* LOAD BOOKING */
 
-let last = bookings[bookings.length - 1];
+let bookings =
+JSON.parse(
+localStorage.getItem("bookings")
+) || [];
+
+let last =
+bookings[bookings.length - 1];
 
 if(last){
-    document.getElementById("details").innerHTML = `
-        <b>Venue:</b> ${last.venue}<br>
-        <b>Game:</b> ${last.game}<br>
-        <b>Time:</b> ${last.time}<br>
-        <b>Price:</b> ${last.price}<br>
-        <b>Date:</b> ${last.date}
-    `;
+
+document
+.getElementById("details")
+.innerHTML = `
+
+<div class="detail-row">
+
+<span class="label">
+Venue
+</span>
+
+<span class="value">
+${last.venue || "LB Stadium"}
+</span>
+
+</div>
+
+<div class="detail-row">
+
+<span class="label">
+Game
+</span>
+
+<span class="value">
+${last.game || "Cricket"}
+</span>
+
+</div>
+
+<div class="detail-row">
+
+<span class="label">
+Time
+</span>
+
+<span class="value">
+${last.time || "07:00 AM"}
+</span>
+
+</div>
+
+<div class="detail-row">
+
+<span class="label">
+Date
+</span>
+
+<span class="value">
+${last.date || "Today"}
+</span>
+
+</div>
+
+<div class="detail-row">
+
+<span class="label">
+Booking ID
+</span>
+
+<span class="value">
+#BMP${Math.floor(Math.random()*99999)}
+</span>
+
+</div>
+
+<div class="price">
+
+${last.price || "₹300"}
+
+</div>
+
+`;
+
+}else{
+
+document
+.getElementById("details")
+.innerHTML = `
+
+<div class="detail-row">
+
+<span class="label">
+Status
+</span>
+
+<span class="value">
+Booking Confirmed
+</span>
+
+</div>
+
+<div class="price">
+₹300
+</div>
+
+`;
+
 }
+
 </script>
 
 </body>
