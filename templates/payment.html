@@ -1,87 +1,291 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<title>Payment</title>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
+
+<title>Payment - BookMyPlay</title>
+
 <style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+}
+
 body{
-    font-family:Arial;
-    text-align:center;
-    background:#f5f7fa;
+font-family:'Segoe UI',sans-serif;
+background:
+radial-gradient(circle at top left,#16213e,#0f172a 45%,#020617 90%);
+color:white;
+min-height:100vh;
+padding:20px;
+}
+
+.container{
+max-width:500px;
+margin:auto;
+background:rgba(255,255,255,0.08);
+backdrop-filter:blur(12px);
+padding:30px;
+border-radius:24px;
+box-shadow:0 0 25px rgba(0,0,0,0.3);
+margin-top:40px;
+}
+
+h2{
+margin-bottom:25px;
+text-align:center;
 }
 
 .box{
-    background:white;
-    margin:50px auto;
-    padding:30px;
-    width:300px;
-    border-radius:15px;
-    box-shadow:0 4px 10px rgba(0,0,0,0.1);
+margin-bottom:18px;
+padding:16px;
+border-radius:18px;
+background:rgba(255,255,255,0.06);
+}
+
+label{
+display:block;
+margin-bottom:10px;
+font-weight:bold;
 }
 
 input{
-    width:100%;
-    padding:10px;
-    margin:10px 0;
-    border-radius:8px;
-    border:1px solid #ccc;
+width:100%;
+padding:14px;
+border:none;
+border-radius:12px;
+outline:none;
+background:rgba(255,255,255,0.1);
+color:white;
+margin-bottom:14px;
 }
 
-button{
-    padding:12px;
-    width:100%;
-    background:#4CAF50;
-    color:white;
-    border:none;
-    border-radius:10px;
+.methods{
+display:flex;
+gap:12px;
+margin-bottom:20px;
 }
+
+.methods button{
+flex:1;
+padding:14px;
+border:none;
+border-radius:14px;
+cursor:pointer;
+font-weight:bold;
+background:#1e293b;
+color:white;
+}
+
+.methods button.active{
+background:#00e676;
+color:black;
+}
+
+.pay-btn{
+width:100%;
+padding:16px;
+border:none;
+border-radius:18px;
+background:
+linear-gradient(135deg,#00ffc8,#00e676);
+font-size:16px;
+font-weight:bold;
+cursor:pointer;
+}
+
+.summary{
+margin-bottom:20px;
+line-height:1.8;
+}
+
+.price{
+font-size:30px;
+color:#00ffc8;
+font-weight:bold;
+}
+
 </style>
+
 </head>
 
 <body>
 
-<h2>Payment</h2>
+<div class="container">
+
+<h2>
+💳 Complete Payment
+</h2>
+
+<div class="summary">
+
+<p id="venue"></p>
+
+<p id="game"></p>
+
+<p id="time"></p>
+
+<p class="price" id="price"></p>
+
+</div>
+
+<div class="methods">
+
+<button
+id="upiBtn"
+class="active"
+onclick="selectMethod('UPI')">
+
+UPI
+
+</button>
+
+<button
+id="cardBtn"
+onclick="selectMethod('CARD')">
+
+Card
+
+</button>
+
+</div>
 
 <div class="box">
-    <p id="summary"></p>
 
-    <input placeholder="Card Number">
-    <input placeholder="Expiry Date">
-    <input placeholder="CVV">
+<label>
+Payment Details
+</label>
 
-    <button onclick="payNow()">Pay Now</button>
+<input
+type="text"
+id="paymentInput"
+placeholder="Enter UPI ID">
+
+</div>
+
+<button
+class="pay-btn"
+onclick="payNow()">
+
+Pay Now
+
+</button>
+
 </div>
 
 <script>
-let game = localStorage.getItem("bookingGame");
-let time = localStorage.getItem("bookingTime");
-let venue = localStorage.getItem("bookingVenue");
 
-document.getElementById("summary").innerText =
-    game + " | " + time + " | " + venue;
+let method = "UPI";
+
+function selectMethod(type){
+
+method = type;
+
+document
+.getElementById("upiBtn")
+.classList.remove("active");
+
+document
+.getElementById("cardBtn")
+.classList.remove("active");
+
+if(type === "UPI"){
+
+document
+.getElementById("upiBtn")
+.classList.add("active");
+
+document
+.getElementById("paymentInput")
+.placeholder =
+"Enter UPI ID";
+
+}else{
+
+document
+.getElementById("cardBtn")
+.classList.add("active");
+
+document
+.getElementById("paymentInput")
+.placeholder =
+"Enter Card Number";
+}
+}
+
+/* LOAD DATA */
+
+document
+.getElementById("venue")
+.innerText =
+"Venue: " + localStorage.getItem("venue");
+
+document
+.getElementById("game")
+.innerText =
+"Game: " + localStorage.getItem("game");
+
+document
+.getElementById("time")
+.innerText =
+"Time: " + localStorage.getItem("time");
+
+document
+.getElementById("price")
+.innerText =
+"₹" + localStorage.getItem("price");
+
+/* PAYMENT */
 
 function payNow(){
 
-    let game = localStorage.getItem("bookingGame");
-    let time = localStorage.getItem("bookingTime");
-    let venue = localStorage.getItem("bookingVenue");
+fetch("/save-transaction",{
 
-    let booking = {
-        game: game,
-        time: time,
-        venue: venue,
-        date: new Date().toLocaleDateString()
-    };
+method:"POST",
 
-    // Get existing bookings
-    let bookings = JSON.parse(localStorage.getItem("allBookings")) || [];
+headers:{
+"Content-Type":"application/json"
+},
 
-    bookings.push(booking);
+body:JSON.stringify({
 
-    // Save back
-    localStorage.setItem("allBookings", JSON.stringify(bookings));
+venue:
+localStorage.getItem("venue"),
 
-    window.location.href = "/success";
+game:
+localStorage.getItem("game"),
+
+time:
+localStorage.getItem("time"),
+
+amount:
+localStorage.getItem("price"),
+
+method:method
+
+})
+
+})
+
+.then(res=>res.text())
+
+.then(msg=>{
+
+alert("Payment Successful!");
+
+window.location.href =
+"/success";
+
+});
+
 }
+
 </script>
 
 </body>

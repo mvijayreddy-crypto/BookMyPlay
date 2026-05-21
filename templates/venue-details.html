@@ -36,12 +36,6 @@ body{
 
 .hero{
     height:280px;
-    background:
-    linear-gradient(rgba(0,0,0,0.45),
-    rgba(0,0,0,0.55)),
-    url('/static/cricket.png');
-    background-size:cover;
-    background-position:center;
     display:flex;
     align-items:flex-end;
     padding:30px;
@@ -71,7 +65,7 @@ body{
     width:320px;
 }
 
-/* GLASS CARD */
+/* GLASS */
 
 .glass{
     background:rgba(255,255,255,0.08);
@@ -80,44 +74,28 @@ body{
     box-shadow:0 0 25px rgba(0,0,0,0.25);
 }
 
-/* GAMES */
+/* GAME CARD */
 
 .games{
-    display:flex;
-    gap:18px;
-    flex-wrap:wrap;
     margin-bottom:24px;
 }
 
 .card{
-    width:220px;
     overflow:hidden;
-    cursor:pointer;
-    transition:0.3s;
-}
-
-.card:hover{
-    transform:translateY(-5px);
 }
 
 .card img{
     width:100%;
-    height:150px;
+    height:240px;
     object-fit:cover;
 }
 
 .card-body{
-    padding:16px;
+    padding:18px;
 }
 
 .card h4{
-    margin-bottom:8px;
-    font-size:20px;
-}
-
-.card p{
-    color:#cccccc;
-    font-size:14px;
+    margin-bottom:10px;
 }
 
 /* SECTION */
@@ -180,10 +158,6 @@ body{
     color:black;
 }
 
-.slot:hover{
-    transform:scale(1.05);
-}
-
 /* MAP */
 
 .map{
@@ -194,16 +168,6 @@ body{
 iframe{
     width:100%;
     border:none;
-}
-
-/* NEARBY */
-
-.nearby-card{
-    padding:16px;
-    margin-bottom:14px;
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
 }
 
 /* SUMMARY */
@@ -240,22 +204,6 @@ iframe{
     font-weight:bold;
     font-size:16px;
     cursor:pointer;
-    transition:0.3s;
-}
-
-.book-btn:hover{
-    transform:scale(1.03);
-}
-
-/* REVIEWS */
-
-.review{
-    padding:18px;
-    margin-bottom:16px;
-}
-
-.review h4{
-    margin-bottom:8px;
 }
 
 /* MODAL */
@@ -305,94 +253,18 @@ iframe{
     cursor:pointer;
 }
 
-/* RESPONSIVE */
+/* MOBILE */
 
 @media screen and (max-width:992px){
 
-    .container{
-        flex-direction:column;
-    }
-
-    .right{
-        width:100%;
-    }
-
-    .summary{
-        position:relative;
-        top:0;
-    }
+.container{
+flex-direction:column;
 }
 
-/* MOBILE */
-
-@media screen and (max-width:768px){
-
-    .hero{
-        height:220px;
-        padding:20px;
-    }
-
-    .hero h2{
-        font-size:28px;
-    }
-
-    .container{
-        padding:16px;
-    }
-
-    .games{
-        justify-content:center;
-    }
-
-    .card{
-        width:100%;
-    }
-
-    .card img{
-        height:180px;
-    }
-
-    #slots{
-        justify-content:center;
-    }
-
-    .slot{
-        width:100%;
-        text-align:center;
-    }
-
-    .summary{
-        padding:20px;
-    }
-
-    .price{
-        font-size:28px;
-    }
+.right{
+width:100%;
 }
 
-/* SMALL MOBILE */
-
-@media screen and (max-width:480px){
-
-    .hero{
-        height:190px;
-    }
-
-    .hero h2{
-        font-size:22px;
-    }
-
-    .container{
-        padding:12px;
-    }
-
-    .card-body{
-        padding:14px;
-    }
-
-    .summary{
-        padding:18px;
-    }
 }
 
 </style>
@@ -403,10 +275,20 @@ iframe{
 
 <!-- HERO -->
 
-<div class="hero">
+<div
+class="hero"
 
-<h2 id="venueTitle">
-Venue
+style="
+background:
+linear-gradient(rgba(0,0,0,0.45),
+rgba(0,0,0,0.55)),
+url('/static/{{ ground.image }}');
+background-size:cover;
+background-position:center;
+">
+
+<h2>
+{{ ground.name }}
 </h2>
 
 </div>
@@ -419,10 +301,60 @@ Venue
 
 <div class="left">
 
-<!-- GAMES -->
+<!-- GAME -->
 
-<div class="games"
-id="gamesContainer">
+<div class="games">
+
+<div class="card glass">
+
+<img src="/static/{{ ground.image }}">
+
+<div class="card-body">
+
+<h4>
+{{ ground.sport_type }}
+</h4>
+
+<p>
+{{ ground.description }}
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+<!-- DETAILS -->
+
+<div class="section">
+
+<h3>
+🏟 Venue Details
+</h3>
+
+<div class="glass card-body">
+
+<p>
+📍 {{ ground.location }}
+</p>
+
+<br>
+
+<p>
+👨 Manager:
+{{ ground.manager_name }}
+</p>
+
+<br>
+
+<p>
+🎟 Available Slots:
+{{ ground.available_slots }}
+</p>
+
+</div>
+
 </div>
 
 <!-- DATE -->
@@ -468,62 +400,8 @@ onchange="handleDate()">
 
 <iframe
 height="260"
-src="https://maps.google.com/maps?q=hyderabad&output=embed">
+src="https://maps.google.com/maps?q={{ ground.location }}&output=embed">
 </iframe>
-
-</div>
-
-</div>
-
-<!-- NEARBY -->
-
-<div class="section">
-
-<h3>
-🏟 Nearby Venues
-</h3>
-
-<div class="glass nearby-card">
-<span>Gachibowli Turf</span>
-<span>⭐4.7</span>
-</div>
-
-<div class="glass nearby-card">
-<span>Indoor Arena</span>
-<span>⭐4.3</span>
-</div>
-
-</div>
-
-<!-- REVIEWS -->
-
-<div class="section">
-
-<h3>
-⭐ Reviews
-</h3>
-
-<div class="glass review">
-
-<h4>
-Rahul
-</h4>
-
-<p>
-Amazing turf and great lighting for night matches.
-</p>
-
-</div>
-
-<div class="glass review">
-
-<h4>
-Kiran
-</h4>
-
-<p>
-Very smooth booking experience and affordable pricing.
-</p>
 
 </div>
 
@@ -549,9 +427,8 @@ Game: -
 Time: -
 </p>
 
-<p class="price"
-id="price">
-₹0
+<p class="price">
+₹{{ ground.price_per_hour }}
 </p>
 
 <button
@@ -601,139 +478,94 @@ Pay Now
 
 /* DATA */
 
-let gamesData = {
+let selectedGame =
+"{{ ground.sport_type }}";
 
-"LB Stadium":
-["cricket","tennis"],
+let price =
+Number("{{ ground.price_per_hour }}");
 
-"Gachibowli Turf":
-["football","cricket"],
+let venue =
+"{{ ground.name }}";
 
-"Indoor Arena":
-["badminton"]
-
-};
-
-let prices = {
-
-cricket:300,
-football:500,
-badminton:200,
-tennis:400
-
-};
+let selectedTime = "";
 
 let times = [
 
-"06:00",
-"07:00",
-"08:00",
-"09:00",
-"10:00"
+"06:00 AM",
+"07:00 AM",
+"08:00 AM",
+"09:00 AM",
+"10:00 AM",
+"11:00 AM",
+"04:00 PM",
+"05:00 PM",
+"06:00 PM",
+"07:00 PM"
 
 ];
 
-let venue =
-localStorage.getItem("venueName");
+/* AUTO LOAD */
+
+window.onload = function(){
+
+let today =
+new Date()
+.toISOString()
+.split('T')[0];
 
 document
-.getElementById("venueTitle")
-.innerText = venue;
+.getElementById("date")
+.value = today;
 
-let container =
-document.getElementById("gamesContainer");
-
-let selectedGame = "";
-let selectedTime = "";
-
-/* LOAD GAMES */
-
-(gamesData[venue] || [])
-.forEach(game=>{
-
-let div =
-document.createElement("div");
-
-div.className =
-"card glass";
-
-div.innerHTML = `
-
-<img src="/static/${game}.png">
-
-<div class="card-body">
-
-<h4>${game}</h4>
-
-<p>
-Professional sports arena
-</p>
-
-</div>
-
-`;
-
-div.onclick = ()=>{
-
-selectedGame = game;
-
-alert(
-"Selected: " + game
+loadSlots(
+selectedGame,
+today
 );
 
-};
+}
 
-container.appendChild(div);
-
-});
-
-/* DATE */
+/* HANDLE DATE */
 
 function handleDate(){
 
 let date =
 document.getElementById("date").value;
 
-if(!selectedGame){
-
-alert(
-"Select game first"
-);
-
-return;
-}
-
 loadSlots(
 selectedGame,
 date
 );
+
 }
 
 /* LOAD SLOTS */
 
 function loadSlots(game,date){
 
+let slotsContainer =
+document.getElementById("slots");
+
+slotsContainer.innerHTML =
+"<p style='color:white'>Loading slots...</p>";
+
 fetch(
 `/check-slots?game=${game}&date=${date}`
 )
 
-.then(res=>res.json())
+.then(response => response.json())
 
-.then(data=>{
+.then(data => {
 
-let container =
-document.getElementById("slots");
+slotsContainer.innerHTML = "";
 
-container.innerHTML = "";
-
-times.forEach(time=>{
+times.forEach(time => {
 
 let div =
 document.createElement("div");
 
 div.innerText = time;
 
-div.classList.add("slot");
+div.className = "slot";
 
 if(data.booked.includes(time)){
 
@@ -743,13 +575,26 @@ div.classList.add("booked");
 
 div.classList.add("available");
 
-div.onclick =
-()=> selectSlot(time,div);
+div.onclick = function(){
+
+selectSlot(time,div);
+
+};
+
 }
 
-container.appendChild(div);
+slotsContainer.appendChild(div);
 
 });
+
+})
+
+.catch(error => {
+
+console.log(error);
+
+slotsContainer.innerHTML =
+"<p style='color:red'>Unable to load slots</p>";
 
 });
 
@@ -763,9 +608,11 @@ selectedTime = time;
 
 document
 .querySelectorAll(".slot")
-.forEach(s=>
-s.classList.remove("selected")
-);
+.forEach(slot => {
+
+slot.classList.remove("selected");
+
+});
 
 element.classList.add("selected");
 
@@ -777,12 +624,27 @@ document
 document
 .getElementById("time")
 .innerText =
-"Time: " + time;
+"Time: " + selectedTime;
+
+}
+
+/* OPEN PAYMENT */
+
+function openPayment(){
+
+if(selectedTime === ""){
+
+alert(
+"Please select slot"
+);
+
+return;
+
+}
 
 document
-.getElementById("price")
-.innerText =
-"₹" + prices[selectedGame];
+.getElementById("paymentModal")
+.style.display = "flex";
 
 }
 
@@ -798,82 +660,115 @@ fetch("/book-slot",{
 method:"POST",
 
 headers:{
-"Content-Type":
-"application/json"
+"Content-Type":"application/json"
 },
 
 body:JSON.stringify({
 
+venue:venue,
 game:selectedGame,
 date:date,
-time:selectedTime
+time:selectedTime,
+amount:price
 
 })
 
 })
 
-.then(res=>res.text())
+.then(res => res.json())
 
-.then(msg=>{
+.then(data => {
 
-alert(msg);
+alert(data.message);
 
-handleDate();
+window.location.href =
+"/success";
 
 });
 
 }
 
-/* PAYMENT */
-
-function openPayment(){
-
-if(!selectedGame || !selectedTime){
-
-alert(
-"Select slot first"
-);
-
-return;
-}
-
-document
-.getElementById("paymentModal")
-.style.display = "flex";
-
-}
-
 function pay(){
 
-bookSlot();
+fetch("/save-transaction", {
 
-alert(
-"🎉 Payment Successful!"
-);
+method:"POST",
 
-document
-.getElementById("paymentModal")
-.style.display = "none";
+headers:{
+"Content-Type":"application/json"
+},
+
+body:JSON.stringify({
+
+venue:venue,
+
+game:selectedGame,
+
+time:selectedTime,
+
+amount:price,
+
+method:"Card"
+
+})
+
+})
+
+.then(res => res.json())
+
+.then(data => {
+
+console.log(data);
+
+let date =
+document.getElementById("date").value;
+
+return fetch("/book-slot", {
+
+method:"POST",
+
+headers:{
+"Content-Type":"application/json"
+},
+
+body:JSON.stringify({
+
+venue:venue,
+
+game:selectedGame,
+
+date:date,
+
+time:selectedTime,
+
+amount:price
+
+})
+
+});
+
+})
+
+.then(res => res.json())
+
+.then(data => {
+
+alert(data.message);
 
 window.location.href =
 "/success";
 
+})
+
+.catch(error => {
+
+console.log(error);
+
+alert("Payment Failed");
+
+});
+
 }
-
-/* AUTO DATE */
-
-window.onload = function(){
-
-let today =
-new Date()
-.toISOString()
-.split('T')[0];
-
-document
-.getElementById("date")
-.value = today;
-
-};
 
 </script>
 

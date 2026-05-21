@@ -102,7 +102,7 @@ body{
     margin:auto;
 }
 
-/* BOOKING CARD */
+/* CARD */
 
 .card{
     background:
@@ -113,7 +113,6 @@ body{
     margin-bottom:22px;
     box-shadow:0 0 25px rgba(0,0,0,0.25);
     transition:0.3s;
-    cursor:pointer;
 }
 
 .card:hover{
@@ -198,6 +197,61 @@ body{
     margin-top:80px;
     color:#cccccc;
     font-size:18px;
+}
+
+/* BUTTONS */
+
+.actions{
+    margin-top:20px;
+    display:flex;
+    gap:12px;
+    flex-wrap:wrap;
+}
+
+.view-btn{
+
+padding:12px 18px;
+
+border-radius:14px;
+
+background:#00c853;
+
+color:white;
+
+text-decoration:none;
+
+font-weight:bold;
+
+border:none;
+
+cursor:pointer;
+
+}
+
+.cancel-btn{
+
+padding:12px 18px;
+
+border-radius:14px;
+
+background:#ff1744;
+
+color:white;
+
+text-decoration:none;
+
+font-weight:bold;
+
+transition:0.3s;
+
+}
+
+.cancel-btn:hover{
+
+background:#ff4569;
+
+transform:scale(1.05);
+
 }
 
 /* MODAL */
@@ -303,48 +357,6 @@ body{
     .card{
         padding:18px;
     }
-
-    .bottom-nav{
-        height:66px;
-    }
-
-    .bottom-nav div{
-        font-size:10px;
-    }
-}
-
-/* SMALL MOBILE */
-
-@media screen and (max-width:480px){
-
-    .header{
-        font-size:18px;
-    }
-
-    .card{
-        padding:16px;
-        border-radius:22px;
-    }
-
-    .venue{
-        font-size:18px;
-    }
-
-    .price{
-        font-size:22px;
-    }
-
-    .modal-content{
-        padding:22px;
-    }
-
-    .bottom-nav{
-        height:64px;
-    }
-
-    .bottom-nav div{
-        font-size:9px;
-    }
 }
 
 </style>
@@ -392,6 +404,129 @@ Completed
 
 <div class="container"
 id="list">
+
+{% if bookings %}
+
+    {% for booking in bookings %}
+
+    <div class="card booking-card">
+
+        <div class="card-top">
+
+            <div class="venue">
+
+                {{ booking.venue }}
+
+            </div>
+
+            <div class="status upcoming">
+
+                {{ booking.status }}
+
+            </div>
+
+        </div>
+
+        <div class="details">
+
+            <div class="detail-box">
+
+                <div class="label">
+                    Game
+                </div>
+
+                <div class="value">
+                    {{ booking.game }}
+                </div>
+
+            </div>
+
+            <div class="detail-box">
+
+                <div class="label">
+                    Date
+                </div>
+
+                <div class="value">
+                    {{ booking.booking_date }}
+                </div>
+
+            </div>
+
+            <div class="detail-box">
+
+                <div class="label">
+                    Time
+                </div>
+
+                <div class="value">
+                    {{ booking.booking_time }}
+                </div>
+
+            </div>
+
+            <div class="detail-box">
+
+                <div class="label">
+                    Amount
+                </div>
+
+                <div class="price">
+                    ₹{{ booking.amount }}
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="actions">
+<a
+href="/edit-booking/{{ booking.id }}"
+class="view-btn">
+
+Edit Booking
+
+</a>
+
+
+            <button
+            class="view-btn"
+            onclick="openDetails(
+            '{{ booking.venue }}',
+            '{{ booking.game }}',
+            '{{ booking.booking_date }}',
+            '{{ booking.booking_time }}',
+            '{{ booking.amount }}',
+            '{{ booking.status }}'
+            )">
+
+            View Details
+
+            </button>
+
+            <a
+            href="/cancel-booking/{{ booking.id }}"
+            class="cancel-btn">
+
+            Cancel Booking
+
+            </a>
+
+        </div>
+
+    </div>
+
+    {% endfor %}
+
+{% else %}
+
+<div class="empty">
+
+🚫 No bookings found
+
+</div>
+
+{% endif %}
 
 </div>
 
@@ -446,159 +581,6 @@ Close
 
 <script>
 
-/* BOOKINGS */
-
-let bookings =
-JSON.parse(
-localStorage.getItem("bookings")
-) || [];
-
-let box =
-document.getElementById("list");
-
-/* EMPTY */
-
-if(bookings.length === 0){
-
-box.innerHTML = `
-
-<div class="empty">
-
-🚫 No bookings yet
-
-</div>
-
-`;
-
-}
-
-/* RENDER */
-
-function renderBookings(data){
-
-box.innerHTML = "";
-
-if(data.length === 0){
-
-box.innerHTML = `
-
-<div class="empty">
-
-🚫 No matching bookings
-
-</div>
-
-`;
-
-return;
-}
-
-data.forEach((b,index)=>{
-
-let status =
-(index % 2 === 0)
-? "Upcoming"
-: "Completed";
-
-let statusClass =
-(index % 2 === 0)
-? "upcoming"
-: "completed";
-
-let div =
-document.createElement("div");
-
-div.className = "card";
-
-div.innerHTML = `
-
-<div class="card-top">
-
-<div class="venue">
-
-${b.venue || "LB Stadium"}
-
-</div>
-
-<div class="status ${statusClass}">
-
-${status}
-
-</div>
-
-</div>
-
-<div class="details">
-
-<div class="detail-box">
-
-<div class="label">
-Game
-</div>
-
-<div class="value">
-${b.game || "Cricket"}
-</div>
-
-</div>
-
-<div class="detail-box">
-
-<div class="label">
-Time
-</div>
-
-<div class="value">
-${b.time || "07:00 AM"}
-</div>
-
-</div>
-
-<div class="detail-box">
-
-<div class="label">
-Date
-</div>
-
-<div class="value">
-${b.date || "Today"}
-</div>
-
-</div>
-
-<div class="detail-box">
-
-<div class="label">
-Price
-</div>
-
-<div class="price">
-${b.price || "₹300"}
-</div>
-
-</div>
-
-</div>
-
-`;
-
-div.onclick = ()=>{
-
-openDetails(
-b,
-status
-);
-
-};
-
-box.appendChild(div);
-
-});
-
-}
-
-renderBookings(bookings);
-
 /* SEARCH */
 
 document
@@ -608,22 +590,25 @@ document
 let value =
 this.value.toLowerCase();
 
-let filtered =
-bookings.filter(b=>
+let cards =
+document.querySelectorAll(".booking-card");
 
-(b.venue || "")
-.toLowerCase()
-.includes(value)
+cards.forEach(card=>{
 
-||
+let text =
+card.innerText.toLowerCase();
 
-(b.game || "")
-.toLowerCase()
-.includes(value)
+if(text.includes(value)){
 
-);
+card.style.display = "block";
 
-renderBookings(filtered);
+}else{
+
+card.style.display = "none";
+
+}
+
+});
 
 });
 
@@ -631,37 +616,49 @@ renderBookings(filtered);
 
 function filterBookings(type){
 
+let cards =
+document.querySelectorAll(".booking-card");
+
+cards.forEach(card=>{
+
 if(type === "all"){
 
-renderBookings(bookings);
-
-return;
-}
-
-let filtered =
-bookings.filter((b,index)=>{
-
-if(type === "upcoming"){
-
-return index % 2 === 0;
+card.style.display = "block";
 
 }
+else{
 
-if(type === "completed"){
+let status =
+card.querySelector(".status")
+.innerText
+.toLowerCase();
 
-return index % 2 !== 0;
+if(status.includes(type)){
+
+card.style.display = "block";
+
+}else{
+
+card.style.display = "none";
+
+}
 
 }
 
 });
 
-renderBookings(filtered);
-
 }
 
 /* DETAILS */
 
-function openDetails(b,status){
+function openDetails(
+venue,
+game,
+date,
+time,
+amount,
+status
+){
 
 document
 .getElementById("detailBox")
@@ -669,27 +666,27 @@ document
 
 <p>
 <b>Venue:</b>
-${b.venue || "LB Stadium"}
+${venue}
 </p>
 
 <p>
 <b>Game:</b>
-${b.game || "Cricket"}
-</p>
-
-<p>
-<b>Time:</b>
-${b.time || "07:00 AM"}
+${game}
 </p>
 
 <p>
 <b>Date:</b>
-${b.date || "Today"}
+${date}
 </p>
 
 <p>
-<b>Price:</b>
-${b.price || "₹300"}
+<b>Time:</b>
+${time}
+</p>
+
+<p>
+<b>Amount:</b>
+₹${amount}
 </p>
 
 <p>

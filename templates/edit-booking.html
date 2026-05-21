@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
+
+<title>Edit Booking</title>
+
+<style>
+
+body{
+
+font-family:'Segoe UI',sans-serif;
+
+background:#0f172a;
+
+color:white;
+
+display:flex;
+
+justify-content:center;
+
+align-items:center;
+
+height:100vh;
+
+}
+
+.form-box{
+
+width:90%;
+
+max-width:420px;
+
+padding:30px;
+
+border-radius:24px;
+
+background:rgba(255,255,255,0.08);
+
+backdrop-filter:blur(15px);
+
+}
+
+input{
+
+width:100%;
+
+padding:14px;
+
+margin-top:14px;
+
+border:none;
+
+border-radius:14px;
+
+background:rgba(255,255,255,0.1);
+
+color:white;
+
+}
+
+button{
+
+width:100%;
+
+padding:14px;
+
+margin-top:20px;
+
+border:none;
+
+border-radius:14px;
+
+background:#00e676;
+
+color:black;
+
+font-weight:bold;
+
+cursor:pointer;
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<form
+method="POST"
+class="form-box">
+
+<h2>
+Edit Booking
+</h2>
+
+<input
+type="text"
+name="game"
+value="{{ booking.game }}"
+required>
+
+<input
+type="date"
+name="date"
+value="{{ booking.booking_date }}"
+required>
+
+<input
+type="text"
+name="time"
+value="{{ booking.booking_time }}"
+required>
+
+<button type="submit">
+
+Update Booking
+
+</button>
+
+</form>
+
+</body>
+</html>
