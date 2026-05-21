@@ -12,7 +12,6 @@ app = Flask(__name__)
 app.secret_key = "bookmyplay_secret_key"
 
 app.config['SESSION_COOKIE_SECURE'] = False
-
 app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://root:@localhost/bookmyplay'
 
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
